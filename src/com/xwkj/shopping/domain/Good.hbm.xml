@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.xwkj.shopping.domain">
+	<class name="Good" table="good">
+		<id name="gid" column="gid" type="string">
+			<generator class="uuid"/>
+		</id>
+		<property name="gname" column="gname" type="string" not-null="true"/>
+		<property name="price" column="price" type="double" not-null="true"/>
+		<property name="number" column="number" type="integer" not-null="true"/>
+		<property name="sold" column="sold" type="integer" not-null="true"/>
+		<property name="createDate" column="createDate" type="java.util.Date" not-null="true"/>
+		<many-to-one name="category" column="cid" class="Category" not-null="true"/>
+		<many-to-one name="cover" column="cover" class="Photo" not-null="true" unique="true"/>
+		<set name="photos" cascade="delete" inverse="true">
+		 	<key><column name="gid" not-null="true" /></key>
+		 	<one-to-many class="Photo"/>
+		</set>
+	</class>
+</hibernate-mapping>

@@ -13,4 +13,41 @@ public class Category implements Serializable {
 	private Integer goods;
 	private Type type;
 	private Icon icon;
+	
+	public String getCid() {
+		return cid;
+	}
+	public String getCname() {
+		return cname;
+	}
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public Integer getGoods() {
+		return goods;
+	}
+	public Type getType() {
+		return type;
+	}
+	public Icon getIcon() {
+		return icon;
+	}
+	public void setCid(String cid) {
+		this.cid = cid;
+	}
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	public void setGoods(Integer goods) {
+		this.goods = goods;
+	}
+	public void setType(Type type) {
+		this.type = type;
+	}
+	public void setIcon(Icon icon) {
+		this.icon = icon;
+	}
 }

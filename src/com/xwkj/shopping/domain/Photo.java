@@ -12,4 +12,29 @@ public class Photo implements Serializable {
 	private Date upload;
 	private Good good;
 	
+	public String getPid() {
+		return pid;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public Date getUpload() {
+		return upload;
+	}
+	public Good getGood() {
+		return good;
+	}
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	public void setUpload(Date upload) {
+		this.upload = upload;
+	}
+	public void setGood(Good good) {
+		this.good = good;
+	}
+	
 }

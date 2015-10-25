@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.xwkj.shopping.domain">
+	<class name="Basket" table="basket">
+		<id name="bid" column="bid" type="string">
+			<generator class="uuid"/>
+		</id>
+		<property name="count" column="count" type="integer" not-null="true"/>
+		<many-to-one name="good" column="gid" class="Good" not-null="true"/>
+		<many-to-one name="sendee" column="sid" class="Sendee" not-null="true"/>
+		<many-to-one name="order" column="oid" class="Order" not-null="true" unique="true"/>
+	</class>
+</hibernate-mapping>

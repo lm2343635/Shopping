@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.xwkj.shopping.domain">
+	<class name="Order" table="orderform">
+		<id name="oid" column="oid" type="string">
+			<generator class="uuid"/>
+		</id>
+		<property name="createDate" column="createDate" type="java.util.Date" not-null="true"/>
+		<property name="express" column="express" type="boolean" not-null="true"/>
+		<property name="count" column="count" type="integer" not-null="true"/>
+		<property name="amount" column="amount" type="double" not-null="true"/>
+		<property name="payed" column="payed" type="boolean" not-null="true"/>
+		<property name="timeout" column="timeout" type="boolean" not-null="true"/>
+		<property name="payDate" column="payDate" type="java.util.Date" not-null="true"/>
+		<many-to-one name="sendee" column="sid" class="Sendee" not-null="true"/>
+	</class>
+</hibernate-mapping>

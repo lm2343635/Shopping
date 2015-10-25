@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.xwkj.shopping.domain">
+	<class name="Category" table="category">
+		<id name="cid" column="cid" type="string">
+			<generator class="uuid"/>
+		</id>
+		<property name="cname" column="cname" type="string" not-null="true"/>
+		<property name="createDate" column="createDate" type="java.util.Date" not-null="true"/>
+		<property name="goods" column="goods" type="integer" not-null="true"/>
+		<many-to-one name="type" column="tid" class="Type" not-null="true" unique="true"/>
+		<many-to-one name="icon" column="iid" class="Icon" not-null="true" unique="true"/>
+	</class>
+</hibernate-mapping>
