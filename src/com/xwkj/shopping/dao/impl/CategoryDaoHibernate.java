@@ -1,8 +1,11 @@
 package com.xwkj.shopping.dao.impl;
 
+import java.util.List;
+
 import com.xwkj.common.hibernate3.support.PageHibernateDaoSupport;
 import com.xwkj.shopping.dao.CategoryDao;
 import com.xwkj.shopping.domain.Category;
+import com.xwkj.shopping.domain.Type;
 
 public class CategoryDaoHibernate extends PageHibernateDaoSupport implements CategoryDao {
 
@@ -24,6 +27,12 @@ public class CategoryDaoHibernate extends PageHibernateDaoSupport implements Cat
 	@Override
 	public void delete(Category category) {
 		getHibernateTemplate().delete(category);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Category> findByType(Type type) {
+		return getHibernateTemplate().find("from Category where type=? order by createDate desc", type);
 	}
 
 }

@@ -10,7 +10,15 @@
 		<create creator="spring" javascript="AdminManager"> 
 			<param name="beanName" value="adminManager"/>
 		</create>
+		<create creator="spring" javascript="TypeManager"> 
+			<param name="beanName" value="typeManager"/>
+		</create>
+		<create creator="spring" javascript="CategoryManager"> 
+			<param name="beanName" value="categoryManager"/>
+		</create>
 		<!-- 定义使用Bean转换器处理如下Java类 -->
-<!-- 		<convert converter="bean" match="com.xwkj.booking.bean.RoomBean"/> -->
+		<convert converter="bean" match="com.xwkj.shopping.bean.IconBean"/> 
+		<convert converter="bean" match="com.xwkj.shopping.bean.TypeBean"/> 
+		<convert converter="bean" match="com.xwkj.shopping.bean.CategoryBean"/> 
 	</allow>
 </dwr>

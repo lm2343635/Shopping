@@ -1,0 +1,13 @@
+#modify-type-form .input-group {
+	margin: 5px 0;
+}
+
+#upload-icon-button {
+	width: 100%
+}
+
+#modify-type-icon {
+	width: 100px;
+	height: 100px;
+	margin-bottom: 5px;
+}

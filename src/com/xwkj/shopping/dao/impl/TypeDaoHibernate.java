@@ -1,5 +1,7 @@
 package com.xwkj.shopping.dao.impl;
 
+import java.util.List;
+
 import com.xwkj.common.hibernate3.support.PageHibernateDaoSupport;
 import com.xwkj.shopping.dao.TypeDao;
 import com.xwkj.shopping.domain.Type;
@@ -24,6 +26,12 @@ public class TypeDaoHibernate extends PageHibernateDaoSupport implements TypeDao
 	@Override
 	public void delete(Type type) {
 		getHibernateTemplate().delete(type);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Type> findAll() {
+		return getHibernateTemplate().find("from Type order by createDate desc");
 	}
 
 }

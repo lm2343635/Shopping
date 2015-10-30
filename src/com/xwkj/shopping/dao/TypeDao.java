@@ -1,5 +1,7 @@
 package com.xwkj.shopping.dao;
 
+import java.util.List;
+
 import com.xwkj.shopping.domain.Type;
 
 public interface TypeDao {
@@ -7,4 +9,6 @@ public interface TypeDao {
 	String save(Type type);
 	void update(Type type);
 	void delete(Type type);
+	
+	List<Type> findAll();
 }
