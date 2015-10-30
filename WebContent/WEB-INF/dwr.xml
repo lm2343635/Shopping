@@ -7,6 +7,9 @@
 		<create creator="spring" javascript="SendeeManager"> 
 			<param name="beanName" value="sendeeManager"/>
 		</create>
+		<create creator="spring" javascript="AdminManager"> 
+			<param name="beanName" value="adminManager"/>
+		</create>
 		<!-- 定义使用Bean转换器处理如下Java类 -->
 <!-- 		<convert converter="bean" match="com.xwkj.booking.bean.RoomBean"/> -->
 	</allow>
