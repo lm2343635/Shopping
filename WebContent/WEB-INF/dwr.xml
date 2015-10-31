@@ -16,9 +16,17 @@
 		<create creator="spring" javascript="CategoryManager"> 
 			<param name="beanName" value="categoryManager"/>
 		</create>
+		<create creator="spring" javascript="GoodManager"> 
+			<param name="beanName" value="goodManager"/>
+		</create>
+		<create creator="spring" javascript="PhotoManager"> 
+			<param name="beanName" value="photoManager"/>
+		</create>
 		<!-- 定义使用Bean转换器处理如下Java类 -->
 		<convert converter="bean" match="com.xwkj.shopping.bean.IconBean"/> 
 		<convert converter="bean" match="com.xwkj.shopping.bean.TypeBean"/> 
 		<convert converter="bean" match="com.xwkj.shopping.bean.CategoryBean"/> 
+		<convert converter="bean" match="com.xwkj.shopping.bean.PhotoBean"/> 
+		<convert converter="bean" match="com.xwkj.shopping.bean.GoodBean"/> 
 	</allow>
 </dwr>

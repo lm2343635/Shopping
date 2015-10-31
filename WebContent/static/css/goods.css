@@ -1,0 +1,27 @@
+.modal-dialog .modal-content .modal-body .input-group {
+	margin: 5px 0;
+}
+
+.form-icon i {
+	width: 20px;
+}
+
+#upload-photo-button {
+	width: 100%
+}
+
+#upload-photo-progress {
+	display: none;
+}
+
+.good-photo-delete {
+    position: absolute;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.good-photo-cover {
+    position: absolute;
+    margin-left: 40px;
+    margin-top: 5px;
+}

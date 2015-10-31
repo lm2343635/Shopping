@@ -12,6 +12,7 @@ public class Good implements Serializable {
 	private String gname;
 	private Double price;
 	private Integer number;
+	private String descriptor;
 	private Integer sold;
 	private Date createDate;
 	private Category category;
@@ -56,6 +57,12 @@ public class Good implements Serializable {
 	}
 	public void setNumber(Integer number) {
 		this.number = number;
+	}
+	public String getDescriptor() {
+		return descriptor;
+	}
+	public void setDescriptor(String descriptor) {
+		this.descriptor = descriptor;
 	}
 	public void setSold(Integer sold) {
 		this.sold = sold;

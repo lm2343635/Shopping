@@ -26,7 +26,9 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.xwkj.common.util.FileTool;
 import com.xwkj.common.util.ImageTool;
 import com.xwkj.shopping.domain.Category;
+import com.xwkj.shopping.domain.Good;
 import com.xwkj.shopping.domain.Icon;
+import com.xwkj.shopping.domain.Photo;
 import com.xwkj.shopping.domain.Type;
 import com.xwkj.shopping.service.util.ManagerTemplate;
 
@@ -81,6 +83,9 @@ public class PhotoServlet extends HttpServlet
 			break;
 		case "uploadCategoryIcon":
 			uploadCategoryIcon(request, response);
+			break;
+		case "uploadGoodPhoto": 
+			uploadGoodPhoto(request, response);
 			break;
 		default:
 			break;
@@ -180,13 +185,47 @@ public class PhotoServlet extends HttpServlet
 		response.getWriter().print(data.toString());
 	}
 
+	private void uploadGoodPhoto(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.setCharacterEncoding("UTF-8");
+		JSONObject data=new JSONObject();
+		String gid=request.getParameter("gid");
+		WebApplicationContext context= WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+		ManagerTemplate template=(ManagerTemplate)context.getBean("managerTemplate");
+		Good good=template.getGoodDao().get(gid);
+		String filepath=createUploadPhotoDirectory(good.getCategory().getType().getTid());
+		String fileName=upload(request, filepath);
+		//压缩图片
+		if(!ImageTool.createThumbnail(filepath+"/"+fileName,THUMBNAIL_WIDTH,THUMBNAIL_HEIGHT)) {
+			data.put("thumbnail", false);
+			response.getWriter().print(data.toString());
+			return;
+		}
+		Photo photo=new Photo();
+		photo.setGood(good);
+		photo.setFilename(UUID.randomUUID().toString()+"."+THUMBNAIL_FORMAT);
+		photo.setUpload(new Date());
+		String pid=template.getPhotoDao().save(photo);
+		//保存成功
+		if(pid!=null) {
+			//更改名称
+			FileTool.modifyFileName(filepath, fileName, photo.getFilename());
+			data.put("filename", photo.getFilename());
+			data.put("pid", photo.getPid());
+		} else {
+			//保存失败，删除图片
+			File file=new File(filepath+"/"+fileName);
+			file.delete();
+			data.put("save", false);
+		}
+		response.getWriter().print(data.toString());
+	}
+
 	/**
 	 * 如果需要的照片上传路径不存在，则创建
 	 * @param id
 	 * @return 上传文件路径
 	 */
-	private String createUploadPhotoDirectory(String id)
-	{
+	private String createUploadPhotoDirectory(String id) {
 		String rootPath=getServletConfig().getServletContext().getRealPath("/");
 		String filepath=rootPath+"/"+PHOTO_FOLDER+"/"+id;
 		//如果不存文件夹，新建文件夹
@@ -201,51 +240,40 @@ public class PhotoServlet extends HttpServlet
 	 * @return 文件名
 	 */
 	@SuppressWarnings("unchecked")
-	private String upload(HttpServletRequest request,String filepath)
-	{
+	private String upload(HttpServletRequest request,String filepath) {
 		String fileName=null;
 		DiskFileItemFactory factory = new DiskFileItemFactory();//为文件对象产生工厂对象。
 		factory.setSizeThreshold(1024*4); //设置缓冲区的大小，此处为4kb
 		factory.setRepository(new File(filepath)); //设置上传文件的目的地
 		ServletFileUpload upload = new ServletFileUpload(factory);//产生servlet上传对象
 		upload.setSizeMax(FILE_MAX_SIZE);  //设置上传文件的大小
-		try 
-		{
+		try {
 			List<FileItem> list=upload.parseRequest(request); //取得所有的上传文件信息
 			Iterator<FileItem> it=list.iterator();
-			while(it.hasNext())
-			{
+			while(it.hasNext()) {
 			    FileItem item=it.next();
-			    if(item.isFormField()==false)
-			    { 
+			    if(item.isFormField()==false) { 
 				    fileName=item.getName();   //文件名
 				    //取文件名  
 				    fileName=fileName.substring(fileName.lastIndexOf("\\")+1,fileName.length());               
-				    if(!fileName.equals("")&&!(fileName==null))
-				    {
+				    if(!fileName.equals("")&&!(fileName==null)) {
 				    	//如果fileName为null，即没有上传文件  
 				    	File uploadedFile=new File(filepath,fileName);  
-				        try 
-				        {
+				        try  {
 				        	item.write(uploadedFile);
-				        } 
-				        catch (Exception e)
-				        {
+				        } catch (Exception e) {
 				        	e.printStackTrace();
 				        }  
 				    }            
 			    }
 			}
-		} 
-		catch (FileUploadException e) 
-		{
+		} catch (FileUploadException e) {
 			e.printStackTrace();
 		}
 		return fileName;
 	}
 
-	private void download(HttpServletRequest request,HttpServletResponse response) throws IOException 
-	{
+	private void download(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		int did=Integer.parseInt(request.getParameter("did"));
 	
 		String rootPath=getServletConfig().getServletContext().getRealPath("/");

@@ -10,10 +10,11 @@
 		<property name="gname" column="gname" type="string" not-null="true"/>
 		<property name="price" column="price" type="double" not-null="true"/>
 		<property name="number" column="number" type="integer" not-null="true"/>
+		<property name="descriptor" column="descriptor" type="text" not-null="true"/>
 		<property name="sold" column="sold" type="integer" not-null="true"/>
 		<property name="createDate" column="createDate" type="java.util.Date" not-null="true"/>
-		<many-to-one name="category" column="cid" class="Category" not-null="true"/>
-		<many-to-one name="cover" column="cover" class="Photo" not-null="true" unique="true"/>
+		<many-to-one name="category" column="cid" class="Category" not-null="true" lazy="false"/>
+		<many-to-one name="cover" column="cover" class="Photo" unique="true" lazy="false"/>
 		<set name="photos" cascade="delete" inverse="true">
 		 	<key><column name="gid" not-null="true" /></key>
 		 	<one-to-many class="Photo"/>

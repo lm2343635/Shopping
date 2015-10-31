@@ -1,7 +1,10 @@
 package com.xwkj.shopping.dao.impl;
 
+import java.util.List;
+
 import com.xwkj.common.hibernate3.support.PageHibernateDaoSupport;
 import com.xwkj.shopping.dao.GoodDao;
+import com.xwkj.shopping.domain.Category;
 import com.xwkj.shopping.domain.Good;
 
 public class GoodDaoHibernate extends PageHibernateDaoSupport implements GoodDao {
@@ -24,6 +27,12 @@ public class GoodDaoHibernate extends PageHibernateDaoSupport implements GoodDao
 	@Override
 	public void delete(Good good) {
 		getHibernateTemplate().delete(good);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Good> findByCategory(Category category) {
+		return getHibernateTemplate().find("from Good where category=? order by createDate desc", category);
 	}
 
 }
