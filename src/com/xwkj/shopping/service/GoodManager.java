@@ -48,4 +48,12 @@ public interface GoodManager {
 	 */
 	List<GoodBean> getGoodsByCid(String cid);
 	
+	/**
+	 * 得到最新的limit个一级分类的商品
+	 * @param tid 一级分类id
+	 * @param limit 限制个数
+	 * @return
+	 */
+	List<GoodBean> getGoodsByTidWithLimit(String tid, int limit);
+	
 }

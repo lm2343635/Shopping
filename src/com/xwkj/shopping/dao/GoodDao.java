@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.xwkj.shopping.domain.Category;
 import com.xwkj.shopping.domain.Good;
+import com.xwkj.shopping.domain.Type;
 
 public interface GoodDao {
 	Good get(String gid);
@@ -17,4 +18,12 @@ public interface GoodDao {
 	 * @return
 	 */
 	List<Good> findByCategory(Category category);
+	
+	/**
+	 * 查询最新的limit个一级分类的商品
+	 * @param type
+	 * @param limit
+	 * @return
+	 */
+	List<Good> findByTypeWithLimit(Type type, int limit);
 }

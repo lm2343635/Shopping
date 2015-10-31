@@ -214,7 +214,7 @@ function loadGoods() {
 		    				});
 		    			});
 			     		setTimeout(function(){
-						 	$("#upload-photo-progresss").hide(1500);
+						 	$("#upload-photo-progress").hide(1500);
 						 },2000);
 			    	},
 			    	progressall:function(e,data){

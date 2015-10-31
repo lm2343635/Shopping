@@ -1,0 +1,11 @@
+.logo a img {
+	max-height: 65px;
+	max-width: 250px;
+}
+
+#nav-user, 
+#nav-logout,
+#user-modify-form, 
+#user-modify-submit {
+	display: none;
+}

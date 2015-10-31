@@ -1,11 +1,18 @@
 package com.xwkj.shopping.dao.impl;
 
+import java.sql.SQLException;
 import java.util.List;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
 
 import com.xwkj.common.hibernate3.support.PageHibernateDaoSupport;
 import com.xwkj.shopping.dao.GoodDao;
 import com.xwkj.shopping.domain.Category;
 import com.xwkj.shopping.domain.Good;
+import com.xwkj.shopping.domain.Type;
 
 public class GoodDaoHibernate extends PageHibernateDaoSupport implements GoodDao {
 
@@ -33,6 +40,22 @@ public class GoodDaoHibernate extends PageHibernateDaoSupport implements GoodDao
 	@Override
 	public List<Good> findByCategory(Category category) {
 		return getHibernateTemplate().find("from Good where category=? order by createDate desc", category);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Good> findByTypeWithLimit(Type type, int limit) {
+		String hql="from Good where category.type=? order by createDate desc";
+		return getHibernateTemplate().executeFind(new HibernateCallback<List<Good>>() {
+			@Override
+			public List<Good> doInHibernate(Session session) throws HibernateException, SQLException {
+				Query query=session.createQuery(hql);
+				query.setParameter(0, type);
+				query.setFirstResult(0);
+				query.setMaxResults(limit);
+				return query.list();
+			}
+		});
 	}
 
 }
