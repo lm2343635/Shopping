@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>九资河旅游商城</title>
+        <link href="static/images/favicon.ico" type="image/x-icon" rel="icon"> 
+		<link href="static/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="static/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+		<link href="static/css/style.css" rel="stylesheet"/>
+		<link href="static/css/font-awesome.min.css" rel="stylesheet">
+		<link href="static/css/mengular.css" rel="stylesheet">
+		<link href="static/css/good.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+		<script src="static/js/jquery.min.js"></script>
+		<script src="static/js/jquery.bootstrap.min.js"></script>
+		<script src="static/js/bootstrap.min.js"></script>
+        <script src="static/js/mengular-2.0.js"></script>
+        <script src="dwr/engine.js"></script>
+        <script src="dwr/interface/TypeManager.js"></script>
+        <script src="dwr/interface/CategoryManager.js"></script>
+        <script src="dwr/interface/GoodManager.js"></script>
+        <script src="dwr/interface/PhotoManager.js"></script>
+        <script src="static/js/tools.js"></script>
+		<script src="static/js/good.js"></script>
+	</head>
+	<body>
+		<div id="head"></div>	
+		<div class="events">
+			<div class="container">
+				<div class="events-top heading">
+					<h3 id="good-gname">商品名称</h3>
+					<p class="text-muted">
+						<span id="good-tname">一级分类</span>，
+						<span id="good-cname">二级分类</span>
+					</p>
+				</div>
+				<div id="good-info" class="row">
+					<div class="col-xs-12 col-md-8">
+						<div class="thumbnail">
+							<ul class="nav nav-tabs">
+								<li role="presentation" class="active"><a>商品图片</a></li>
+							</ul>
+							<div id="good-photo-list">
+								<img id="${pid}$" src="${src}$" class="mengular-template good-photo-list-template">
+							</div>
+							<ul class="nav nav-tabs">
+								<li role="presentation" class="active"><a>商品简介</a></li>
+							</ul>
+							<div class="caption">
+								<pre id="good-descriptor"></pre>
+							</div>
+							<a href="javascript:window.history.go(-1)" class="btn btn-block btn-lg btn-info">返回上一页</a>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-4">
+						<div id="information-tips" class="panel panel-default">
+							<div class="panel-heading">
+								<h2 class="panel-title">说明</h2>
+							</div>
+							<div class="panel-body">
+		                        <p class="text-muted">1、成功预订即保障有房。</p>
+		                        <p class="text-muted">2、房间已经过实地验证，请放心预订。</p>
+		                        <p class="text-muted">3、入住需要购买保险：按人数计算(固定的)10元/人*人数。</p>
+		                        <p class="text-muted">4、房间价格按入住天数分三种情况进行折扣：1-2天、按100%房价计算，3-7天、按80%房价计算，8-30天、按60%房价计算，系统自动根据入住人数计算出保险金额及房价</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-4">
+						<div id="buy-good" class="panel panel-default">
+							<div class="panel-heading">
+								<h2 class="panel-title">购买</h2>
+							</div>
+							<div class="panel-body">
+								<h3 class="text-danger">￥<span id="good-price"></span></h3>
+		                        <div class="input-group">
+		                            <span class="input-group-addon form-icon"><i class="fa fa-heart fa-lg"></i></span>
+		                            <select id="booking-room-insurance" class="form-control input-lg"></select>
+		                        </div>
+		                        <h4 class="text-muted">共<strong id="booking-room-days" class="text-success">0</strong>件，合计￥<strong id="booking-room-money" class="text-success">0</strong>元。</h4>
+		                        <button id="booking-room-submit" class="btn btn-lg btn-danger btn-block" disabled>立即预定</button>
+		                        <a href="search.html" class="btn btn-lg btn-warning btn-block">搜索房间</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="foot"></div>
+	</body>
+</html>

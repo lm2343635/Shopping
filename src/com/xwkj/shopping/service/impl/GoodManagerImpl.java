@@ -92,4 +92,20 @@ public class GoodManagerImpl extends ManagerTemplate implements GoodManager {
 		return goods;
 	}
 
+	@Override
+	public List<GoodBean> getHotestGoodsWithLimit(int limit) {
+		List<GoodBean> goods=new ArrayList<>();
+		for(Good good: goodDao.findHotestWithLimit(limit))
+			goods.add(new GoodBean(good));
+		return goods;
+	}
+
+	@Override
+	public List<GoodBean> searchGoods(String gname) {
+		List<GoodBean> goods=new ArrayList<>();
+		for(Good good: goodDao.findByGname(gname))
+			goods.add(new GoodBean(good));
+		return goods;
+	}
+
 }

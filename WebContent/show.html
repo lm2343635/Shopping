@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>九资河旅游商城</title>
+        <link href="static/images/favicon.ico" type="image/x-icon" rel="icon"> 
+		<link href="static/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="static/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+		<link href="static/css/style.css" rel="stylesheet"/>
+		<link href="static/css/font-awesome.min.css" rel="stylesheet">
+		<link href="static/css/mengular.css" rel="stylesheet">
+		<link href="static/css/show.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+		<script src="static/js/jquery.min.js"></script>
+		<script src="static/js/jquery.bootstrap.min.js"></script>
+		<script src="static/js/bootstrap.min.js"></script>
+        <script src="static/js/mengular-2.0.js"></script>
+        <script src="dwr/engine.js"></script>
+        <script src="dwr/interface/TypeManager.js"></script>
+        <script src="dwr/interface/CategoryManager.js"></script>
+        <script src="dwr/interface/GoodManager.js"></script>
+        <script src="static/js/tools.js"></script>
+		<script src="static/js/show.js"></script>
+	</head>
+	<body>
+		<div id="head"></div>	
+		<div id="show-goods" class="container">
+			<div class="page-header">
+				<h1>
+					<span class="text-primary">搜索商品：</span>
+					<input id="search-good" type="text" placeholder="请输入关键字" class="text-info">
+					<i id="search-good-submit" class="fa fa-search pull-right text-success"></i>
+				</h1>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-md-3">
+					<ul id="type-list" class="list-group">
+						<li id="${tid}$" class="list-group-item mengular-template type-template">
+							<img src="${ticon}$" class="img-circle pull-right">
+							<h4 class="text-primary">${tname}$</h4>
+						</li>
+						<li id="${cid}$" class="${tid}$ list-group-item mengular-template category-template">
+							<img src="${cicon}$" class="img-circle pull-right">
+							<h5 class="text-muted">${cname}$</h5>
+						</li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-md-9">
+					<div id="good-list" class="row">
+						<div id="${gid}$" class="col-xs-12 col-sm-6 mengular-template good-list-template">
+							<div class="thumbnail">
+								<a href="good.html?gid=${gid}$"><img src="${src}$" alt="${gname}$"></a>
+								<div class="caption">
+									<h4>
+										<strong>${gname}$</strong>
+									</h4>
+									<p class="text-muted">${tname}$，${cname}$</p>
+									<h4>
+										<span class="text-warning">￥${price}$</span>
+										<small class="pull-right text-info">已售：${sold}$</small>
+									</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="no-search-result" class="jumbotron">
+	                    <h1>对不起！</h1>
+	                    <p>该分类下加没有任何商品，请变更分类后重试！</p>
+	                    <p><a href="index.html" class="btn btn-danger btn-lg">返回主页</a></p>
+	                </div>
+	                <div id="search-room-loading" class="jumbotron">
+	                    <img class="center-block" src="static/images/loading-blue.gif">
+	                    <h1>正在加载商品...</h1>
+	                </div>
+				</div>
+			</div>
+		</div>
+
+		<div id="foot"></div>
+	</body>
+</html>

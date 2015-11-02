@@ -58,4 +58,26 @@ public class GoodDaoHibernate extends PageHibernateDaoSupport implements GoodDao
 		});
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Good> findHotestWithLimit(int limit) {
+		String hql="from Good order by sold, createDate desc";
+		return getHibernateTemplate().executeFind(new HibernateCallback<List<Good>>() {
+			@Override
+			public List<Good> doInHibernate(Session session) throws HibernateException, SQLException {
+				Query query=session.createQuery(hql);
+				query.setFirstResult(0);
+				query.setMaxResults(limit);
+				return query.list();
+			}
+		});
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Good> findByGname(String gname) {
+		String hql="from Good where gname like ? order by sold, createDate desc";
+		return getHibernateTemplate().find(hql, "%"+gname+"%");
+	}
+
 }

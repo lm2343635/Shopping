@@ -26,4 +26,18 @@ public interface GoodDao {
 	 * @return
 	 */
 	List<Good> findByTypeWithLimit(Type type, int limit);
+	
+	/**
+	 * 查询销量最好的limit个商品
+	 * @param limit
+	 * @return
+	 */
+	List<Good> findHotestWithLimit(int limit);
+	
+	/**
+	 * 根据商品名称查询
+	 * @param gname
+	 * @return
+	 */
+	List<Good> findByGname(String gname);
 }

@@ -1,0 +1,19 @@
+#good-photo-list img {
+	width: 100%;
+	margin: 5px 0;
+}
+
+#good-info {
+	margin-top: 30px;
+}
+
+#good-gname {
+	margin-bottom: 10px;
+}
+
+#good-descriptor {
+	background-color: rgba(255,255,255,0);
+    border: none;
+    font-size: 16px;
+    padding: 0;
+}

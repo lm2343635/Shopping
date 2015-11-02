@@ -1,0 +1,28 @@
+#search-good {
+	border: 0;
+	font-size: 34px;
+	outline:none;
+	width: 245px;
+}
+
+#search-good:hover {
+	border: 0;
+}
+
+#search-good-submit:hover {
+	cursor: pointer;
+	color: rgb(41, 88, 41);
+}
+
+#no-search-result,
+#search-loading {
+	display: none;
+}
+
+#search-loading img {
+	height: 230px;
+}
+
+#search-loading h1 {
+	text-align: center;
+}

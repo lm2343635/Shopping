@@ -56,4 +56,18 @@ public interface GoodManager {
 	 */
 	List<GoodBean> getGoodsByTidWithLimit(String tid, int limit);
 	
+	/**
+	 * 得到销量最好的limit个商品
+	 * @param limit
+	 * @return
+	 */
+	List<GoodBean> getHotestGoodsWithLimit(int limit);
+	
+	/**
+	 * 根据商品名称搜索商品
+	 * @param gname
+	 * @return
+	 */
+	List<GoodBean> searchGoods(String gname);
+	
 }

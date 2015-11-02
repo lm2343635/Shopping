@@ -1,0 +1,48 @@
+#search-good {
+	border: 0;
+	font-size: 34px;
+	outline:none;
+	width: 245px;
+}
+
+#search-good:hover {
+	border: 0;
+}
+
+#search-good-submit:hover {
+	cursor: pointer;
+	color: rgb(41, 88, 41);
+}
+
+#type-list li {
+	cursor: pointer;
+}
+
+#type-list .type-template img {
+	width: 40px;
+	height: 40px;
+}
+
+#type-list .category-template {
+	height: 50px;
+	list-style-type: none;
+	display: none;
+}
+
+#type-list .category-template img {
+	width: 30px;
+	height: 30px;
+}
+
+#no-search-result,
+#search-room-loading {
+	display: none;
+}
+
+#search-room-loading img {
+	height: 230px;
+}
+
+#search-room-loading h1 {
+	text-align: center;
+}

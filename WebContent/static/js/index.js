@@ -31,7 +31,9 @@ $(document).ready(function($) {
 						gname: goods[j].gname,
 						src: src,
 						price: goods[j].price,
-						sold: goods[j].sold
+						sold: goods[j].sold,
+						tname: goods[j].category.type.tname,
+						cname: goods[j].category.cname
 					});
 				}
 			});
