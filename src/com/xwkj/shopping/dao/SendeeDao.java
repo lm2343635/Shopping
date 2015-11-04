@@ -7,4 +7,11 @@ public interface SendeeDao {
 	String save(Sendee sendee);
 	void update(Sendee sendee);
 	void delete(Sendee sendee);
+	
+	/**
+	 * 根据用户id查询收货人
+	 * @param uid
+	 * @return
+	 */
+	Sendee findByUid(String uid);
 }

@@ -28,5 +28,7 @@
 		<convert converter="bean" match="com.xwkj.shopping.bean.CategoryBean"/> 
 		<convert converter="bean" match="com.xwkj.shopping.bean.PhotoBean"/> 
 		<convert converter="bean" match="com.xwkj.shopping.bean.GoodBean"/> 
+		<convert converter="bean" match="com.xwkj.shopping.bean.SendeeBean"/> 
+		<convert converter="bean" match="com.xwkj.shopping.bean.UserBean"/> 
 	</allow>
 </dwr>

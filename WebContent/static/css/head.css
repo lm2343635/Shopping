@@ -1,6 +1,21 @@
-.logo a img {
-	max-height: 65px;
-	max-width: 250px;
+
+.input-group i {
+	width: 25px;
+}
+
+#user-login-modal .input-group, 
+#user-register-modal .input-group,
+#user-modify-modal .input-group {
+	margin: 10px 0;
+}
+
+#user-register-security-code-img,
+#user-modify-security-code-img {
+    float: right;
+    position: absolute;
+    margin-left: -90px;
+    margin-top: 10px;
+    z-index: 10;
 }
 
 #nav-user, 
@@ -8,4 +23,9 @@
 #user-modify-form, 
 #user-modify-submit {
 	display: none;
+}
+
+.logo a img {
+	max-height: 65px;
+	max-width: 250px;
 }

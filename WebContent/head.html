@@ -1,4 +1,5 @@
 <link href="static/css/head.css" rel="stylesheet">
+<script src="dwr/interface/SendeeManager.js"></script>
 <script src="static/js/head.js"></script>
 <div class="header">
 	<div class="container">
@@ -43,7 +44,7 @@
                 </div>
 	        </div>
 	        <div class="modal-footer">
-	        	<button id="forget-password" type="button" class="btn btn-danger pull-left">忘记密码</button>
+	        	<a id="forget-password" class="btn btn-danger pull-left">忘记密码，前往订房系统找回</a>
 	            <button id="user-login-submit" type="button" class="btn btn-success">登录</button>
 	        </div>
 	    </div>
@@ -58,35 +59,11 @@
 	            <h4 class="modal-title">用户注册</h4>
 	        </div>
 	        <div class="modal-body">
-	            <div class="input-group">
-                    <span class="input-group-addon form-icon"><i class="fa fa-phone fa-lg"></i></span>
-                    <input id="user-register-telephone" type="text" class="form-control input-lg" placeholder="手机号码（手机短信验证，请填写真实手机号码）">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon form-icon"><i class="fa fa-user fa-lg"></i></span>
-                    <input id="user-register-uname" type="text" class="form-control input-lg" placeholder="姓名（订房后作为联系人，请填写真实姓名）">
-                </div>
-	            <div class="input-group">
-                    <span class="input-group-addon form-icon"><i class="fa fa-key fa-lg"></i></span>
-                    <input id="user-register-password" type="password" class="form-control input-lg" placeholder="密码">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon form-icon"><i class="fa fa-circle-o fa-lg"></i></span>
-                    <input id="user-register-repeat-password" type="password" class="form-control input-lg" placeholder="重复密码">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon form-icon"><i class="fa fa-lock fa-lg"></i></span>
-                    <input id="user-register-security-code" type="text" class="form-control input-lg" placeholder="点击获取安全码">
-                    <img id="user-register-security-code-img">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon form-icon"><i class="fa fa-comment fa-lg"></i></span>
-                    <input id="user-register-verification-code" type="text" class="form-control input-lg" placeholder="短信验证码">
-                    <span id="get-verification-code" class="input-group-addon input-group-addon-button">获取验证码</span>
-                </div>
+	            <h3>注册请前往九资河订房！</h3>
 	        </div>
 	        <div class="modal-footer">
-	            <button id="user-register-submit" type="button" class="btn btn-info">提交注册信息</button>
+	        	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+	            <a id="user-register-submit" class="btn btn-info" target="_blank">前往订房系统注册</a>
 	        </div>
 	    </div>
 	</div>

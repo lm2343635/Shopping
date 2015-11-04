@@ -8,9 +8,9 @@
 			<generator class="uuid"/>
 		</id>
 		<property name="uid" column="uid" type="string" not-null="true"/>
-		<property name="sname" column="sname" type="string" not-null="true"/>
-		<property name="email" column="email" type="string" not-null="true"/>
-		<property name="address" column="address" type="string" not-null="true"/>
-		<property name="telephone" column="telephone" type="string" not-null="true"/>
+		<property name="sname" column="sname" type="string"/>
+		<property name="email" column="email" type="string"/>
+		<property name="address" column="address" type="string"/>
+		<property name="telephone" column="telephone" type="string"/>
 	</class>
 </hibernate-mapping>
