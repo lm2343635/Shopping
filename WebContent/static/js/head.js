@@ -4,6 +4,15 @@ $(document).ready(function() {
 		$(" ul.navig").slideToggle("slow" , function(){});
 	});
 	
+	//检查用户session
+	checkSession(function(user) {
+		if(user!=null) {
+			$("#nav-login, #nav-register").css("display","none");
+			$("#nav-user a").text(user.uname);
+			$("#nav-user, #nav-logout").css("display","inline");
+		}
+	});
+	
 	SendeeManager.getBookingDomain(function(BookingDomain) {
 		$("#user-register-submit, #forget-password").attr("href", "http://"+BookingDomain);
 	});

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>九资河旅游商城</title>
+        <link href="static/images/favicon.ico" type="image/x-icon" rel="icon"> 
+		<link href="static/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="static/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+		<link href="static/css/style.css" rel="stylesheet"/>
+		<link href="static/css/font-awesome.min.css" rel="stylesheet">
+		<link href="static/css/mengular.css" rel="stylesheet">
+		<link href="static/css/basket.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+		<script src="static/js/jquery.min.js"></script>
+		<script src="static/js/jquery.bootstrap.min.js"></script>
+		<script src="static/js/bootstrap.min.js"></script>
+        <script src="static/js/mengular-2.0.js"></script>
+        <script src="dwr/engine.js"></script>
+        <script src="dwr/interface/SendeeManager.js"></script>
+        <script src="dwr/interface/BasketManager.js"></script>
+        <script src="static/js/tools.js"></script>
+		<script src="static/js/basket.js"></script>
+	</head>
+	<body>
+		<div id="head"></div>	
+		<div class="events">
+			<div class="container">
+				<div class="events-top heading">
+					<h3>我的购物车</h3>
+				</div>
+				<div id="basket-list">
+					<div id="${bid}$" class="thumbnail mengular-template basket-list-template">
+						<div class="row">
+							<div class="col-xs-12 col-sm-5 col-md-2">
+								<a href="good.html?gid=${gid}$"><img src="${src}$" alt="${gname}$" class="img-rounded"></a>
+							</div>
+							<div class="col-xs-12 col-sm-7 col-md-10">
+								<div class="caption">
+									<div class="basket-remove">
+										<i class="fa fa-times-circle-o text-danger"></i>
+									</div>
+									<h3 class="text-success basket-gname">${gname}$</h3>			
+									<p class="text-muted">${cname}$，${tname}$，共${number}$件库存</p>	
+									<p class="text-muted">
+										购买<select class="buy-good-count"></select>件，共<span class="text-danger buy-good-amount">${amount}$</span>元
+		                        	</p>
+												
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="no-good" class="jumbotron">
+					<h1>购物车没有任何商品！</h1>
+					<p>只有登录后的用户才能查看购物车，请确认您已经登录！</p>
+					<p>登录后刷新本页即可浏览购物车。</p>
+					<div class="row">
+						<div class="col-xs-12 col-sm-8 col-md-9">
+							<a href="show.html" class="btn btn-success btn-lg">浏览商品</a>
+							<a href="index.html" class="btn btn-info btn-lg">返回首页</a>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-3">
+							<a href="basket.html" class="btn btn-warning btn-lg btn-block">已登录，刷新本页</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="foot"></div>
+	</body>
+</html>

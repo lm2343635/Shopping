@@ -22,6 +22,9 @@
 		<create creator="spring" javascript="PhotoManager"> 
 			<param name="beanName" value="photoManager"/>
 		</create>
+		<create creator="spring" javascript="BasketManager"> 
+			<param name="beanName" value="basketManager"/>
+		</create>
 		<!-- 定义使用Bean转换器处理如下Java类 -->
 		<convert converter="bean" match="com.xwkj.shopping.bean.IconBean"/> 
 		<convert converter="bean" match="com.xwkj.shopping.bean.TypeBean"/> 
@@ -30,5 +33,6 @@
 		<convert converter="bean" match="com.xwkj.shopping.bean.GoodBean"/> 
 		<convert converter="bean" match="com.xwkj.shopping.bean.SendeeBean"/> 
 		<convert converter="bean" match="com.xwkj.shopping.bean.UserBean"/> 
+		<convert converter="bean" match="com.xwkj.shopping.bean.BasketBean"/> 
 	</allow>
 </dwr>

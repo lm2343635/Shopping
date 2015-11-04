@@ -27,6 +27,7 @@
         <script src="dwr/interface/CategoryManager.js"></script>
         <script src="dwr/interface/GoodManager.js"></script>
         <script src="dwr/interface/PhotoManager.js"></script>
+        <script src="dwr/interface/BasketManager.js"></script>
         <script src="static/js/tools.js"></script>
 		<script src="static/js/good.js"></script>
 	</head>
@@ -78,14 +79,17 @@
 								<h2 class="panel-title">购买</h2>
 							</div>
 							<div class="panel-body">
-								<h3 class="text-danger">￥<span id="good-price"></span></h3>
+								<h4 class="text-muted">商品单价：￥<span id="good-price"></span>元</h4>
+								<h4 class="text-muted">库存数量：<span id="good-number"></span>件</h4>
 		                        <div class="input-group">
-		                            <span class="input-group-addon form-icon"><i class="fa fa-heart fa-lg"></i></span>
-		                            <select id="booking-room-insurance" class="form-control input-lg"></select>
+		                            <span class="input-group-addon form-icon"><i class="fa fa-list-ol fa-lg"></i></span>
+		                            <select id="buy-good-count" class="form-control input-lg">
+		                            	<option value="0" selected>请选择购买件数</option>
+		                            </select>
 		                        </div>
-		                        <h4 class="text-muted">共<strong id="booking-room-days" class="text-success">0</strong>件，合计￥<strong id="booking-room-money" class="text-success">0</strong>元。</h4>
-		                        <button id="booking-room-submit" class="btn btn-lg btn-danger btn-block" disabled>立即预定</button>
-		                        <a href="search.html" class="btn btn-lg btn-warning btn-block">搜索房间</a>
+		                        <h4 class="text-muted">共<strong id="buy-good-number" class="text-success">0</strong>件，合计￥<strong id="buy-good-amount" class="text-success">0</strong>元。</h4>
+		                        <button id="buy-good-cart" class="btn btn-lg btn-danger btn-block" disabled>加入购物车</button>
+		                        <a href="search.html" class="btn btn-lg btn-warning btn-block">立即结算</a>
 							</div>
 						</div>
 					</div>

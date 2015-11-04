@@ -8,8 +8,9 @@
 			<generator class="uuid"/>
 		</id>
 		<property name="count" column="count" type="integer" not-null="true"/>
-		<many-to-one name="good" column="gid" class="Good" not-null="true"/>
+		<property name="createDate" column="createDate" type="java.util.Date" not-null="true"/>
+		<many-to-one name="good" column="gid" class="Good" not-null="true" lazy="false"/>
 		<many-to-one name="sendee" column="sid" class="Sendee" not-null="true"/>
-		<many-to-one name="order" column="oid" class="Order" not-null="true" unique="true"/>
+		<many-to-one name="order" column="oid" class="Order" unique="true"/>
 	</class>
 </hibernate-mapping>

@@ -1,0 +1,33 @@
+#basket-list {
+    margin-top: 20px;
+}
+
+#basket-list a img {
+
+}
+
+#basket-list .basket-remove {
+	font-size: 40px;
+	float: right;
+	cursor: pointer;
+}
+
+#basket-list h3 {
+	margin: 7px 0;	
+}
+
+#basket-list p {
+	margin: 5px 0;	
+}
+
+
+#basket-list .buy-good-count {
+	width: 50px;
+    line-height: 13px;
+    background: #F3F3F3;
+}
+
+#no-good {
+    margin-top: 20px;
+    display: none;
+}
