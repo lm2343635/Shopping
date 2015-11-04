@@ -1,3 +1,6 @@
+var accountCount=0, accountAmount=0;
+var _user;
+
 $(document).ready(function() {
 	$.messager.model = {
 		ok:{ 
@@ -19,13 +22,16 @@ $(document).ready(function() {
 			$("#no-good").show();
 			return;
 		}
-
+		_user=user;
 		BasketManager.getBasketGoodsByUid(user.uid, function(baskets) {
 			if(baskets.length==0) {
 				$("#no-good").show();
 				return;
-			}
+			} 
+			$("#account-div").show();
 			for(var i in baskets) {
+				accountCount+=baskets[i].count;
+				accountAmount+=baskets[i].count*baskets[i].good.price;
 				var src="static/images/noImage.jpg";
 				if(baskets[i].good.cover!=null) {
 					src="upload/"+baskets[i].good.category.type.tid+"/"+baskets[i].good.cover.filename;
@@ -38,7 +44,8 @@ $(document).ready(function() {
 					number: baskets[i].good.number,
 					cname: baskets[i].good.category.cname,
 					tname: baskets[i].good.category.type.tname,
-					amount: baskets[i].count*baskets[i].good.price
+					amount: baskets[i].count*baskets[i].good.price,
+					price: baskets[i].good.price
 				});
 
 				//加载购买件数的下拉菜单
@@ -53,8 +60,14 @@ $(document).ready(function() {
 				$("#"+baskets[i].bid+" .buy-good-count").change(function() {
 					var count=$(this).val();
 					var bid=$(this).parent().parent().parent().parent().parent().attr("id");
-					BasketManager.changeCount(bid, count, function(amount) {
-						$("#"+bid+" .buy-good-amount").text(amount);
+					BasketManager.changeCount(bid, count, function(data) {
+						$("#"+bid+" .buy-good-amount").text(data.amount);
+						accountCount+=data.dcount;
+						accountAmount+=data.damount;
+						fillText({
+							"account-count": accountCount,
+							"account-amount": accountAmount
+						});
 					});
 				});
 
@@ -62,13 +75,41 @@ $(document).ready(function() {
 				$("#"+baskets[i].bid+" .basket-remove").click(function() {
 					var bid=$(this).parent().parent().parent().parent().attr("id");
 					var gname=$("#"+bid+" .basket-gname").text();
+					var count=parseInt($("#"+bid+" .buy-good-count").val());
+					var amount=parseFloat($("#"+bid+" .buy-good-amount").text());
 					$.messager.confirm("提示", "确认从购物车中移除商品"+gname+"吗？", function() {
 						BasketManager.removeGoodFromBasket(bid, function() {
 							$("#"+bid).remove();
+							accountCount-=count;
+							accountAmount-=amount;
+							fillText({
+								"account-count": accountCount,
+								"account-amount": accountAmount
+							});
+							if(accountCount==0) {
+								$("#account-div").hide();
+								$("#no-good").show();
+							}
 						});
 					});
 				});
 			}
+			fillText({
+				"account-goods": baskets.length,
+				"account-count": accountCount,
+				"account-amount": accountAmount
+			});
+		});
+	});
+
+	//清空购物车
+	$("#clear-basket").click(function() {
+		$.messager.confirm("警告", "确定要清除购物车中的所有商品吗？", function() {
+			BasketManager.clearBasket(_user.uid, function() {
+				$("#basket-list").remove();
+				$("#account-div").hide();
+				$("#no-good").show();
+			});
 		});
 	});
 });

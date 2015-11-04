@@ -1,6 +1,7 @@
 package com.xwkj.shopping.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.xwkj.shopping.bean.BasketBean;
 
@@ -26,13 +27,19 @@ public interface BasketManager {
 	 * 变更购买件数
 	 * @param bid
 	 * @param count
-	 * @return 总价
+	 * @return 
 	 */
-	double changeCount(String bid, int count);
+	Map<String, Object> changeCount(String bid, int count);
 	
 	/**
 	 * 从购物车中移除商品
 	 * @param bid
 	 */
 	void removeGoodFromBasket(String bid);
+	
+	/**
+	 * 清空购物车
+	 * @param uid
+	 */
+	void clearBasket(String uid);
 }

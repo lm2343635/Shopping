@@ -31,3 +31,15 @@
     margin-top: 20px;
     display: none;
 }
+
+#account-div {
+	display: none;
+}
+
+#account-div .row div {
+	margin: 5px 0;
+}
+
+#account-div h3 {
+	margin: 10px 0;
+}

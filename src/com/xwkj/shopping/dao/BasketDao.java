@@ -3,6 +3,7 @@ package com.xwkj.shopping.dao;
 import java.util.List;
 
 import com.xwkj.shopping.domain.Basket;
+import com.xwkj.shopping.domain.Good;
 import com.xwkj.shopping.domain.Sendee;
 
 public interface BasketDao {
@@ -18,4 +19,12 @@ public interface BasketDao {
 	 * @return
 	 */
 	List<Basket> findUnorderdBySendee(Sendee sendee);
+	
+	/**
+	 * 根据商品查询购物车项目
+	 * @param good
+	 * @param sendee
+	 * @return
+	 */
+	Basket findByGood(Good good, Sendee sendee);
 }
