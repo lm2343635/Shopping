@@ -39,8 +39,73 @@
 						<h3 class="pull-right text-muted">共种商品，件，合计￥元</h3>
 					</div>
 				</div>
-				
-				
+			</div>
+			<div id="basket-list" class="list-group">
+				<div id="${bid}$" class="list-group-item mengular-template basket-list-template">
+					<div class="row">
+						<div class="col-xs-12 col-md-7">
+							<a href="good.html?gid=${gid}$" target="_blank">
+								<img src="${src}$" class="img-circle" alt="${gname}$">
+								<span class="text-primary">${gname}$</span>
+							</a>
+						</div>
+						<div class="col-xs-12 col-md-5">
+							<h4 class="pull-right text-muted">单价￥${price}$元，${count}$件，小计￥${amount}$元</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="alert alert-info" role="alert">
+				<h2>收货人信息 <small>（用户自取请忽略本项，默认选择快递包邮）</small></h2>
+				<hr>
+				<div id="sendee-form" class="row">
+					<div class="col-xs-12 col-md-2">
+						<h3>收货人姓名 <i class="fa fa-certificate text-danger"></i></h3>
+					</div>
+					<div class="col-xs-12 col-md-4">
+						<input id="sendee-sname" type="text" placeholder="请填写收货人姓名">
+					</div>
+					<div class="col-xs-12 col-md-2">
+						<h3>收货人电话 <i class="fa fa-certificate text-danger"></i></h3>
+					</div>
+					<div class="col-xs-12 col-md-4">
+						<input id="sendee-telephone" type="text" placeholder="请填写收货人电话">
+					</div>
+					<div class="col-xs-12 col-md-2">
+						<h3>收货人地址 <i class="fa fa-certificate text-danger"></i></h3>
+					</div>
+					<div class="col-xs-12 col-md-10">
+						<input id="sendee-address" type="text" placeholder="请填写收货人地址">
+					</div>
+					<div class="col-xs-12 col-md-2">
+						<h3>电子邮箱</h3>
+					</div>
+					<div class="col-xs-12 col-md-10">
+						<input id="sendee-email" type="text" placeholder="电子邮箱用于接收配送邮件通知">
+					</div>
+				</div>
+			</div>
+			<div class="alert alert-success" role="alert">
+				<div id="submit-div" class="row">
+					<div class="col-xs-12 col-md-2">
+						<h3>配送方式</h3>
+					</div>
+					<div class="col-xs-12 col-md-4">
+						<div class="btn-group" role="group">
+							<button id="sendee-express-true" class="btn btn-lg btn-success active">快递包邮</button>
+							<button id="sendee-express-false" class="btn btn-lg btn-success">用户自取</button>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-2">
+						<a href="show.html" class="btn btn-block btn-lg btn-info">继续购物</a>
+					</div>
+					<div class="col-xs-12 col-md-2">
+						<a href="basket.html" class="btn btn-block btn-lg btn-warning">返回购物车</a>
+					</div>
+					<div class="col-xs-12 col-md-2">
+						<button id="create-order" class="btn btn-block btn-lg btn-danger">确认支付</button>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div id="foot"></div>

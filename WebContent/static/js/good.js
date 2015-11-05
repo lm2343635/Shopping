@@ -64,27 +64,25 @@ $(document).ready(function() {
 	$("#buy-good-cart, #buy-good-account").click(function() {
 		var number=$("#buy-good-count").val();
 		var id=	$(this).attr("id");
-		if(number>0) {
-			checkSession(function(user) {
-				if(user==null) {
-					$.messager.popup("请先登录！");
-					return;
-				}
-				BasketManager.addToBasket(user.uid, gid, number, function(bid) {
-					if(bid) {
-						switch (id) {
-						case "buy-good-cart":
-							location.href="basket.html";
-							break;
-						case "buy-good-account":
-							location.href="account.html";
-							break;
-						default:
-							break;
-						}
+		checkSession(function(user) {
+			if(user==null) {
+				$.messager.popup("请先登录！");
+				return;
+			}
+			BasketManager.addToBasket(user.uid, gid, number, function(bid) {
+				if(bid) {
+					switch (id) {
+					case "buy-good-cart":
+						location.href="basket.html";
+						break;
+					case "buy-good-account":
+						location.href="account.html";
+						break;
+					default:
+						break;
 					}
-				})
-			})
-		}
+				}
+			});
+		});
 	});
 });

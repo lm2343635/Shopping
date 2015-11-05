@@ -1,3 +1,59 @@
 #account-title h3 {
 	margin-top: 33px;
 }
+
+#sendee-form div  {
+	margin: 5px 0;
+}
+ 
+#sendee-form input {
+	border: 0;
+    font-size: 25px;
+    line-height: 40px;
+    outline: none;
+    width: 100%;
+    background: rgba(255,255,255,0.5);
+    border-radius: 6px;
+    padding: 10px;
+}
+
+#sendee-form .input-error {
+	background: rgba(255,0,0,0.3);
+	color: #ff0000;
+}
+
+#sendee-form .input-error::-webkit-input-placeholder { /* WebKit browsers */ 
+	color: rgba(255,0,0,0.4);
+} 
+#sendee-form .input-error:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+	color: rgba(255,0,0,0.4);
+} 
+#sendee-form .input-error::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+	color: rgba(255,0,0,0.4);
+} 
+#sendee-form .input-error:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+	color: rgba(255,0,0,0.4);
+} 
+
+#submit-div h3 {
+	margin: 10px 0;
+}
+
+#submit-div .col-xs-12 {
+	margin: 10px 0;
+}
+
+#basket-list img {
+	max-height: 50px;
+}
+
+#basket-list span {
+	font-size: 22px;
+	margin-left: 10px;
+	position: relative;
+    top: 5px;
+}
+
+#basket-list h4 {
+	margin: 15px 0;
+}
