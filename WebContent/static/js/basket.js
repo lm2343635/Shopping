@@ -30,6 +30,11 @@ $(document).ready(function() {
 			} 
 			$("#account-div").show();
 			for(var i in baskets) {
+				//如果购买件数大于库存
+				if(baskets[i].count>baskets[i].good.number) {
+					baskets[i].count=baskets[i].good.number;
+					BasketManager.changeCount(baskets[i].bid, baskets[i].count);
+				}
 				accountCount+=baskets[i].count;
 				accountAmount+=baskets[i].count*baskets[i].good.price;
 				var src="static/images/noImage.jpg";
@@ -49,13 +54,13 @@ $(document).ready(function() {
 				});
 
 				//加载购买件数的下拉菜单
-				for(var j=1; j<baskets[i].good.number; j++) {
+				for(var j=1; j<=baskets[i].good.number; j++) {
 					var option=$("<option>").val(j).text(j);
 					if(j==baskets[i].count)
 						option.attr("selected", "selected");
 					$("#"+baskets[i].bid+" .buy-good-count").append(option);
 				}
-				
+
 				//变更购买件数
 				$("#"+baskets[i].bid+" .buy-good-count").change(function() {
 					var count=$(this).val();

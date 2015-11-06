@@ -17,11 +17,18 @@ public interface BasketManager {
 	String addToBasket(String uid, String good, int count);
 	
 	/**
-	 * 得到一个用户的购物筐内容
+	 * 得到一个用户的购物车内容
 	 * @param uid
 	 * @return
 	 */
 	List<BasketBean> getBasketGoodsByUid(String uid);
+	
+	/**
+	 * 得到一个订单的购物车内容
+	 * @param oid
+	 * @return
+	 */
+	List<BasketBean> getBasketGoodsByOid(String oid);
 	
 	/**
 	 * 变更购买件数

@@ -1,5 +1,5 @@
-
-var accountCount=0, accountAmount=0;
+var _user;
+var goods, accountCount=0, accountAmount=0;
 
 $(document).ready(function() {
 	$.messager.model = {
@@ -21,6 +21,7 @@ $(document).ready(function() {
 			location.href="basket.html";
 			return;
 		}
+		_user=user;
 
 		BasketManager.getBasketGoodsByUid(user.uid, function(baskets) {
 			for(var i in baskets) {
@@ -40,6 +41,21 @@ $(document).ready(function() {
 					count: baskets[i].count
 				});
 			}
+			goods=baskets.length;
+			fillText({
+				"account-goods": goods,
+				"account-count": accountCount,
+				"account-amount": accountAmount
+			});
+		});
+
+		SendeeManager.getSendeeByUid(user.uid, function(sendee) {
+			fillValue({
+				"sendee-sname": sendee.sname,
+				"sendee-telephone": sendee.telephone,
+				"sendee-address": sendee.address,
+				"sendee-email": sendee.email
+			});
 		});
 	})
 
@@ -80,7 +96,32 @@ $(document).ready(function() {
 		if(!validate) {
 			$.messager.popup("请正确填写收货人信息！");
 		} else {
-			
+			var message="订单信息<br>"+
+				"共"+goods+"种商品， "+accountCount+"件， 合计￥"+accountAmount+"元<br><br>"+
+				"配送信息<br>"+
+				"配送方式："+ (express? "快递包邮": "用户自取")+"<br>";
+			if(express) {
+				message+="收货人姓名："+sname+"<br>"+
+					"收货人电话："+telephone+"<br>"+
+					"收货人地址："+address+"<br>";
+			}
+			message+="电子邮箱："+email+"<br>";
+			$.messager.confirm("确认订单信息", message, function() {
+				OrderManager.addOrder(_user, express, sname, telephone, address, email, function(data) {
+					if(data.empty) {
+						$.messager.popup("购物车中没有任何商品，无法创建订单！");
+						return;
+					}
+					if(!data.availability) {
+						$.messager.popup("购物车中的商品库存不足，请返回购物车确认！");
+						return;
+					}
+					if(data.oid!=null) {
+						location.href="pay.html?ono="+data.ono;
+					}
+				});			
+			});
+
 		}
 	});
 });

@@ -24,6 +24,7 @@
         <script src="dwr/engine.js"></script>
         <script src="dwr/interface/SendeeManager.js"></script>
         <script src="dwr/interface/BasketManager.js"></script>
+        <script src="dwr/interface/OrderManager.js"></script>
         <script src="static/js/tools.js"></script>
 		<script src="static/js/account.js"></script>
 	</head>
@@ -36,7 +37,11 @@
 						<h1 class="text-success">结算购物车</h1>
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-9">
-						<h3 class="pull-right text-muted">共种商品，件，合计￥元</h3>
+						<h3 class="pull-right text-muted">
+							共<span id="account-goods" class="text-danger"></span>种商品，
+							<span id="account-count" class="text-danger"></span>件，
+							合计￥<span id="account-amount" class="text-danger"></span>元
+						</h3>
 					</div>
 				</div>
 			</div>
@@ -50,7 +55,11 @@
 							</a>
 						</div>
 						<div class="col-xs-12 col-md-5">
-							<h4 class="pull-right text-muted">单价￥${price}$元，${count}$件，小计￥${amount}$元</h4>
+							<h4 class="pull-right text-muted">
+								单价￥<span class="text-warning">${price}$</span>元，
+								<span class="text-warning">${count}$</span>件，
+								小计￥<span class="text-warning">${amount}$</span>元
+							</h4>
 						</div>
 					</div>
 				</div>

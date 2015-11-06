@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.xwkj.shopping.domain.Basket;
 import com.xwkj.shopping.domain.Good;
+import com.xwkj.shopping.domain.Order;
 import com.xwkj.shopping.domain.Sendee;
 
 public interface BasketDao {
@@ -27,4 +28,11 @@ public interface BasketDao {
 	 * @return
 	 */
 	Basket findByGood(Good good, Sendee sendee);
+	
+	/**
+	 * 根据订单查询购物车
+	 * @param order
+	 * @return
+	 */
+	List<Basket> findByOrder(Order order);
 }

@@ -1,26 +1,25 @@
-package com.xwkj.shopping.domain;
+package com.xwkj.shopping.bean;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Order implements Serializable {
-	
-	private static final long serialVersionUID = 1740553232189480871L;
+import com.xwkj.shopping.domain.Order;
 
+public class OrderBean {
+	
 	private String oid;
 	private String ono;
 	private Date createDate;
-	private Boolean express;
-	private Integer count;
-	private Double amount;
-	private Boolean payed;
-	private Boolean timeout;
+	private boolean express;
+	private int count;
+	private double amount;
+	private boolean payed;
+	private boolean timeout;
 	private Date payDate; 
 	private String name;
 	private String telephone;
 	private String address;
 	private String email;
-	private Sendee sendee;
+	private SendeeBean sendee;
 	
 	public String getOid() {
 		return oid;
@@ -31,19 +30,19 @@ public class Order implements Serializable {
 	public Date getCreateDate() {
 		return createDate;
 	}
-	public Boolean getExpress() {
+	public boolean isExpress() {
 		return express;
 	}
-	public Integer getCount() {
+	public int getCount() {
 		return count;
 	}
-	public Double getAmount() {
+	public double getAmount() {
 		return amount;
 	}
-	public Boolean getPayed() {
+	public boolean isPayed() {
 		return payed;
 	}
-	public Boolean getTimeout() {
+	public boolean isTimeout() {
 		return timeout;
 	}
 	public Date getPayDate() {
@@ -61,9 +60,6 @@ public class Order implements Serializable {
 	public String getEmail() {
 		return email;
 	}
-	public Sendee getSendee() {
-		return sendee;
-	}
 	public void setOid(String oid) {
 		this.oid = oid;
 	}
@@ -73,19 +69,19 @@ public class Order implements Serializable {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	public void setExpress(Boolean express) {
+	public void setExpress(boolean express) {
 		this.express = express;
 	}
-	public void setCount(Integer count) {
+	public void setCount(int count) {
 		this.count = count;
 	}
-	public void setAmount(Double amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	public void setPayed(Boolean payed) {
+	public void setPayed(boolean payed) {
 		this.payed = payed;
 	}
-	public void setTimeout(Boolean timeout) {
+	public void setTimeout(boolean timeout) {
 		this.timeout = timeout;
 	}
 	public void setPayDate(Date payDate) {
@@ -103,26 +99,28 @@ public class Order implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public void setSendee(Sendee sendee) {
+	public SendeeBean getSendee() {
+		return sendee;
+	}
+	public void setSendee(SendeeBean sendee) {
 		this.sendee = sendee;
 	}
 	
-	@Override
-	public String toString() {
-		String order="oid="+oid
-				+ "ono="+ono
-				+ "createDate="+createDate
-				+ "express="+express
-				+ "count="+count
-				+ "amount="+amount
-				+ "payed="+payed
-				+ "timeout="+timeout
-				+ "payDate="+payDate
-				+ "name="+name
-				+ "telephone="+telephone
-				+ "address="+address
-				+ "email="+email
-				+ "sendee="+sendee;
-		return order;
+	public OrderBean(Order order) {
+		super();
+		this.oid = order.getOid();
+		this.ono = order.getOno();
+		this.createDate = order.getCreateDate();
+		this.express = order.getExpress();
+		this.count = order.getCount();
+		this.amount = order.getAmount();
+		this.payed = order.getPayed();
+		this.timeout = order.getTimeout();
+		this.payDate = order.getPayDate();
+		this.name = order.getName();
+		this.telephone = order.getTelephone();
+		this.address = order.getAddress();
+		this.email = order.getEmail();
+		this.sendee =	new SendeeBean(order.getSendee());
 	}
 }

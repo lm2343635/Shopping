@@ -2,6 +2,7 @@ package com.xwkj.shopping.service;
 
 import javax.servlet.http.HttpSession;
 
+import com.xwkj.shopping.bean.SendeeBean;
 import com.xwkj.shopping.bean.UserBean;
 
 public interface SendeeManager {
@@ -28,4 +29,11 @@ public interface SendeeManager {
 	 * @param session
 	 */
 	void logout(HttpSession session);
+	
+	/**
+	 * 根据uid获取收货人
+	 * @param uid
+	 * @return
+	 */
+	SendeeBean getSendeeByUid(String uid);
 }

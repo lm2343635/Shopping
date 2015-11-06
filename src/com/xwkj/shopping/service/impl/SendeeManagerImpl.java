@@ -3,6 +3,7 @@ package com.xwkj.shopping.service.impl;
 import javax.servlet.http.HttpSession;
 
 import com.xwkj.common.util.HttpRequestUtil;
+import com.xwkj.shopping.bean.SendeeBean;
 import com.xwkj.shopping.bean.UserBean;
 import com.xwkj.shopping.domain.Sendee;
 import com.xwkj.shopping.service.SendeeManager;
@@ -54,6 +55,14 @@ public class SendeeManagerImpl extends ManagerTemplate implements SendeeManager 
 	@Override
 	public void logout(HttpSession session) {
 		session.removeAttribute(USER_FLAG);
+	}
+
+	@Override
+	public SendeeBean getSendeeByUid(String uid) {
+		Sendee sendee=sendeeDao.findByUid(uid);
+		if(sendee==null)
+			return null;
+		return new SendeeBean(sendee);
 	}
 
 }

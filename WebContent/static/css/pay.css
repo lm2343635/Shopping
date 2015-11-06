@@ -1,0 +1,28 @@
+#alipay-logo {
+	max-height: 46px;
+	margin-right: 20px;
+}
+
+.jumbotron {
+	margin-top: 20px;
+	display: none;
+}
+
+#basket-list img {
+	max-height: 50px;
+}
+
+#basket-list span {
+	font-size: 22px;
+	margin-left: 10px;
+	position: relative;
+    top: 5px;
+}
+
+#basket-list h4 {
+	margin: 15px 0;
+}
+
+#pay-title h3 {
+	margin-top: 33px;
+}

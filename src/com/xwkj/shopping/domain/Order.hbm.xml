@@ -8,12 +8,17 @@
 			<generator class="uuid"/>
 		</id>
 		<property name="createDate" column="createDate" type="java.util.Date" not-null="true"/>
+		<property name="ono" column="ono" type="string" not-null="true" unique="true"/>
 		<property name="express" column="express" type="boolean" not-null="true"/>
 		<property name="count" column="count" type="integer" not-null="true"/>
 		<property name="amount" column="amount" type="double" not-null="true"/>
 		<property name="payed" column="payed" type="boolean" not-null="true"/>
 		<property name="timeout" column="timeout" type="boolean" not-null="true"/>
-		<property name="payDate" column="payDate" type="java.util.Date" not-null="true"/>
-		<many-to-one name="sendee" column="sid" class="Sendee" not-null="true"/>
+		<property name="payDate" column="payDate" type="java.util.Date"/>
+		<property name="name" column="name" type="string"/>
+		<property name="telephone" column="telephone" type="string"/>
+		<property name="address" column="address" type="string"/>
+		<property name="email" column="email" type="string"/>
+		<many-to-one name="sendee" column="sid" class="Sendee" not-null="true" lazy="false"/>
 	</class>
 </hibernate-mapping>

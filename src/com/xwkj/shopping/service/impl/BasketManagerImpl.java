@@ -9,6 +9,7 @@ import java.util.Map;
 import com.xwkj.shopping.bean.BasketBean;
 import com.xwkj.shopping.domain.Basket;
 import com.xwkj.shopping.domain.Good;
+import com.xwkj.shopping.domain.Order;
 import com.xwkj.shopping.domain.Sendee;
 import com.xwkj.shopping.service.BasketManager;
 import com.xwkj.shopping.service.util.ManagerTemplate;
@@ -40,6 +41,15 @@ public class BasketManagerImpl extends ManagerTemplate implements BasketManager 
 		List<BasketBean> baskets=new ArrayList<>();
 		Sendee sendee=sendeeDao.findByUid(uid);
 		for(Basket basket: basketDao.findUnorderdBySendee(sendee))
+			baskets.add(new BasketBean(basket));
+		return baskets;
+	}
+
+	@Override
+	public List<BasketBean> getBasketGoodsByOid(String oid) {
+		List<BasketBean> baskets=new ArrayList<>();
+		Order order=orderDao.get(oid);
+		for(Basket basket: basketDao.findByOrder(order))
 			baskets.add(new BasketBean(basket));
 		return baskets;
 	}

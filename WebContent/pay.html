@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>订单付款</title>
+        <link href="static/images/favicon.ico" type="image/x-icon" rel="icon"> 
+		<link href="static/css/bootstrap.min.css" rel="stylesheet"/>
+		<link href="static/css/style.css" rel="stylesheet"/>
+		<link href="static/css/font-awesome.min.css" rel="stylesheet">
+		<link href="static/css/mengular.css" rel="stylesheet">
+		<link href="static/css/pay.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+		<script src="static/js/jquery.min.js"></script>
+		<script src="static/js/jquery.bootstrap.min.js"></script>
+		<script src="static/js/bootstrap.min.js"></script>
+        <script src="static/js/mengular-2.0.js"></script>
+        <script src="dwr/engine.js"></script>
+        <script src="dwr/interface/SendeeManager.js"></script>
+        <script src="dwr/interface/BasketManager.js"></script>
+        <script src="dwr/interface/OrderManager.js"></script>
+        <script src="static/js/tools.js"></script>
+		<script src="static/js/pay.js"></script>
+	</head>
+	<body>
+		<div id="head"></div>	
+		<div class="container">
+			<div id="pay-title" class="page-header">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6">
+						<h1 class="text-primary">支付订单：<small id="pay-ono"></small></h1>
+					</div>
+					<div class="col-xs-12 col-sm-6">
+						<h3 class="pull-right text-muted">
+							共<span id="pay-count" class="text-danger"></span>件，
+							合计￥<span id="pay-amount" class="text-danger"></span>元
+						</h3>
+					</div>
+				</div>
+			</div>
+			<div id="basket-list" class="list-group">
+				<div id="${bid}$" class="list-group-item mengular-template basket-list-template">
+					<div class="row">
+						<div class="col-xs-12 col-md-7">
+							<a href="good.html?gid=${gid}$" target="_blank">
+								<img src="${src}$" class="img-circle" alt="${gname}$">
+								<span class="text-primary">${gname}$</span>
+							</a>
+						</div>
+						<div class="col-xs-12 col-md-5">
+							<h4 class="pull-right text-muted">
+								单价￥<span class="text-warning">${price}$</span>元，
+								<span class="text-warning">${count}$</span>件，
+								小计￥<span class="text-warning">${amount}$</span>元
+							</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="not-pay" class="alert alert-warning">
+				<h2>您还未支付订单</h2>
+				<h4>请在一小时内完成订单支付，该订单的房间将在一小时内为您保留。</h4>
+				<img id="alipay-logo" src="static/images/alipay.png">
+				<a id="alipay-submit" class="btn btn-danger btn-lg">支付订单</a>
+			</div>
+			<div id="has-payed" class="alert alert-success">
+				<h2>订单支付成功</h2>
+				<h4>您已于<span id="pay-date"></span>支付订单，配送信息请查询您的预留邮箱</h4>
+			</div>
+		</div>
+		<div id="foot"></div>
+	</body>
+</html>

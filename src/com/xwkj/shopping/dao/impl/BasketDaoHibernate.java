@@ -6,6 +6,7 @@ import com.xwkj.common.hibernate3.support.PageHibernateDaoSupport;
 import com.xwkj.shopping.dao.BasketDao;
 import com.xwkj.shopping.domain.Basket;
 import com.xwkj.shopping.domain.Good;
+import com.xwkj.shopping.domain.Order;
 import com.xwkj.shopping.domain.Sendee;
 
 public class BasketDaoHibernate extends PageHibernateDaoSupport implements BasketDao {
@@ -44,6 +45,13 @@ public class BasketDaoHibernate extends PageHibernateDaoSupport implements Baske
 		if(baskets.size()==0)
 			return null;
 		return baskets.get(0);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Basket> findByOrder(Order order) {
+		String hql="from Basket where order=? order by createDate";
+		return getHibernateTemplate().find(hql, order);
 	}
 
 }
