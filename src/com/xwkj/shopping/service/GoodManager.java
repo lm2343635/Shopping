@@ -35,6 +35,14 @@ public interface GoodManager {
 	void modifyGood(String gid, String gname, double price, int number, String descriptor);
 	
 	/**
+	 * 增加商品数量
+	 * @param gid 要增加的商品id
+	 * @param dnumber 增加数量
+	 * @return
+	 */
+	int addGoodNumber(String gid, int dnumber);
+	
+	/**
 	 * 删除商品
 	 * @param gid
 	 * @return

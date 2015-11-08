@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>我的订单</title>
+        <link href="static/images/favicon.ico" type="image/x-icon" rel="icon"> 
+		<link href="static/css/bootstrap.min.css" rel="stylesheet"/>
+		<link href="static/css/style.css" rel="stylesheet"/>
+		<link href="static/css/font-awesome.min.css" rel="stylesheet">
+		<link href="static/css/mengular.css" rel="stylesheet">
+		<link href="static/css/order.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+		<script src="static/js/jquery.min.js"></script>
+		<script src="static/js/jquery.bootstrap.min.js"></script>
+		<script src="static/js/bootstrap.min.js"></script>
+        <script src="static/js/mengular-2.0.js"></script>
+        <script src="dwr/engine.js"></script>
+        <script src="dwr/interface/SendeeManager.js"></script>
+        <script src="dwr/interface/BasketManager.js"></script>
+        <script src="dwr/interface/OrderManager.js"></script>
+        <script src="static/js/tools.js"></script>
+		<script src="static/js/order.js"></script>
+	</head>
+	<body>
+		<div id="head"></div>	
+		<div class="events">
+			<div class="container">
+				<div class="events-top heading">
+					<h3>我的所有订单</h3>
+				</div>
+				<div id="order-sort" class="row">
+					<div class="col-xs-12 col-sm-6 col-md-5">
+						<div class="btn-group btn-group-justified">
+							<div class="btn-group btn-group-lg" role="group">
+								<button id="order-sort-createdate" class="order-sort-orderby btn btn-success active" data-toggle="tooltip" data-placement="top" title="按预订时间进行排序">预订时间</button>
+							</div>
+							<div class="btn-group btn-group-lg" role="group">
+								<button id="order-sort-checkin" class="order-sort-orderby btn btn-success" data-toggle="tooltip" data-placement="top" title="按入住日期进行排序">付款时间</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-5">
+						<div class="btn-group btn-group-justified">
+							<div class="btn-group btn-group-lg" role="group">
+								<button id="order-sort-desc" class="order-sort-type btn btn-info active" data-toggle="tooltip" data-placement="top" title="按时间先后逆向排序"><i class="fa fa-sort-numeric-desc"></i></button>
+							</div>
+							<div class="btn-group btn-group-lg" role="group">
+								<button id="order-sort-asc" class="order-sort-type btn btn-info" data-toggle="tooltip" data-placement="top" title="按时间先后进行排序"><i class="fa fa-sort-numeric-asc"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="order-list">
+					<div id="${oid}$" class="alert alert-warning mengular-template order-wait-template">
+						<input type="hidden" class="order-ono" value="${ono}$">
+						<div class="pull-right pay-state">
+							<i class="fa fa-clock-o"></i>
+							<p>待支付</p>
+						</div>
+						<h3>订单号：${ono}$</h3>
+						<p>共${count}$件商品，合计${amount}$元，订购于${createDate}$</p>
+						<a href="pay.html?ono=${ono}$" class="btn btn-warning">支付订单</a>
+						<button class="btn btn-danger order-delete">删除订单</button>
+					</div>
+					<div id="${oid}$" class="alert alert-success mengular-template order-payed-template">
+						<input type="hidden" class="order-ono" value="${ono}$">
+						<div class="pull-right pay-state">
+							<i class="fa fa-check-circle-o"></i>
+							<p>已支付</p>
+						</div>
+						<h3>订单号：${ono}$</h3>
+						<p>共${count}$件商品，合计${amount}$元，订购于${createDate}$，支付于${payDate}$</p>
+						<a href="pay.html?ono=${ono}$" class="btn btn-info">查看订单</a>
+						<button class="btn btn-success">确认收货</button>
+						<button class="btn btn-primary">申请退货</button>
+					</div>
+					<div id="${oid}$" class="alert alert-danger mengular-template order-timeout-template">
+						<input type="hidden" class="order-ono" value="${ono}$">
+						<div class="pull-right pay-state">
+							<i class="fa fa-times-circle-o"></i>
+							<p>未支付</p>
+						</div>
+						<h3>订单号：${ono}$</h3>
+						<p>共${count}$件商品，合计${amount}$元，订购于${createDate}$，超时未支付</p>
+						<a href="pay.html?ono=${ono}$" class="btn btn-info">查看订单</a>
+						<button class="btn btn-danger order-delete">删除订单</button>
+					</div>
+				</div>
+				<div id="no-order" class="jumbotron">
+					<h1>没有任何订单！</h1>
+					<p>只有登录后的用户才能查看订单，请确认您已经登录！</p>
+					<p>登录后刷新本页即可浏览订单。若您已经登录，请直接预订房间。</p>
+					<div class="row">
+						<div class="col-xs-12 col-sm-8 col-md-9">
+							<a href="show.html" class="btn btn-success btn-lg">继续购物</a>
+							<a href="index.html" class="btn btn-info btn-lg">返回首页</a>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-3">
+							<a href="order.html" class="btn btn-warning btn-lg btn-block">已登录，刷新本页</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="foot"></div>
+	</body>
+</html>

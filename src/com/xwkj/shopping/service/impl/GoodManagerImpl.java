@@ -57,6 +57,14 @@ public class GoodManagerImpl extends ManagerTemplate implements GoodManager {
 	}
 
 	@Override
+	public int addGoodNumber(String gid, int dnumber) {
+		Good good=goodDao.get(gid);
+		good.setNumber(good.getNumber()+dnumber);
+		goodDao.update(good);
+		return good.getNumber();
+	}
+
+	@Override
 	public boolean removeGood(String gid) {
 		Good good=goodDao.get(gid);
 		Category category=good.getCategory();

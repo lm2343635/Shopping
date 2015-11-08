@@ -6,7 +6,10 @@ import com.xwkj.shopping.bean.SendeeBean;
 import com.xwkj.shopping.bean.UserBean;
 
 public interface SendeeManager {
+	
 	public static final String USER_FLAG="e4e681eb50bd2fd60150bd30d82b0000";
+	
+	String getBookingDomain();
 
 	/**
 	 * 用户登录

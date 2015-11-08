@@ -20,13 +20,13 @@ $(document).ready(function() {
 			location.href="urlError.html";
 			return;
 		}
-		if(order.payed==true) {
+		if(order.payed&&!order.timeout) {
 			$("#has-payed").show();
-			$("#not-pay").remove();
 			$("#pay-date").text(order.payDate.format(DATE_HOUR_MINUTE_FORMAT_CN));
-		} else {
-			$("#has-payed").remove();
+		} else if(!order.payed&&!order.timeout) {
 			$("#not-pay").show();
+		} else if(!order.payed&&order.timeout) {
+			$("#pay-timeout").show();
 		}
 		fillText({
 			"pay-ono": order.ono,

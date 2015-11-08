@@ -1,5 +1,6 @@
 package com.xwkj.shopping.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.xwkj.shopping.domain.Order;
@@ -25,5 +26,10 @@ public interface OrderDao {
 	 */
 	List<Order> findBySendee(Sendee sendee);
 	
-
+	/**
+	 * 查找超时未支付的订单
+	 * @param time 超时时间点
+	 * @return
+	 */
+	List<Order> findWillTimeoutOrders(Date time);
 }

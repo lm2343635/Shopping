@@ -1,5 +1,6 @@
 package com.xwkj.shopping.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.xwkj.common.hibernate3.support.PageHibernateDaoSupport;
@@ -41,7 +42,14 @@ public class OrderDaoHibernate extends PageHibernateDaoSupport implements OrderD
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Order> findBySendee(Sendee sendee) {
-		return getHibernateTemplate().find("from Order where sendee=?", sendee);
+		return getHibernateTemplate().find("from Order where sendee=? order by createDate desc", sendee);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Order> findWillTimeoutOrders(Date time) {
+		String hql="from Order where payed=false and timeout=false and createDate<=?";
+		return getHibernateTemplate().find(hql, time);
 	}
 
 }

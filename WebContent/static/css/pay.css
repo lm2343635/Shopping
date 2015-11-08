@@ -26,3 +26,9 @@
 #pay-title h3 {
 	margin-top: 33px;
 }
+
+#not-pay,
+#has-payed,
+#pay-timeout {
+	display: none;
+}

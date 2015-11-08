@@ -15,6 +15,7 @@ import com.xwkj.common.util.SMSService;
 import com.xwkj.shopping.bean.OrderBean;
 import com.xwkj.shopping.bean.UserBean;
 import com.xwkj.shopping.domain.Basket;
+import com.xwkj.shopping.domain.Good;
 import com.xwkj.shopping.domain.Order;
 import com.xwkj.shopping.domain.Sendee;
 import com.xwkj.shopping.service.OrderManager;
@@ -31,6 +32,8 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 	private int PayTimeOut;
 	//订房成功发送短信模板id
 	private int OrderSuccessSMSTemplateID;
+	//付款成功发送短信模板id
+	private int PaySuccessSMSTemplateID;
 
 	public String getExpressTure() {
 		return ExpressTure;
@@ -64,6 +67,14 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 		OrderSuccessSMSTemplateID = orderSuccessSMSTemplateID;
 	}
 
+	public int getPaySuccessSMSTemplateID() {
+		return PaySuccessSMSTemplateID;
+	}
+
+	public void setPaySuccessSMSTemplateID(int paySuccessSMSTemplateID) {
+		PaySuccessSMSTemplateID = paySuccessSMSTemplateID;
+	}
+
 	@Override
 	public Map<String, Object> addOrder(UserBean user, boolean express, String name, String telephone, String address, String email) {
 		Map<String, Object> data=new HashMap<>();
@@ -85,6 +96,10 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 			}
 			count+=basket.getCount();
 			amount+=basket.getCount()*basket.getGood().getPrice();
+			//占有存货
+			Good good=basket.getGood();
+			good.setNumber(good.getNumber()-basket.getCount());
+			goodDao.update(good);
 		}
 		Order order=new Order();
 		order.setOno("S"+DateTool.formatDate(new Date(), "yyyyMMddHHmmss")+MathTool.getRandomStr(6));
@@ -109,6 +124,7 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 			sendeeDao.update(sendee);
 		}
 		order.setSendee(sendee);
+		//生成订单
 		String oid=orderDao.save(order);
 		data.put("empty", false);
 		data.put("availability", true);
@@ -120,7 +136,7 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 		}
 		SMSService sms=(SMSService)WebApplicationContextUtils.getWebApplicationContext(WebContextFactory.get().getServletContext()).getBean("SMSService");
 		String value="#name#="+ user.getUname()
-				+ "&#bno#="+ order.getOno()
+				+ "&#ono#="+ order.getOno()
 				+ "&#goods#="+ baskets.size()
 				+ "&#count#="+ order.getCount()
 				+ "&#amount#="+ order.getAmount()
@@ -147,8 +163,20 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 
 	@Override
 	public boolean removeOrder(String oid) {
-		// TODO Auto-generated method stub
-		return false;
+		Order order=orderDao.get(oid);
+		if(order.getPayed())
+			return false;
+		for(Basket basket: basketDao.findByOrder(order)) {
+			//释放存货
+			Good good=basket.getGood();
+			good.setNumber(good.getNumber()+basket.getCount());
+			goodDao.update(good);
+			//删除购物车
+			basketDao.delete(basket);
+		}
+		//删除订单
+		orderDao.delete(order);
+		return true;
 	}
 
 	@Override

@@ -24,6 +24,10 @@ $(document).ready(function() {
 		_user=user;
 
 		BasketManager.getBasketGoodsByUid(user.uid, function(baskets) {
+			if(baskets.length==0) {
+				location.href="basket.html";
+				return;
+			}
 			for(var i in baskets) {
 				accountCount+=baskets[i].count;
 				accountAmount+=baskets[i].count*baskets[i].good.price;

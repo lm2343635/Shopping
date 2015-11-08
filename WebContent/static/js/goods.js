@@ -111,6 +111,20 @@ $(document).ready(function() {
 			});
 		}
 	});
+
+	//添加商品数量
+	$("#modify-good-number-add-submit").click(function() {
+		var add=$("#modify-good-number-add").val();
+		if(add==""||add==null||!isInteger(add)) {
+			$.messager.popup("请正确填写要增加的商品数量！");
+			return;
+		}
+		GoodManager.addGoodNumber(modifyingGid, add, function(number) {
+			$("#modify-good-number").val(number);
+			$.messager.popup("已添加"+add+"个");
+			loadGoods();
+		})
+	});
 });
 
 function loadGoods() {
