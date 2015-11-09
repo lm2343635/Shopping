@@ -40,4 +40,11 @@ public interface GoodDao {
 	 * @return
 	 */
 	List<Good> findByGname(String gname);
+	
+	/**
+	 * 查询最新的limit个商品
+	 * @param limit
+	 * @return
+	 */
+	List<Good> findNewstWithLimit(int limit);
 }

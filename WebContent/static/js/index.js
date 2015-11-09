@@ -1,10 +1,44 @@
-var GOOD_LIMIT=6;
-
 $(document).ready(function($) {
 	$("#head").load("head.html");
 	$("#foot").load("foot.html");
 
+	GoodManager.getNewestGoodsWithLimit(4, function(goods) {
+		for(var j in goods) {
+			var tid=goods[j].category.type.tid;
+			var src="static/images/noImage.jpg";
+			if(goods[j].cover!=null)
+				src="upload/"+tid+"/"+goods[j].cover.filename;
+			$("#good-list").mengular(".good-list-template", {
+				gid: goods[j].gid,
+				gname: goods[j].gname,
+				src: src,
+				price: goods[j].price,
+				sold: goods[j].sold,
+				tname: goods[j].category.type.tname,
+				cname: goods[j].category.cname
+			});
+		}
+	});
 
+	GoodManager.getHotestGoodsWithLimit(3, function(goods) {
+		for(var j in goods) {
+			var tid=goods[j].category.type.tid;
+			var src="static/images/noImage.jpg";
+			if(goods[j].cover!=null)
+				src="upload/"+tid+"/"+goods[j].cover.filename;
+			$("#hotest-good-list").mengular(".hotest-good-list-template", {
+				gid: goods[j].gid,
+				gname: goods[j].gname,
+				src: src,
+				price: goods[j].price,
+				sold: goods[j].sold,
+				tname: goods[j].category.type.tname,
+				cname: goods[j].category.cname
+			});
+		}
+	});
+
+	/**
 	TypeManager.getAll(function(types) {
 		var style="news";
 		for(var i in types) {
@@ -20,7 +54,7 @@ $(document).ready(function($) {
 				icon: icon
 			});
 
-			GoodManager.getGoodsByTidWithLimit(types[i].tid, GOOD_LIMIT, function(goods) {
+			GoodManager.getGoodsByTidWithLimit(types[i].tid, 6, function(goods) {
 				for(var j in goods) {
 					var tid=goods[j].category.type.tid;
 					var src="static/images/noImage.jpg";
@@ -41,4 +75,5 @@ $(document).ready(function($) {
 
 		}
 	});
+	**/
 });

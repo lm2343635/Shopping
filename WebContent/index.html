@@ -57,7 +57,100 @@
 	            </a>
 	        </div>
 	    </div>
-        <div id="type-list">
+	    <div class="container">
+			<div class="page-header">
+				<h1 class="text-success">
+					<i class="fa fa-shopping-cart" style="margin-right: 10px"></i>最新上架
+					<a href="show.html" class="pull-right more">更多</a>
+				</h1>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-md-4">
+					<img id="left" src="static/images/left.jpg" class="img-rounded">
+				</div>
+				<div class="col-xs-12 col-md-8">
+					<div id="good-list" class="row">
+						<div id="${gid}$" class="col-xs-12 col-sm-6 mengular-template good-list-template">
+							<div class="thumbnail">
+								<a href="good.html?gid=${gid}$"><img src="${src}$" alt="${gname}$"></a>
+								<div class="caption">
+									<h4>
+										<strong>${gname}$</strong>
+									</h4>
+									<p class="text-muted">${tname}$，${cname}$</p>
+									<h4>
+										<span class="text-warning">￥${price}$</span>
+										<small class="pull-right text-info">已售：${sold}$</small>
+									</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="page-header">
+				<h1 class="text-danger">
+					<i class="fa fa-star" style="margin-right: 10px"></i>
+					热卖产品<a href="show.html" class="pull-right more">更多</a>
+				</h1>
+			</div>
+			<div id="hotest-good-list" class="row">
+				<div id="${gid}$" class="col-xs-12 col-sm-6 col-md-4 mengular-template hotest-good-list-template">
+					<div class="thumbnail">
+						<a href="good.html?gid=${gid}$"><img src="${src}$" alt="${gname}$"></a>
+						<div class="caption">
+							<h4>
+								<strong>${gname}$</strong>
+							</h4>
+							<p class="text-muted">${tname}$，${cname}$</p>
+							<h4>
+								<span class="text-warning">￥${price}$</span>
+								<small class="pull-right text-info">已售：${sold}$</small>
+							</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr style="border-top: 2px solid #3496C9;">
+		<div class="container">
+			<img class="center-block" src="static/images/mid.jpg">
+			<div id="reason" class="row">
+				<div class="col-xs-12 col-sm-6 col-md-3">
+					<div class="pull-left text-success">
+						<i class="fa fa-circle-thin"></i>
+						<i class="fa-yuan">原</i>
+					</div>
+					<h4 class="pull-left text-primary">100%原产地直采</h4>
+					<p class="pull-left text-muted">确保产品的原汁原味</p>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-3">
+					<div class="pull-left text-success">
+						<i class="fa fa-circle-thin"></i>
+						<i class="fa fa-eye"></i>
+					</div>
+					<h4 class="pull-left text-primary">严筛精选 品质保证</h4>
+					<p class="pull-left text-muted">用心为您挑选产品</p>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-3">
+					<div class="pull-left text-success">
+						<i class="fa fa-circle-thin"></i>
+						<i class="fa-qi">七</i>
+					</div>
+					<h4 class="pull-left text-primary">七天免费退货</h4>
+					<p class="pull-left text-muted">网购不在有任何担忧</p>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-3">
+					<div class="pull-left text-success">
+						<i class="fa fa-circle-thin"></i>
+						<i class="fa fa-headphones"></i>
+					</div>
+					<h4 class="pull-left text-primary">7x9小时在线客服</h4>
+					<p class="pull-left text-muted">为您提供优质售后保证</p>
+				</div>
+			</div>
+		</div>
+        <!-- <div id="type-list">
 			<div id="${tid}$" class="${style}$ mengular-template type-list-template">
 				<div class="container">
 					<div class="heading">
@@ -86,7 +179,7 @@
 					</div>
 				</div>
 			</div>
-        </div>
+        </div> -->
 		<div class="map">
 			<iframe src="http://www.google.cn/maps/embed?pb=!1m18!1m12!1m3!1d13710.714298682034!2d115.39618999999999!3d30.7835995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x342dec8e75224825%3A0x8778c190a9179cf9!2z5rmW5YyX55yB6buE5YaI5biC572X55Sw5Y6_5Yek5bGx6ZWH!5e0!3m2!1szh-CN!2scn!4v1443967666355" width="600" height="450"></iframe>	
 		</div>

@@ -22,3 +22,58 @@
 .carousel-inner .item img {	
 	min-height: 200px;
 }
+
+#left {
+	width: 100%;
+	height: 800px;
+	margin-bottom: 20px;
+}
+
+.more {
+	font-size: 20px;
+	margin-top: 15px;
+}
+
+#reason {
+	margin: 20px 0;
+}
+
+#reason .fa-eye {
+	position: absolute;
+    font-size: 40px;
+    left: 25px;
+    top: 14px;
+}
+
+#reason .fa-yuan {
+	position: absolute;
+    font-size: 30px;
+    left: 27px;
+    top: 14px;
+}
+
+#reason .fa-qi {
+	position: absolute;
+    font-size: 30px;
+    left: 27px;
+    top: 14px;
+}
+
+#reason .fa-headphones {
+	position: absolute;
+    font-size: 40px;
+    left: 27px;
+    top: 16px;
+}
+
+#reason .fa-circle-thin {
+	font-size: 70px;
+}
+
+#reason h4 {
+	margin: 10px;
+}
+
+#reason p {
+	margin-left: 10px;
+}

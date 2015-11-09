@@ -72,6 +72,13 @@ public interface GoodManager {
 	List<GoodBean> getHotestGoodsWithLimit(int limit);
 	
 	/**
+	 * 得到最新的limit个商品
+	 * @param limit
+	 * @return
+	 */
+	List<GoodBean> getNewestGoodsWithLimit(int limit);
+	
+	/**
 	 * 根据商品名称搜索商品
 	 * @param gname
 	 * @return
