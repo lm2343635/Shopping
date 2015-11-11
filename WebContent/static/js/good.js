@@ -24,17 +24,32 @@ $(document).ready(function() {
 		})
 
 		PhotoManager.getPhotosByGid(gid, function(photos) {
-			for(var i in photos) {
-				$("#good-photo-list").mengular(".good-photo-list-template", {
-					pid: photos[i].pid,
-					src: "upload/"+tid+"/"+photos[i].filename
-				});
-			}
 			if(photos.length==0) {
 				$("#good-photo-list").mengular(".good-photo-list-template", {
 					src: "static/images/noImage.jpg"
 				});
 			}
+			for(var i in photos) {
+				var indicator=$("<li>").attr("data-target", "#good-photo-list")
+					.attr("data-slide-to", i)
+					.attr("style","background-image: url(upload/"+tid+"/"+photos[i].filename+")");
+				if(i==0)
+					indicator.addClass("active");
+				$("#good-photo-list .carousel-indicators").append(indicator);
+			}
+
+			for(var i in photos) {
+				$("#good-photo-list .carousel-inner").mengular(".good-photo-list-template", {
+					pid: photos[i].pid,
+					src: "upload/"+tid+"/"+photos[i].filename,
+					rname: _good.gname
+				});
+				if(i==0) {
+					$("#"+photos[i].pid).addClass("active");
+				}
+
+			}
+			$("#good-photo-list .mengular-template").remove();
 		});
 
 		for(var i=1; i<=good.number; i++) {
