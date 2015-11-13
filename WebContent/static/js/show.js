@@ -1,4 +1,6 @@
 var types;
+var tid=request("tid");
+var cid=request("cid");
 
 $(document).ready(function() {
 	$("#head").load("head.html");
@@ -30,10 +32,11 @@ function loadOneType(index) {
 	//为一级分类绑定点击事件
 	$("#"+types[index].tid).click(function() {
 		var tid=$(this).attr("id");
-		if(!$("."+tid).is(":visible"))
-			$("."+tid).show("normal");
-		else
-			$("."+tid).hide("normal");
+		location.href="show.html?tid="+tid;
+//		if(!$("."+tid).is(":visible"))
+//			$("."+tid).show("normal");
+//		else
+//			$("."+tid).hide("normal");
 	});
 
 	CategoryManager.getCategoriesByTid(types[index].tid, function(categories) {
@@ -49,28 +52,29 @@ function loadOneType(index) {
 			});		
 			//为二级分类绑定点击事件
 			$("#"+categories[j].cid).click(function() {
-				$("#type-list li").removeClass("list-group-item-info");
-				$(this).addClass("list-group-item-info");
-				$("#good-list").mengularClear();
-				$("#search-room-loading").show();
-				$("#no-search-result").hide();
-				GoodManager.getGoodsByCid($(this).attr("id"), function(goods) {
-					$("#search-room-loading").hide();
-					if(goods.length==0) {
-						$("#no-search-result").show();
-					} else {
-						loadGoods(goods);
-					}
-				});
+				location.href="show.html?tid="+tid+"&cid="+$(this).attr("id");
+//				$("#type-list li").removeClass("list-group-item-info");
+//				$(this).addClass("list-group-item-info");
+//				$("#good-list").mengularClear();
+//				$("#search-room-loading").show();
+//				$("#no-search-result").hide();
+//				GoodManager.getGoodsByCid($(this).attr("id"), function(goods) {
+//					$("#search-room-loading").hide();
+//					if(goods.length==0) {
+//						$("#no-search-result").show();
+//					} else {
+//						loadGoods(goods);
+//					}
+//				});
 			});		
 		}
-		console.log(index+", "+types.length);
 		if(index<types.length-1)
 			loadOneType(index+1);
 		if(index==types.length-1) {
 			//加载第一个分类的商品
-			var cid=$(".category-template").eq(1).attr("id");
-			$("."+types[0].tid).show();
+			tid=tid? tid: types[0].tid;
+			cid=cid? cid: $("#"+tid).next().attr("id");
+			$("."+tid).show();
 			$("#type-list li").removeClass("list-group-item-info");
 			$("#"+cid).addClass("list-group-item-info");
 			GoodManager.getGoodsByCid(cid, function(goods) {

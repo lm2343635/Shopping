@@ -202,6 +202,10 @@ function loadGoods() {
 			    	dataType:"json",
 			    	acceptFileTypes: /^image\/(gif|jpeg|png)$/,
 			    	done:function(e,data){
+			    		if(data.result.thumbnail==false) {
+			    			$.messager.popup("图片尺寸过小，不允许上传！");
+			    			return;
+			    		}
 			     		$("#good-photo-list").mengular(".good-photo-template", {
 			     			pid: data.result.pid,
 			     			src: "upload/"+tid+"/"+data.result.filename
