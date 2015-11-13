@@ -41,4 +41,10 @@ public interface CategoryManager {
 	 * @return
 	 */
 	List<CategoryBean> getCategoriesByTid(String tid);
+	
+	/**
+	 * 更新创建时间
+	 * @param tid
+	 */
+	void updateCreateDate(String cid);
 }

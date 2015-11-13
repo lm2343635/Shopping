@@ -124,4 +124,11 @@ public class GoodManagerImpl extends ManagerTemplate implements GoodManager {
 		return goods;
 	}
 
+	@Override
+	public void updateCreateDate(String gid) {
+		Good good=goodDao.get(gid);
+		good.setCreateDate(new Date());
+		goodDao.update(good);
+	}
+
 }

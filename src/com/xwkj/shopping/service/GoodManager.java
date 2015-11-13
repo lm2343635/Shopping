@@ -85,4 +85,9 @@ public interface GoodManager {
 	 */
 	List<GoodBean> searchGoods(String gname);
 	
+	/**
+	 * 更新创建时间
+	 * @param tid
+	 */
+	void updateCreateDate(String gid);
 }

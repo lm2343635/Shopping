@@ -240,6 +240,14 @@ function loadGoods() {
 				});
 				
 			});
+			
+			//置顶商品
+			$("#"+goods[i].gid+" .good-list-top").click(function() { 
+				var gid=$(this).parent().attr("id");
+				GoodManager.updateCreateDate(gid, function() {
+					loadGoods();
+				})
+			});
 
 			//删除商品
 			$("#"+goods[i].gid+" .good-list-delete").click(function() {

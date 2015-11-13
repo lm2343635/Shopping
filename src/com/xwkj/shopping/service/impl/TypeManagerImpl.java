@@ -63,4 +63,11 @@ public class TypeManagerImpl extends ManagerTemplate implements TypeManager {
 		return types;
 	}
 
+	@Override
+	public void updateCreateDate(String tid) {
+		Type type=typeDao.get(tid);
+		type.setCreateDate(new Date());
+		typeDao.update(type);
+	}
+
 }

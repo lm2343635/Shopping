@@ -92,7 +92,15 @@ function loadCategories() {
 
 				$("#modify-category-modal").modal("show");
 			});
-
+			
+			//删除二级分类
+			$("#"+categories[i].cid+" .category-list-top").click(function() {
+				var cid=$(this).parent().attr("id");
+				CategoryManager.updateCreateDate(cid, function() {
+					loadCategories();
+				});
+			});
+			
 			//删除二级分类
 			$("#"+categories[i].cid+" .category-list-delete").click(function() {
 				var cid=$(this).parent().attr("id");

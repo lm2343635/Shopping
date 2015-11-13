@@ -90,7 +90,14 @@ function loadTypes() {
 
 				$("#modify-type-modal").modal("show");
 			});
-
+			//删除一级分类
+			$("#"+types[i].tid+" .type-list-top").click(function() {
+				var tid=$(this).parent().attr("id");
+				TypeManager.updateCreateDate(tid, function() {
+					loadTypes();
+				})
+			});
+			
 			//删除一级分类
 			$("#"+types[i].tid+" .type-list-delete").click(function() {
 				var tid=$(this).parent().attr("id");

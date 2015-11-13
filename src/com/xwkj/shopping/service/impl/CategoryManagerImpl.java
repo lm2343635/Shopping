@@ -78,4 +78,11 @@ public class CategoryManagerImpl extends ManagerTemplate implements CategoryMana
 		return categories;
 	}
 
+	@Override
+	public void updateCreateDate(String cid) {
+		Category category=categoryDao.get(cid);
+		category.setCreateDate(new Date());
+		categoryDao.update(category);
+	}
+
 }

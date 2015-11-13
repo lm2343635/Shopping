@@ -40,4 +40,9 @@ public interface TypeManager {
 	 */
 	List<TypeBean> getAll();
 
+	/**
+	 * 更新创建时间
+	 * @param tid
+	 */
+	void updateCreateDate(String tid);
 }
