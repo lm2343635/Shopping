@@ -205,18 +205,15 @@ public final class ImageTool
      * @param height 高度
      * @param width 宽度
      */
-    public static boolean createThumbnail(String filePath, int width,int height) 
-    {
+    public static boolean createThumbnail(String filePath, int width,int height) {
     	//缩放比例    
         double ratio = 0; 
         File f = new File(filePath);   
-        try 
-        {
+        try {
         	BufferedImage bi = ImageIO.read(f);   
             Image itemp = bi.getScaledInstance(width, height, BufferedImage.SCALE_SMOOTH);   
             //计算比例   
-            if ((bi.getHeight() > height)||(bi.getWidth() > width)) 
-            {   
+            if ((bi.getHeight()>= height)||(bi.getWidth()>=width)) {   
                 if (bi.getWidth()*1.0/bi.getHeight()>1.0*width/height) 
                     ratio=height*1.0/bi.getHeight();   
                 else 
@@ -228,8 +225,7 @@ public final class ImageTool
                 return true;
             }      
 		}
-        catch (Exception e) 
-        {
+        catch (Exception e)  {
 			e.printStackTrace();
 		}
         return false;

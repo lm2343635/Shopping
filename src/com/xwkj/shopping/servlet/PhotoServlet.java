@@ -114,6 +114,8 @@ public class PhotoServlet extends HttpServlet
 		//压缩图片
 		if(!ImageTool.createThumbnail(filepath+"/"+fileName,ICON_WIDTH, ICON_HEIGHT)) {
 			data.put("thumbnail", false);
+			File file=new File(filepath+"/"+fileName);
+			file.delete();
 			response.getWriter().print(data.toString());
 			return;
 		}
@@ -160,6 +162,8 @@ public class PhotoServlet extends HttpServlet
 		//压缩图片
 		if(!ImageTool.createThumbnail(filepath+"/"+fileName,ICON_WIDTH, ICON_HEIGHT)) {
 			data.put("thumbnail", false);
+			File file=new File(filepath+"/"+fileName);
+			file.delete();
 			response.getWriter().print(data.toString());
 			return;
 		}
@@ -197,6 +201,8 @@ public class PhotoServlet extends HttpServlet
 		//压缩图片
 		if(!ImageTool.createThumbnail(filepath+"/"+fileName,THUMBNAIL_WIDTH,THUMBNAIL_HEIGHT)) {
 			data.put("thumbnail", false);
+			File file=new File(filepath+"/"+fileName);
+			file.delete();
 			response.getWriter().print(data.toString());
 			return;
 		}

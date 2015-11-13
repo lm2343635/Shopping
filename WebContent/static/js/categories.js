@@ -86,6 +86,10 @@ function loadCategories() {
 			    	dataType:"json",
 			    	acceptFileTypes: /^image\/(gif|jpeg|png)$/,
 			    	done:function(e,data){
+			    		if(data.result.thumbnail==false) {
+			    			$.messager.popup("图片尺寸过小，不允许上传！");
+			    			return;
+			    		}
 			    		$("#modify-category-icon").attr("src", "upload/"+tid+"/"+data.result.filename);
 			    	}
 				});

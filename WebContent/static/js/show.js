@@ -64,7 +64,6 @@ function loadOneType(index) {
 				});
 			});		
 		}
-		console.log(index+", "+types.length);
 		if(index<types.length-1)
 			loadOneType(index+1);
 		if(index==types.length-1) {
