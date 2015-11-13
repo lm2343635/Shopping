@@ -70,4 +70,11 @@ public class TypeManagerImpl extends ManagerTemplate implements TypeManager {
 		typeDao.update(type);
 	}
 
+	@Override
+	public void enable(String cid, boolean enable) {
+		Type type=typeDao.get(cid);
+		type.setEnable(enable);
+		typeDao.update(type);
+	}
+
 }

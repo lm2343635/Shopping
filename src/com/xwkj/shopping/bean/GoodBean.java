@@ -7,6 +7,7 @@ import com.xwkj.shopping.domain.Good;
 public class GoodBean {
 	private String gid;
 	private String gname;
+	private boolean enable;
 	private double price;
 	private int number;
 	private String descriptor;
@@ -69,11 +70,18 @@ public class GoodBean {
 	public void setCover(PhotoBean cover) {
 		this.cover = cover;
 	}
+	public boolean isEnable() {
+		return enable;
+	}
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
 	
 	public GoodBean(Good good) {
 		super();
 		this.gid = good.getGid();
 		this.gname = good.getGname();
+		this.enable= good.getEnable();
 		this.price = good.getPrice();
 		this.number = good.getNumber();
 		this.descriptor = good.getDescriptor();
@@ -82,4 +90,5 @@ public class GoodBean {
 		this.category = new CategoryBean(good.getCategory());
 		this.cover = good.getCover()==null? null: new PhotoBean(good.getCover());
 	}
+	
 }

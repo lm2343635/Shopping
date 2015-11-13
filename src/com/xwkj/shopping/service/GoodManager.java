@@ -90,4 +90,11 @@ public interface GoodManager {
 	 * @param tid
 	 */
 	void updateCreateDate(String gid);
+	
+	/**
+	 * 更改可用状态
+	 * @param gid
+	 * @param enable
+	 */
+	void enable(String gid, boolean enable);
 }

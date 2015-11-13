@@ -45,4 +45,11 @@ public interface TypeManager {
 	 * @param tid
 	 */
 	void updateCreateDate(String tid);
+	
+	/**
+	 * 更改可用状态
+	 * @param gid
+	 * @param enable
+	 */
+	void enable(String cid, boolean enable);
 }

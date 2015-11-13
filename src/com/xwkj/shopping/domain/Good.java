@@ -10,6 +10,7 @@ public class Good implements Serializable {
 	
 	private String gid;
 	private String gname;
+	private Boolean enable;
 	private Double price;
 	private Integer number;
 	private String descriptor;
@@ -78,6 +79,12 @@ public class Good implements Serializable {
 	}
 	public void setPhotos(Set<Photo> photos) {
 		this.photos = photos;
+	}
+	public Boolean getEnable() {
+		return enable;
+	}
+	public void setEnable(Boolean enable) {
+		this.enable = enable;
 	}
 
 }

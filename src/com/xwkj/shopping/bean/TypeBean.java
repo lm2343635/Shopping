@@ -7,6 +7,7 @@ import com.xwkj.shopping.domain.Type;
 public class TypeBean {
 	private String tid;
 	private String tname;
+	private boolean enable;
 	private Date createDate;
 	private int categories;
 	private IconBean icon;
@@ -41,13 +42,21 @@ public class TypeBean {
 	public void setIcon(IconBean icon) {
 		this.icon = icon;
 	}
+	public boolean isEnable() {
+		return enable;
+	}
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
 	
 	public TypeBean(Type type) {
 		super();
 		this.tid = type.getTid();
 		this.tname = type.getTname();
+		this.enable= type.getEnable();
 		this.createDate = type.getCreateDate();
 		this.categories = type.getCategories();
 		this.icon=type.getIcon()==null? null: new IconBean(type.getIcon());
 	}
+
 }

@@ -32,6 +32,7 @@ public class GoodManagerImpl extends ManagerTemplate implements GoodManager {
 		Category category=categoryDao.get(cid);
 		good.setCategory(category);
 		good.setGname(gname);
+		good.setEnable(true);
 		good.setPrice(price);
 		good.setNumber(number);
 		good.setDescriptor(descriptor);
@@ -130,5 +131,13 @@ public class GoodManagerImpl extends ManagerTemplate implements GoodManager {
 		good.setCreateDate(new Date());
 		goodDao.update(good);
 	}
+
+	@Override
+	public void enable(String gid, boolean enable) {
+		Good good=goodDao.get(gid);
+		good.setEnable(enable);
+		goodDao.update(good);
+	}
+	
 
 }

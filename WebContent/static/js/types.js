@@ -65,6 +65,14 @@ function loadTypes() {
 				categories: types[i].categories
 			});
 
+			//一级分类可用状态
+			$("#"+types[i].tid+" .type-list-enable input").bootstrapSwitch({
+				state: types[i].enable
+			}).on('switchChange.bootstrapSwitch', function(event, state) {
+				var tid=$(this).parent().parent().parent().parent().attr("id");
+				TypeManager.enable(tid, state);
+			});
+			
 			//管理一级分类
 			$("#"+types[i].tid+" .type-list-manage").click(function() {
 				modifyingTid=$(this).parent().attr("id");

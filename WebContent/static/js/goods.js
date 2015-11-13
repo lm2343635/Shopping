@@ -140,6 +140,14 @@ function loadGoods() {
 				sold: goods[i].sold,
 			});
 
+			//商品可用状态
+			$("#"+goods[i].gid+" .good-list-enable input").bootstrapSwitch({
+				state: goods[i].enable
+			}).on('switchChange.bootstrapSwitch', function(event, state) {
+				var gid=$(this).parent().parent().parent().parent().attr("id");
+				GoodManager.enable(gid, state);
+			});
+			
 			//管理商品
 			$("#"+goods[i].gid+" .good-list-manage").click(function() {
 				modifyingGid=$(this).parent().attr("id");

@@ -66,6 +66,14 @@ function loadCategories() {
 				createDate: categories[i].createDate.format(DATE_HOUR_MINUTE_SECOND_FORMAT),
 				goods: categories[i].goods
 			});
+			
+			//二级分类可用状态
+			$("#"+categories[i].cid+" .category-list-enable input").bootstrapSwitch({
+				state: categories[i].enable
+			}).on('switchChange.bootstrapSwitch', function(event, state) {
+				var cid=$(this).parent().parent().parent().parent().attr("id");
+				CategoryManager.enable(cid, state);
+			});
 
 			//管理二级分类
 			$("#"+categories[i].cid+" .category-list-manage").click(function() {

@@ -85,4 +85,11 @@ public class CategoryManagerImpl extends ManagerTemplate implements CategoryMana
 		categoryDao.update(category);
 	}
 
+	@Override
+	public void enable(String cid, boolean enable) {
+		Category category=categoryDao.get(cid);
+		category.setEnable(enable);
+		categoryDao.update(category);
+	}
+
 }

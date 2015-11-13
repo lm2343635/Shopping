@@ -47,4 +47,11 @@ public interface CategoryManager {
 	 * @param tid
 	 */
 	void updateCreateDate(String cid);
+	
+	/**
+	 * 更改可用状态
+	 * @param gid
+	 * @param enable
+	 */
+	void enable(String cid, boolean enable);
 }

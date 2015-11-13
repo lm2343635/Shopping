@@ -8,6 +8,7 @@
 			<generator class="uuid"/>
 		</id>
 		<property name="gname" column="gname" type="string" not-null="true"/>
+		<property name="enable" column="enable" type="boolean" not-null="true"/>
 		<property name="price" column="price" type="double" not-null="true"/>
 		<property name="number" column="number" type="integer" not-null="true"/>
 		<property name="descriptor" column="descriptor" type="text" not-null="true"/>

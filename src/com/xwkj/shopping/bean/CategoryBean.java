@@ -7,6 +7,7 @@ import com.xwkj.shopping.domain.Category;
 public class CategoryBean {
 	private String cid;
 	private String cname;
+	private boolean enable;
 	private Date createDate;
 	private int goods;
 	private TypeBean type;
@@ -48,11 +49,18 @@ public class CategoryBean {
 	public void setIcon(IconBean icon) {
 		this.icon = icon;
 	}
+	public boolean isEnable() {
+		return enable;
+	}
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
 	
 	public CategoryBean(Category category) {
 		super();
 		this.cid = category.getCid();
 		this.cname = category.getCname();
+		this.enable = category.getEnable();
 		this.createDate = category.getCreateDate();
 		this.goods = category.getGoods();
 		this.type = new TypeBean(category.getType());

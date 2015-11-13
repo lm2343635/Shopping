@@ -9,6 +9,7 @@ public class Type implements Serializable {
 
 	private String tid;
 	private String tname;
+	private Boolean enable;
 	private Date createDate;
 	private Integer categories;
 	private Icon icon;
@@ -42,5 +43,11 @@ public class Type implements Serializable {
 	}
 	public void setIcon(Icon icon) {
 		this.icon = icon;
+	}
+	public Boolean getEnable() {
+		return enable;
+	}
+	public void setEnable(Boolean enable) {
+		this.enable = enable;
 	}
 }
