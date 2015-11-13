@@ -25,6 +25,8 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.xwkj.common.util.FileTool;
 import com.xwkj.common.util.ImageTool;
+import com.xwkj.shopping.dao.CategoryDao;
+import com.xwkj.shopping.dao.PhotoDao;
 import com.xwkj.shopping.domain.Category;
 import com.xwkj.shopping.domain.Good;
 import com.xwkj.shopping.domain.Icon;
@@ -67,6 +69,9 @@ public class PhotoServlet extends HttpServlet
 		{
 		case "download":
 			download(request,response);
+			break;
+		case "clearUnusefulPhotos":
+			clearUnusefulPhotos(request,response);
 			break;
 		default:
 			break;
@@ -318,4 +323,56 @@ public class PhotoServlet extends HttpServlet
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 清除无用照片
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void clearUnusefulPhotos(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		WebApplicationContext context= WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+		String rootPath=getServletConfig().getServletContext().getRealPath("/");
+		ManagerTemplate manager=(ManagerTemplate)context.getBean("managerTemplate");
+		PhotoDao photoDao=manager.getPhotoDao();
+		CategoryDao categoryDao=manager.getCategoryDao();
+		String message = "";
+		for(Type type: manager.getTypeDao().findAll()) {
+			String folder=rootPath+"/"+PHOTO_FOLDER+"/"+type.getTid();
+			File files=new File(folder);
+			List<Photo> photos=photoDao.findByType(type);
+			List<Category> categories=categoryDao.findByType(type);
+			for(File file: files.listFiles()) {
+				boolean exist=false;
+				if(type.getIcon().getFilename().equals(file.getName())) {
+					exist=true;
+				}
+				if(!exist) {
+					for(Category category: categories) {
+						if(category.getIcon().getFilename().equals(file.getName())) {
+							exist=true;
+							categories.remove(category);
+							break;
+						}
+					}
+				}
+				if(!exist) {
+					for(Photo photo: photos) {
+						if(photo.getFilename().equals(file.getName())) {
+							exist=true;
+							photos.remove(photo);
+							break;
+						}
+					}
+				}
+				if(!exist) {
+					message+="Delete file "+folder+"/"+file.getName()+"\n";
+					file.delete();
+				}
+			}
+		}
+		response.setCharacterEncoding("utf-8");
+		response.getWriter().println(message);
+	}
+
 }

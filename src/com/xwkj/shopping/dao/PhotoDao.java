@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.xwkj.shopping.domain.Good;
 import com.xwkj.shopping.domain.Photo;
+import com.xwkj.shopping.domain.Type;
 
 public interface PhotoDao {
 	Photo get(String pid);
@@ -17,4 +18,11 @@ public interface PhotoDao {
 	 * @return
 	 */
 	List<Photo> findByGood(Good good);
+	
+	/**
+	 * 根据一级分类查询照片
+	 * @param type
+	 * @return
+	 */
+	List<Photo> findByType(Type type);
 }
