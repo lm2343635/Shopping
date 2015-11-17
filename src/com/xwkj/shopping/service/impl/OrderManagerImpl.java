@@ -76,7 +76,7 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 	}
 
 	@Override
-	public Map<String, Object> addOrder(UserBean user, boolean express, String name, String telephone, String address, String email) {
+	public Map<String, Object> addOrder(UserBean user, boolean express, String name, String telephone, String address, String zip, String email) {
 		Map<String, Object> data=new HashMap<>();
 		Sendee sendee=sendeeDao.findByUid(user.getUid());
 		List<Basket> baskets=basketDao.findUnorderdBySendee(sendee);
@@ -96,7 +96,9 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 			}
 			count+=basket.getCount();
 			amount+=basket.getCount()*basket.getGood().getPrice();
-			//占有存货
+		}
+		//占有存货
+		for(Basket basket: baskets) {
 			Good good=basket.getGood();
 			good.setNumber(good.getNumber()-basket.getCount());
 			goodDao.update(good);
@@ -109,12 +111,15 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 		order.setAmount(amount);
 		order.setPayed(false);
 		order.setTimeout(false);
+		order.setSend(false);
 		if(express) {
 			order.setName(name);
 			order.setTelephone(telephone);
 			order.setAddress(address);
+			order.setZip(zip);
 			sendee.setSname(name);
 			sendee.setTelephone(telephone);
+			sendee.setZip(zip);
 			sendee.setAddress(address);
 			sendeeDao.update(sendee);
 		}

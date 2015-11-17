@@ -48,13 +48,13 @@
 			<div id="basket-list" class="list-group">
 				<div id="${bid}$" class="list-group-item mengular-template basket-list-template">
 					<div class="row">
-						<div class="col-xs-12 col-md-7">
+						<div class="col-xs-12 col-md-8">
 							<a href="good.html?gid=${gid}$" target="_blank">
 								<img src="${src}$" class="img-circle" alt="${gname}$">
 								<span class="text-primary">${gname}$</span>
 							</a>
 						</div>
-						<div class="col-xs-12 col-md-5">
+						<div class="col-xs-12 col-md-4">
 							<h4 class="pull-right text-muted">
 								单价￥<span class="text-warning">${price}$</span>元，
 								<span class="text-warning">${count}$</span>件，
@@ -81,16 +81,22 @@
 						<input id="sendee-telephone" type="text" placeholder="请填写收货人电话">
 					</div>
 					<div class="col-xs-12 col-md-2">
-						<h3>收货人地址 <i class="fa fa-certificate text-danger"></i></h3>
+						<h3>邮政编码 <i class="fa fa-certificate text-danger"></i></h3>
 					</div>
-					<div class="col-xs-12 col-md-10">
-						<input id="sendee-address" type="text" placeholder="请填写收货人地址">
+					<div class="col-xs-12 col-md-4">
+						<input id="sendee-zip" type="text" placeholder="请填写邮政编码">
 					</div>
 					<div class="col-xs-12 col-md-2">
 						<h3>电子邮箱</h3>
 					</div>
-					<div class="col-xs-12 col-md-10">
+					<div class="col-xs-12 col-md-4">
 						<input id="sendee-email" type="text" placeholder="电子邮箱用于接收配送邮件通知">
+					</div>
+					<div class="col-xs-12 col-md-2">
+						<h3>收货人地址 <i class="fa fa-certificate text-danger"></i></h3>
+					</div>
+					<div class="col-xs-12 col-md-10">
+						<input id="sendee-address" type="text" placeholder="请填写收货人地址">
 					</div>
 				</div>
 			</div>

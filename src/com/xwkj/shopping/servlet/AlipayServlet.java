@@ -2,7 +2,6 @@ package com.xwkj.shopping.servlet;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -58,12 +57,13 @@ public class AlipayServlet extends HttpServlet {
 		//超时时长
 		int minutes=orderManager.getPayTimeOut()-DateTool.minutesBetween(order.getCreateDate(), new Date());
 		String name=basket.getGood().getGname()+"等"+order.getCount()+"件商品";
-		Map<String, Object> data= alipaySubmit.buildRequest(minutes, order.getOno(), name, order.getAmount(), body);
-		System.out.println(data.get("sbHtml"));
+		String sbHtml=alipaySubmit.buildSecuredTransactionsRequest(minutes, order.getOno(), name, order.getAmount(), body, order.getName(), 
+				order.getAddress(), order.getZip(), order.getTelephone(), order.getTelephone());
+		System.out.println(sbHtml);
 		//跳转页面
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");  
-		response.getWriter().print(data.get("sbHtml"));
+		response.getWriter().print(sbHtml);
 	}
 
 }

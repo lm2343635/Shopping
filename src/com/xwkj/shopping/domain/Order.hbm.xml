@@ -17,8 +17,12 @@
 		<property name="payDate" column="payDate" type="java.util.Date"/>
 		<property name="name" column="name" type="string"/>
 		<property name="telephone" column="telephone" type="string"/>
+		<property name="zip" column="zip" type="string"/>
 		<property name="address" column="address" type="string"/>
 		<property name="email" column="email" type="string"/>
+		<property name="send" column="send" type="boolean" not-null="true"/>
+		<property name="sendDate" column="sendDate" type="java.util.Date"/>
+		<property name="logistics" column="logistics" type="string"/>
 		<many-to-one name="sendee" column="sid" class="Sendee" not-null="true" lazy="false"/>
 	</class>
 </hibernate-mapping>

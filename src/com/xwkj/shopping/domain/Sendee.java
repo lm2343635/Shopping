@@ -12,6 +12,7 @@ public class Sendee implements Serializable {
 	private String email;
 	private String address;
 	private String telephone;
+	private String zip;
 	
 	public String getSid() {
 		return sid;
@@ -48,6 +49,12 @@ public class Sendee implements Serializable {
 	}
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+	public String getZip() {
+		return zip;
+	}
+	public void setZip(String zip) {
+		this.zip = zip;
 	}
 
 }

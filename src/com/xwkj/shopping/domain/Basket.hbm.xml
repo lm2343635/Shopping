@@ -11,6 +11,6 @@
 		<property name="createDate" column="createDate" type="java.util.Date" not-null="true"/>
 		<many-to-one name="good" column="gid" class="Good" not-null="true" lazy="false"/>
 		<many-to-one name="sendee" column="sid" class="Sendee" not-null="true"/>
-		<many-to-one name="order" column="oid" class="Order" unique="true"/>
+		<many-to-one name="order" column="oid" class="Order"/>
 	</class>
 </hibernate-mapping>

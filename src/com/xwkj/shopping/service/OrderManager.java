@@ -22,7 +22,7 @@ public interface OrderManager {
 	 * @param email
 	 * @return
 	 */
-	Map<String, Object> addOrder(UserBean user, boolean express, String name, String telephone, String address, String email);
+	Map<String, Object> addOrder(UserBean user, boolean express, String name, String telephone, String address, String zip, String email);
 	
 	/**
 	 * 通过订单号查询订单

@@ -8,7 +8,6 @@ $(document).ready(function() {
 	checkSession(function(user) {
 		if(user!=null) {
 			$("#nav-login, #nav-register").css("display","none");
-			$("#nav-user a").text(user.uname+"的订单");
 			$("#nav-user, #nav-logout").css("display","inline");
 		}
 	});
@@ -63,7 +62,6 @@ $(document).ready(function() {
 					$.messager.popup("登录成功！");
 					checkSession(function(user) {
 						$("#nav-login, #nav-register").css("display","none");
-						$("#nav-user a").text(user.uname+"的订单");
 						$("#nav-user, #nav-logout").css("display","inline");
 					})
 				} else {

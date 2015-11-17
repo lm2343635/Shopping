@@ -178,6 +178,54 @@ public class AlipaySubmit {
         return data;
     }
     
+    public String buildSecuredTransactionsRequest(int it_b_pay, String out_trade_no, String subject, double total_fee, String body,
+    		String receive_name, String receive_address, String receive_zip, String receive_phone, String receive_mobile) {
+    	//把请求参数打包成数组
+		Map<String, String> sParaTemp = new HashMap<String, String>();
+		sParaTemp.put("service", "create_partner_trade_by_buyer");
+        sParaTemp.put("partner", partner);
+        sParaTemp.put("seller_email", seller_email);
+        sParaTemp.put("_input_charset", input_charset);
+		sParaTemp.put("payment_type", payment_type);
+		sParaTemp.put("notify_url", notify_url);
+		sParaTemp.put("return_url", return_url+out_trade_no);
+		sParaTemp.put("out_trade_no", out_trade_no);
+		sParaTemp.put("subject", subject);
+		sParaTemp.put("price", String.valueOf(total_fee));
+		sParaTemp.put("quantity", "1");
+		sParaTemp.put("logistics_fee", "0.00");//物流费用
+		sParaTemp.put("logistics_type", "EXPRESS");//物流类型
+		sParaTemp.put("logistics_payment", "SELLER_PAY");//物流支付方式
+		sParaTemp.put("body", body);//订单描述
+		sParaTemp.put("show_url", show_url+out_trade_no);//商品展示地址
+		sParaTemp.put("receive_name", receive_name);//收货人姓名
+		sParaTemp.put("receive_address", receive_address);//收货人地址
+		sParaTemp.put("receive_zip", receive_zip);//收货人邮编
+		sParaTemp.put("receive_phone", receive_phone);//收货人电话号码
+		sParaTemp.put("receive_mobile", receive_mobile);//收货人手机号码
+		//待请求参数数组
+        Map<String, String> sPara = buildRequestPara(sParaTemp);
+        List<String> keys = new ArrayList<String>(sPara.keySet());
+
+        StringBuffer sbHtml = new StringBuffer();
+
+        sbHtml.append("<form id=\"alipaysubmit\" name=\"alipaysubmit\" action=\"" + ALIPAY_GATEWAY_NEW
+                      + "_input_charset=" + input_charset + "\" method=\"" + "get"
+                      + "\">");
+
+        for (int i = 0; i < keys.size(); i++) {
+            String name = (String) keys.get(i);
+            String value = (String) sPara.get(name);
+
+            sbHtml.append("<input type=\"hidden\" name=\"" + name + "\" value=\"" + value + "\"/>");
+        }
+
+        //submit按钮控件请不要含有name属性
+        sbHtml.append("<input type=\"submit\" value=\"" + "submit" + "\" style=\"display:none;\"></form>");
+        sbHtml.append("<script>document.forms['alipaysubmit'].submit();</script>");
+        return sbHtml.toString();
+    }
+    
 	/**
 	 * 验证异步请求是否是支付宝发出的
 	 * @param notify_id

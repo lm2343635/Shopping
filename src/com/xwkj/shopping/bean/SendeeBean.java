@@ -9,6 +9,7 @@ public class SendeeBean {
 	private String email;
 	private String address;
 	private String telephone;
+	private String zip;
 	
 	public String getSid() {
 		return sid;
@@ -46,6 +47,12 @@ public class SendeeBean {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+	public String getZip() {
+		return zip;
+	}
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
 	
 	public SendeeBean(Sendee sendee) {
 		super();
@@ -55,6 +62,7 @@ public class SendeeBean {
 		this.email = sendee.getEmail();
 		this.address = sendee.getAddress();
 		this.telephone = sendee.getTelephone();
+		this.zip=sendee.getZip();
 	}
 	
 }

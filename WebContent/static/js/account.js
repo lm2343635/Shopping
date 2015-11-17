@@ -58,7 +58,8 @@ $(document).ready(function() {
 				"sendee-sname": sendee.sname,
 				"sendee-telephone": sendee.telephone,
 				"sendee-address": sendee.address,
-				"sendee-email": sendee.email
+				"sendee-email": sendee.email,
+				"sendee-zip": sendee.zip
 			});
 		});
 	})
@@ -75,6 +76,7 @@ $(document).ready(function() {
 		var sname=$("#sendee-sname").val();
 		var telephone=$("#sendee-telephone").val();
 		var address=$("#sendee-address").val();
+		var zip=$("#sendee-zip").val();
 		var email=$("#sendee-email").val();
 		var validate=true;
 		if(express) {
@@ -96,6 +98,12 @@ $(document).ready(function() {
 			} else {
 				$("#sendee-address").removeClass("input-error");
 			}
+			if(zip==""||zip==null) {
+				validate=false;
+				$("#sendee-zip").addClass("input-error");
+			} else {
+				$("#sendee-zip").removeClass("input-error");
+			}
 		}
 		if(!validate) {
 			$.messager.popup("请正确填写收货人信息！");
@@ -111,7 +119,7 @@ $(document).ready(function() {
 			}
 			message+="电子邮箱："+email+"<br>";
 			$.messager.confirm("确认订单信息", message, function() {
-				OrderManager.addOrder(_user, express, sname, telephone, address, email, function(data) {
+				OrderManager.addOrder(_user, express, sname, telephone, address, zip, email, function(data) {
 					if(data.empty) {
 						$.messager.popup("购物车中没有任何商品，无法创建订单！");
 						return;

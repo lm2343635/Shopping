@@ -18,94 +18,157 @@ public class OrderBean {
 	private String name;
 	private String telephone;
 	private String address;
+	private String zip;
 	private String email;
+	private boolean send;
+	private Date sendDate; 
+	private String logistics;
 	private SendeeBean sendee;
-	
+
 	public String getOid() {
 		return oid;
 	}
-	public String getOno() {
-		return ono;
-	}
-	public Date getCreateDate() {
-		return createDate;
-	}
-	public boolean isExpress() {
-		return express;
-	}
-	public int getCount() {
-		return count;
-	}
-	public double getAmount() {
-		return amount;
-	}
-	public boolean isPayed() {
-		return payed;
-	}
-	public boolean isTimeout() {
-		return timeout;
-	}
-	public Date getPayDate() {
-		return payDate;
-	}
-	public String getName() {
-		return name;
-	}
-	public String getTelephone() {
-		return telephone;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public String getEmail() {
-		return email;
-	}
+
 	public void setOid(String oid) {
 		this.oid = oid;
 	}
+
+	public String getOno() {
+		return ono;
+	}
+
 	public void setOno(String ono) {
 		this.ono = ono;
 	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
+
+	public boolean isExpress() {
+		return express;
+	}
+
 	public void setExpress(boolean express) {
 		this.express = express;
 	}
+
+	public int getCount() {
+		return count;
+	}
+
 	public void setCount(int count) {
 		this.count = count;
 	}
+
+	public double getAmount() {
+		return amount;
+	}
+
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
+
+	public boolean isPayed() {
+		return payed;
+	}
+
 	public void setPayed(boolean payed) {
 		this.payed = payed;
 	}
+
+	public boolean isTimeout() {
+		return timeout;
+	}
+
 	public void setTimeout(boolean timeout) {
 		this.timeout = timeout;
 	}
+
+	public Date getPayDate() {
+		return payDate;
+	}
+
 	public void setPayDate(Date payDate) {
 		this.payDate = payDate;
 	}
+
+	public String getName() {
+		return name;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+
+	public String getAddress() {
+		return address;
+	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public boolean isSend() {
+		return send;
+	}
+
+	public void setSend(boolean send) {
+		this.send = send;
+	}
+
+	public Date getSendDate() {
+		return sendDate;
+	}
+
+	public void setSendDate(Date sendDate) {
+		this.sendDate = sendDate;
+	}
+
+	public String getLogistics() {
+		return logistics;
+	}
+
+	public void setLogistics(String logistics) {
+		this.logistics = logistics;
+	}
+
 	public SendeeBean getSendee() {
 		return sendee;
 	}
+
 	public void setSendee(SendeeBean sendee) {
 		this.sendee = sendee;
 	}
-	
+
 	public OrderBean(Order order) {
 		super();
 		this.oid = order.getOid();
@@ -120,7 +183,11 @@ public class OrderBean {
 		this.name = order.getName();
 		this.telephone = order.getTelephone();
 		this.address = order.getAddress();
+		this.zip = order.getZip();
 		this.email = order.getEmail();
+		this.send = order.getSend();
+		this.sendDate= order.getSendDate();
+		this.logistics = order.getLogistics();
 		this.sendee =	new SendeeBean(order.getSendee());
 	}
 }
