@@ -21,6 +21,7 @@ public class Order implements Serializable {
 	private String address;
 	private String zip;
 	private String email;
+	private String trade;
 	private Boolean send;
 	private Date sendDate; 
 	private String logistics;
@@ -133,6 +134,12 @@ public class Order implements Serializable {
 	}
 	public void setSendee(Sendee sendee) {
 		this.sendee = sendee;
+	}
+	public String getTrade() {
+		return trade;
+	}
+	public void setTrade(String trade) {
+		this.trade = trade;
 	}
 
 }

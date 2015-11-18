@@ -69,18 +69,6 @@
 						<a href="pay.html?ono=${ono}$" class="btn btn-warning">支付订单</a>
 						<button class="btn btn-danger order-delete">删除订单</button>
 					</div>
-					<div id="${oid}$" class="alert alert-success mengular-template order-payed-template">
-						<input type="hidden" class="order-ono" value="${ono}$">
-						<div class="pull-right pay-state">
-							<i class="fa fa-check-circle-o"></i>
-							<p>已支付</p>
-						</div>
-						<h3>订单号：${ono}$</h3>
-						<p>共${count}$件商品，合计${amount}$元，订购于${createDate}$，支付于${payDate}$</p>
-						<a href="pay.html?ono=${ono}$" class="btn btn-info">查看订单</a>
-						<button class="btn btn-success">确认收货</button>
-						<button class="btn btn-primary">申请退货</button>
-					</div>
 					<div id="${oid}$" class="alert alert-danger mengular-template order-timeout-template">
 						<input type="hidden" class="order-ono" value="${ono}$">
 						<div class="pull-right pay-state">
@@ -91,6 +79,30 @@
 						<p>共${count}$件商品，合计${amount}$元，订购于${createDate}$，超时未支付</p>
 						<a href="pay.html?ono=${ono}$" class="btn btn-info">查看订单</a>
 						<button class="btn btn-danger order-delete">删除订单</button>
+					</div>
+					<div id="${oid}$" class="alert alert-success mengular-template order-payed-template">
+						<input type="hidden" class="order-ono" value="${ono}$">
+						<div class="pull-right pay-state">
+							<i class="fa fa-check-circle-o"></i>
+							<p>已支付</p>
+						</div>
+						<h3>订单号：${ono}$</h3>
+						<p>共${count}$件商品，合计${amount}$元，订购于${createDate}$，支付于${payDate}$，等待发货。</p>
+						<a href="pay.html?ono=${ono}$" class="btn btn-info">查看订单</a>
+						<button class="btn btn-primary">申请退货</button>
+					</div>
+					<div id="${oid}$" class="alert alert-info mengular-template order-sending-template">
+						<input type="hidden" class="order-ono" value="${ono}$">
+						<div class="pull-right pay-state">
+							<i class="fa fa-truck"></i>
+							<p>已发货</p>
+						</div>
+						<h3>订单号：${ono}$</h3>
+						<p>共${count}$件商品，合计${amount}$元，订购于${createDate}$，支付于${payDate}$。</p>
+						<p>该订单已于${sendDate}$发货，快递信息：${logistics}$。</p>
+						<a href="pay.html?ono=${ono}$" class="btn btn-info">查看订单</a>
+						<button class="btn btn-success">确认收货</button>
+						<button class="btn btn-primary">申请退货</button>
 					</div>
 				</div>
 				<div id="no-order" class="jumbotron">

@@ -52,9 +52,10 @@ public interface GoodManager {
 	/**
 	 * 获取二级分类下的商品
 	 * @param cid
+	 * @param enable
 	 * @return
 	 */
-	List<GoodBean> getGoodsByCid(String cid);
+	List<GoodBean> getGoodsByCid(String cid, boolean enable);
 	
 	/**
 	 * 得到最新的limit个一级分类的商品

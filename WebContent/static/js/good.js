@@ -11,6 +11,10 @@ $(document).ready(function() {
 			location.href="urlError.html";
 			return;
 		}
+		if(!good.enable||!good.category.enable||!good.category.type.enable) {
+			location.href="urlError.html";
+			return;
+		}
 		tid=good.category.type.tid;
 		_good=good;
 

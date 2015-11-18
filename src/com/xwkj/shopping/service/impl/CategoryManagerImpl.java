@@ -70,10 +70,10 @@ public class CategoryManagerImpl extends ManagerTemplate implements CategoryMana
 	}
 
 	@Override
-	public List<CategoryBean> getCategoriesByTid(String tid) {
+	public List<CategoryBean> getCategoriesByTid(String tid, boolean enable) {
 		List<CategoryBean> categories=new ArrayList<>();
 		Type type=typeDao.get(tid);
-		for(Category category: categoryDao.findByType(type))
+		for(Category category: categoryDao.findByType(type, enable))
 			categories.add(new CategoryBean(category));
 		return categories;
 	}

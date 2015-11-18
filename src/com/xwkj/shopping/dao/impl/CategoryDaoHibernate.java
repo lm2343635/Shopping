@@ -31,8 +31,11 @@ public class CategoryDaoHibernate extends PageHibernateDaoSupport implements Cat
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Category> findByType(Type type) {
-		return getHibernateTemplate().find("from Category where type=? order by createDate desc", type);
+	public List<Category> findByType(Type type, boolean enable) {
+		String hql="from Category where type=? order by createDate desc";
+		if(enable)
+			hql="from Category where type=? and enable=true and type.enable=true order by createDate desc";
+		return getHibernateTemplate().find(hql, type);
 	}
 
 }

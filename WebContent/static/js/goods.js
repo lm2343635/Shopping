@@ -128,7 +128,7 @@ $(document).ready(function() {
 });
 
 function loadGoods() {
-	GoodManager.getGoodsByCid(cid, function(goods) {
+	GoodManager.getGoodsByCid(cid, false, function(goods) {
 		$("#good-list tbody").mengularClear();
 		for(var i in goods) {
 			$("#good-list tbody").mengular(".good-list-template", {

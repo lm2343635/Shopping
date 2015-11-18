@@ -10,5 +10,10 @@ public interface TypeDao {
 	void update(Type type);
 	void delete(Type type);
 	
-	List<Type> findAll();
+	/**
+	 * 查找所有一级分类
+	 * @param enable 可用性
+	 * @return
+	 */
+	List<Type> findAll(boolean enable);
 }

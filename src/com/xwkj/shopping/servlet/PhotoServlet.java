@@ -337,11 +337,11 @@ public class PhotoServlet extends HttpServlet
 		PhotoDao photoDao=manager.getPhotoDao();
 		CategoryDao categoryDao=manager.getCategoryDao();
 		String message = "";
-		for(Type type: manager.getTypeDao().findAll()) {
+		for(Type type: manager.getTypeDao().findAll(false)) {
 			String folder=rootPath+"/"+PHOTO_FOLDER+"/"+type.getTid();
 			File files=new File(folder);
 			List<Photo> photos=photoDao.findByType(type);
-			List<Category> categories=categoryDao.findByType(type);
+			List<Category> categories=categoryDao.findByType(type, false);
 			for(File file: files.listFiles()) {
 				boolean exist=false;
 				if(type.getIcon().getFilename().equals(file.getName())) {

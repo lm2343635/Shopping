@@ -57,7 +57,7 @@ $(document).ready(function() {
 });
 
 function loadCategories() {
-	CategoryManager.getCategoriesByTid(tid, function(categories) {
+	CategoryManager.getCategoriesByTid(tid, false, function(categories) {
 		$("#category-list tbody").mengularClear();
 		for(var i in categories) {
 			$("#category-list tbody").mengular(".type-list-template", {

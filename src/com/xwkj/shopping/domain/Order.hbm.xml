@@ -20,6 +20,7 @@
 		<property name="zip" column="zip" type="string"/>
 		<property name="address" column="address" type="string"/>
 		<property name="email" column="email" type="string"/>
+		<property name="trade" column="trade" type="string"/>
 		<property name="send" column="send" type="boolean" not-null="true"/>
 		<property name="sendDate" column="sendDate" type="java.util.Date"/>
 		<property name="logistics" column="logistics" type="string"/>

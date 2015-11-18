@@ -36,9 +36,10 @@ public interface TypeManager {
 	
 	/**
 	 * 获取所有一级分类
+	 * @param enable 可用性
 	 * @return
 	 */
-	List<TypeBean> getAll();
+	List<TypeBean> getAll(boolean enable);
 
 	/**
 	 * 更新创建时间

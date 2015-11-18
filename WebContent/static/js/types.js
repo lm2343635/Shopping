@@ -55,7 +55,7 @@ $(document).ready(function() {
  * 加载一级分类
  */
 function loadTypes() {
-	TypeManager.getAll(function(types) {
+	TypeManager.getAll(false, function(types) {
 		$("#type-list tbody").mengularClear();
 		for(var i in types) {
 			$("#type-list tbody").mengular(".type-list-template", {

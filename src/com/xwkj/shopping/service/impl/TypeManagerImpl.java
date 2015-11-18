@@ -56,9 +56,9 @@ public class TypeManagerImpl extends ManagerTemplate implements TypeManager {
 	}
 
 	@Override
-	public List<TypeBean> getAll() {
+	public List<TypeBean> getAll(boolean enable) {
 		List<TypeBean> types=new ArrayList<>();
-		for(Type type: typeDao.findAll()) 
+		for(Type type: typeDao.findAll(enable)) 
 			types.add(new TypeBean(type));
 		return types;
 	}

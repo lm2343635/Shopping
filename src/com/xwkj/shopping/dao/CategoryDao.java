@@ -14,7 +14,8 @@ public interface CategoryDao {
 	/**
 	 * 查询一级分类下的所有二级分类
 	 * @param type
+	 * @param enable 可用性
 	 * @return
 	 */
-	List<Category> findByType(Type type);
+	List<Category> findByType(Type type, boolean enable);
 }

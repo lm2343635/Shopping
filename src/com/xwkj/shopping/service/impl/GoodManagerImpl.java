@@ -84,10 +84,10 @@ public class GoodManagerImpl extends ManagerTemplate implements GoodManager {
 	}
 
 	@Override
-	public List<GoodBean> getGoodsByCid(String cid) {
+	public List<GoodBean> getGoodsByCid(String cid, boolean enable) {
 		List<GoodBean> goods=new ArrayList<>();
 		Category category=categoryDao.get(cid);
-		for(Good good: goodDao.findByCategory(category)) 
+		for(Good good: goodDao.findByCategory(category, enable)) 
 			goods.add(new GoodBean(good));
 		return goods;
 	}

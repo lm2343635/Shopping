@@ -27,12 +27,14 @@ $(document).ready(function() {
 			}
 			for(var i in orders) {
 				var template;
-				if(orders[i].payed&&!orders[i].timeout) {
+				if(orders[i].payed&&!orders[i].timeout&&!orders[i].send) {
 					template=".order-payed-template";
-				} else if (!orders[i].payed&&!orders[i].timeout) {
+				} else if (!orders[i].payed&&!orders[i].timeout&&!orders[i].send) {
 					template=".order-wait-template";
-				} else if(!orders[i].payed&&orders[i].timeout) {
+				} else if(!orders[i].payed&&orders[i].timeout&&!orders[i].send) {
 					template=".order-timeout-template";
+				} else if(orders[i].payed&&!orders[i].timeout&&orders[i].send) {
+					template=".order-sending-template";
 				}
 				$("#order-list").mengular(template, {
 					oid: orders[i].oid,
@@ -40,7 +42,9 @@ $(document).ready(function() {
 					count: orders[i].count,
 					amount: orders[i].amount,
 					createDate: orders[i].createDate.format(DATE_HOUR_MINUTE_FORMAT_CN),
-					payDate: orders[i].payDate==null? null: orders[i].payDate.format(DATE_HOUR_MINUTE_FORMAT_CN)
+					payDate: orders[i].payDate==null? null: orders[i].payDate.format(DATE_HOUR_MINUTE_FORMAT_CN),
+					sendDate: orders[i].sendDate==null? null: orders[i].sendDate.format(DATE_HOUR_MINUTE_FORMAT_CN),
+					logistics: orders[i].logistics
 				});
 
 				//删除订单

@@ -30,8 +30,11 @@ public class TypeDaoHibernate extends PageHibernateDaoSupport implements TypeDao
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Type> findAll() {
-		return getHibernateTemplate().find("from Type order by createDate desc");
+	public List<Type> findAll(boolean enable) {
+		String hql="from Type order by createDate desc";
+		if(enable) 
+			hql="from Type where enable=true order by createDate desc";
+		return getHibernateTemplate().find(hql);
 	}
 
 }

@@ -40,7 +40,7 @@ public interface CategoryManager {
 	 * @param tid
 	 * @return
 	 */
-	List<CategoryBean> getCategoriesByTid(String tid);
+	List<CategoryBean> getCategoriesByTid(String tid, boolean enable);
 	
 	/**
 	 * 更新创建时间

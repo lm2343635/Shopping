@@ -6,8 +6,21 @@ $(document).ready(function() {
 	$("#head").load("head.html");
 	$("#foot").load("foot.html");
 
-	TypeManager.getAll(function(_types) {
+	TypeManager.getAll(true, function(_types) {
 		types=_types;
+		if(tid) {
+			var enable=false;
+			for(var i in types) {
+				if(types[i].tid==tid) {
+					enable=true;
+					break;
+				}
+			}
+			if(!enable) {
+				location.href="urlError.html";
+				return;
+			}
+		}
 		loadOneType(0);
 	});
 
@@ -33,13 +46,9 @@ function loadOneType(index) {
 	$("#"+types[index].tid).click(function() {
 		var tid=$(this).attr("id");
 		location.href="show.html?tid="+tid;
-//		if(!$("."+tid).is(":visible"))
-//			$("."+tid).show("normal");
-//		else
-//			$("."+tid).hide("normal");
 	});
 
-	CategoryManager.getCategoriesByTid(types[index].tid, function(categories) {
+	CategoryManager.getCategoriesByTid(types[index].tid, true, function(categories) {
 		for(var j in categories) {
 			var cicon="static/images/noIcon.jpg";
 			if(categories[j].icon!=null)
@@ -53,19 +62,6 @@ function loadOneType(index) {
 			//为二级分类绑定点击事件
 			$("#"+categories[j].cid).click(function() {
 				location.href="show.html?tid="+tid+"&cid="+$(this).attr("id");
-//				$("#type-list li").removeClass("list-group-item-info");
-//				$(this).addClass("list-group-item-info");
-//				$("#good-list").mengularClear();
-//				$("#search-room-loading").show();
-//				$("#no-search-result").hide();
-//				GoodManager.getGoodsByCid($(this).attr("id"), function(goods) {
-//					$("#search-room-loading").hide();
-//					if(goods.length==0) {
-//						$("#no-search-result").show();
-//					} else {
-//						loadGoods(goods);
-//					}
-//				});
 			});		
 		}
 		if(index<types.length-1)
@@ -77,9 +73,21 @@ function loadOneType(index) {
 			$("."+tid).show();
 			$("#type-list li").removeClass("list-group-item-info");
 			$("#"+cid).addClass("list-group-item-info");
-			GoodManager.getGoodsByCid(cid, function(goods) {
-				loadGoods(goods);
-			});
+			if(cid!=undefined&&(cid!=null||cid!="")) {
+				CategoryManager.getCategory(cid, function(category) {
+					if(category==null) {
+						location.href="urlError.html";
+						return;
+					}
+					if(!category.enable||!category.type.enable) {
+						location.href="urlError.html";
+						return;
+					}
+					GoodManager.getGoodsByCid(cid, true, function(goods) {
+						loadGoods(goods);
+					});
+				});
+			}
 		}
 	});
 }

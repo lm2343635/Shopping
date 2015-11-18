@@ -38,14 +38,17 @@ public class GoodDaoHibernate extends PageHibernateDaoSupport implements GoodDao
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Good> findByCategory(Category category) {
-		return getHibernateTemplate().find("from Good where category=? order by createDate desc", category);
+	public List<Good> findByCategory(Category category, boolean enable) {
+		String hql="from Good where category=? order by createDate desc";
+		if(enable)
+			hql="from Good where category=? and enable=true and category.enable=true and category.type.enable=true order by createDate desc";
+		return getHibernateTemplate().find(hql, category);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Good> findNewstWithLimit(int limit) {
-		String hql="from Good order by createDate desc";
+		String hql="from Good where enable=true and category.enable=true and category.type.enable=true order by createDate desc";
 		return getHibernateTemplate().executeFind(new HibernateCallback<List<Good>>() {
 			@Override
 			public List<Good> doInHibernate(Session session) throws HibernateException, SQLException {
@@ -60,7 +63,7 @@ public class GoodDaoHibernate extends PageHibernateDaoSupport implements GoodDao
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Good> findByTypeWithLimit(Type type, int limit) {
-		String hql="from Good where category.type=? order by createDate desc";
+		String hql="from Good where category.type=? where enable=true and category.enable=true and category.type.enable=true order by createDate desc";
 		return getHibernateTemplate().executeFind(new HibernateCallback<List<Good>>() {
 			@Override
 			public List<Good> doInHibernate(Session session) throws HibernateException, SQLException {
@@ -76,7 +79,7 @@ public class GoodDaoHibernate extends PageHibernateDaoSupport implements GoodDao
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Good> findHotestWithLimit(int limit) {
-		String hql="from Good order by sold desc";
+		String hql="from Good where enable=true and category.enable=true and category.type.enable=true order by sold desc";
 		return getHibernateTemplate().executeFind(new HibernateCallback<List<Good>>() {
 			@Override
 			public List<Good> doInHibernate(Session session) throws HibernateException, SQLException {
@@ -91,7 +94,7 @@ public class GoodDaoHibernate extends PageHibernateDaoSupport implements GoodDao
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Good> findByGname(String gname) {
-		String hql="from Good where gname like ? order by sold, createDate desc";
+		String hql="from Good where gname like ? and enable=true and category.enable=true and category.type.enable=true order by sold, createDate desc";
 		return getHibernateTemplate().find(hql, "%"+gname+"%");
 	}
 

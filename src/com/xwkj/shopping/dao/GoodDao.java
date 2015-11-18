@@ -15,9 +15,10 @@ public interface GoodDao {
 	/**
 	 * 根据二级分类查找商品
 	 * @param category
+	 * @param enable
 	 * @return
 	 */
-	List<Good> findByCategory(Category category);
+	List<Good> findByCategory(Category category, boolean enable);
 	
 	/**
 	 * 查询最新的limit个一级分类的商品
