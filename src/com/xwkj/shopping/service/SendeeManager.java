@@ -1,5 +1,7 @@
 package com.xwkj.shopping.service;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import com.xwkj.shopping.bean.SendeeBean;
@@ -39,4 +41,11 @@ public interface SendeeManager {
 	 * @return
 	 */
 	SendeeBean getSendeeByUid(String uid);
+	
+	/**
+	 * 根据uid查询远端服务器中用户信息
+	 * @param uid
+	 * @return
+	 */
+	Map<String, Object> getUserInfoByUid(String uid);
 }

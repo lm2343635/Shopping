@@ -1,5 +1,7 @@
 package com.xwkj.shopping.service.impl;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import com.xwkj.common.util.HttpRequestUtil;
@@ -63,6 +65,12 @@ public class SendeeManagerImpl extends ManagerTemplate implements SendeeManager 
 		if(sendee==null)
 			return null;
 		return new SendeeBean(sendee);
+	}
+
+	@Override
+	public Map<String, Object> getUserInfoByUid(String uid) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

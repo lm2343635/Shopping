@@ -32,4 +32,28 @@ public interface OrderDao {
 	 * @return
 	 */
 	List<Order> findWillTimeoutOrders(Date time);
+	
+	/**
+	 * 查询指定条件下的订单数量
+	 * @param payed 是否支付
+	 * @param timeout 是否超时
+	 * @param send 是否发货
+	 * @param receive 是否收货
+	 * @param ono 订单号
+	 * @return
+	 */
+	int getOrdersCount(boolean payed, boolean timeout, boolean send, boolean receive, String ono);
+	
+	/**
+	 * 搜索订单
+	 * @param payed 是否支付
+	 * @param timeout 是否超时
+	 * @param send 是否发货
+	 * @param receive 是否收货
+	 * @param ono 订单号
+	 * @param page 页码
+	 * @param pageSize 页面长度
+	 * @return
+	 */
+	List<Order> findOrders(boolean payed, boolean timeout, boolean send, boolean receive, String ono, int offset, int pageSize);
 }

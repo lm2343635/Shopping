@@ -12,8 +12,12 @@ $(document).ready(function() {
 			return;
 		}
 		if(!good.enable||!good.category.enable||!good.category.type.enable) {
-			location.href="urlError.html";
-			return;
+			AdminManager.checkSession(function(username) {
+				if(username==null) {
+					location.href="urlError.html";
+					return;
+				} 
+			});
 		}
 		tid=good.category.type.tid;
 		_good=good;

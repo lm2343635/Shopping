@@ -25,6 +25,9 @@ public class Order implements Serializable {
 	private Boolean send;
 	private Date sendDate; 
 	private String logistics;
+	private Boolean receive;
+	private Date receiveDate;
+	private Date returnDate;
 	private Sendee sendee;
 	
 	public String getOid() {
@@ -140,6 +143,24 @@ public class Order implements Serializable {
 	}
 	public void setTrade(String trade) {
 		this.trade = trade;
+	}
+	public Boolean getReceive() {
+		return receive;
+	}
+	public void setReceive(Boolean receive) {
+		this.receive = receive;
+	}
+	public Date getReceiveDate() {
+		return receiveDate;
+	}
+	public void setReceiveDate(Date receiveDate) {
+		this.receiveDate = receiveDate;
+	}
+	public Date getReturnDate() {
+		return returnDate;
+	}
+	public void setReturnDate(Date returnDate) {
+		this.returnDate = returnDate;
 	}
 
 }

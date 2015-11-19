@@ -20,9 +20,13 @@ public class OrderBean {
 	private String address;
 	private String zip;
 	private String email;
+	private String trade;
 	private boolean send;
 	private Date sendDate; 
 	private String logistics;
+	private boolean receive;
+	private Date receiveDate;
+	private Date returnDate;
 	private SendeeBean sendee;
 
 	public String getOid() {
@@ -137,6 +141,14 @@ public class OrderBean {
 		this.email = email;
 	}
 
+	public String getTrade() {
+		return trade;
+	}
+
+	public void setTrade(String trade) {
+		this.trade = trade;
+	}
+
 	public boolean isSend() {
 		return send;
 	}
@@ -169,6 +181,30 @@ public class OrderBean {
 		this.sendee = sendee;
 	}
 
+	public boolean isReceive() {
+		return receive;
+	}
+
+	public void setReceive(boolean receive) {
+		this.receive = receive;
+	}
+
+	public Date getReceiveDate() {
+		return receiveDate;
+	}
+
+	public void setReceiveDate(Date receiveDate) {
+		this.receiveDate = receiveDate;
+	}
+
+	public Date getReturnDate() {
+		return returnDate;
+	}
+
+	public void setReturnDate(Date returnDate) {
+		this.returnDate = returnDate;
+	}
+
 	public OrderBean(Order order) {
 		super();
 		this.oid = order.getOid();
@@ -185,9 +221,13 @@ public class OrderBean {
 		this.address = order.getAddress();
 		this.zip = order.getZip();
 		this.email = order.getEmail();
+		this.trade = order.getTrade();
 		this.send = order.getSend();
 		this.sendDate= order.getSendDate();
 		this.logistics = order.getLogistics();
+		this.receive = order.getReceive();
+		this.receiveDate = order.getReceiveDate();
+		this.returnDate = order.getReturnDate();
 		this.sendee =	new SendeeBean(order.getSendee());
 	}
 }

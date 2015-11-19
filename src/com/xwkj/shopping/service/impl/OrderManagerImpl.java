@@ -112,6 +112,7 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 		order.setPayed(false);
 		order.setTimeout(false);
 		order.setSend(false);
+		order.setReceive(false);
 		if(express) {
 			order.setName(name);
 			order.setTelephone(telephone);
@@ -159,6 +160,14 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 	}
 
 	@Override
+	public OrderBean getOrder(String oid) {
+		Order order=orderDao.get(oid);
+		if(order==null)
+			return null;
+		return new OrderBean(order);
+	}
+
+	@Override
 	public OrderBean getOrderByOno(String ono) {
 		Order order=orderDao.findByOno(ono);
 		if(order==null)
@@ -190,6 +199,21 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 		Sendee sendee=sendeeDao.findByUid(uid);
 		for(Order order: orderDao.findBySendee(sendee))
 			orders.add(new OrderBean(order));
+		return orders;
+	}
+
+	@Override
+	public int getOrdersCount(boolean payed, boolean timeout, boolean send, boolean receive, String ono) {
+		return orderDao.getOrdersCount(payed, timeout, send, receive, ono);
+	}
+
+	@Override
+	public List<OrderBean> searchOrders(boolean payed, boolean timeout, boolean send, boolean receive, String ono, int page, int pageSize) {
+		List<OrderBean> orders=new ArrayList<>();
+		int offset=(page-1)*pageSize;
+		for(Order order: orderDao.findOrders(payed, timeout, send, receive, ono, offset, pageSize)) {
+			orders.add(new OrderBean(order));
+		}
 		return orders;
 	}
 

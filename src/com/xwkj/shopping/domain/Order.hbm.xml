@@ -24,6 +24,9 @@
 		<property name="send" column="send" type="boolean" not-null="true"/>
 		<property name="sendDate" column="sendDate" type="java.util.Date"/>
 		<property name="logistics" column="logistics" type="string"/>
+		<property name="receive" column="receive" type="boolean" not-null="true"/>
+		<property name="receiveDate" column="receiveDate" type="java.util.Date"/>
+		<property name="returnDate" column="returnDate" type="java.util.Date"/>
 		<many-to-one name="sendee" column="sid" class="Sendee" not-null="true" lazy="false"/>
 	</class>
 </hibernate-mapping>
