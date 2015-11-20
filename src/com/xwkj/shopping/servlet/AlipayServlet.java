@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.httpclient.HttpException;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -34,7 +35,9 @@ public class AlipayServlet extends HttpServlet {
 		case "pay":
 			pay(request,response);
 			break;
-
+		case "send":
+			send(request, response);
+			break;
 		default:
 			break;
 		}
@@ -59,7 +62,24 @@ public class AlipayServlet extends HttpServlet {
 		String name=basket.getGood().getGname()+"等"+order.getCount()+"件商品";
 		String sbHtml=alipaySubmit.buildSecuredTransactionsRequest(minutes, order.getOno(), name, order.getAmount(), body, order.getName(), 
 				order.getAddress(), order.getZip(), order.getTelephone(), order.getTelephone());
-		System.out.println(sbHtml);
+		//跳转页面
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html");  
+		response.getWriter().print(sbHtml);
+	}
+
+	private void send(HttpServletRequest request, HttpServletResponse response) throws HttpException, IOException {
+		String oid=request.getParameter("oid");
+		//物流公司名称
+		String logistics_name=request.getParameter("logistics_name");
+		//物流发货单号
+		String invoice_no =request.getParameter("invoice_no");
+		WebApplicationContext context=WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+		ManagerTemplate manager=(ManagerTemplate)context.getBean("managerTemplate");
+		Order order=manager.getOrderDao().get(oid);
+		String trade_no=order.getTrade();
+		AlipaySubmit alipaySubmit=(AlipaySubmit)context.getBean("AlipaySubmit");
+		String sbHtml=alipaySubmit.buildSendGoodRequest(trade_no, logistics_name, invoice_no, "EXPRESS");
 		//跳转页面
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");  

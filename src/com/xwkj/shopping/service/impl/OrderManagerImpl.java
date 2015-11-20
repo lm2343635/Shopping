@@ -217,4 +217,13 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 		return orders;
 	}
 
+	@Override
+	public void savetLogistics(String oid, String logistics) {
+		Order order=orderDao.get(oid);
+		if(order.getExpress()==true) {
+			order.setLogistics(logistics);
+		}
+		orderDao.update(order);
+	}
+
 }

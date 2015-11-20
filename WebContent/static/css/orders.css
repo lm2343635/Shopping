@@ -2,3 +2,7 @@
 #order-info-goods img {
 	width: 100%;
 }
+
+#order-send-logistics .input-group {
+	margin-bottom: 10px;
+}

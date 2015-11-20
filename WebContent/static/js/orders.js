@@ -3,6 +3,7 @@ var TIME_NAME=["付款时间", "发货时间", "收货时间", "退款申请时�
 var pageSize=15;
 var payed, timeout, send, receive;
 var type=0;
+var sendingOid, sendingExpress;
 
 $(document).ready(function() {
 
@@ -50,12 +51,41 @@ $(document).ready(function() {
 
 	//订单发货
 	$("#order-send-submit").click(function() {
-		var logistics=$("#order-send-logistics").val();
-		if(logistics==null||logistics=="") {
-			$.messager.popup("请填写快递信息！");
-			$("#order-send-logistics").parent().addClass("has-error");
+		var company=$("#order-send-logistics-company").val();
+		var no=$("#order-send-logistics-no").val();
+		var validate=true;
+		if(sendingExpress) {
+			if(company==null||company=="") {
+				validate=false;
+				$("#order-send-logistics-company").parent().addClass("has-error");
+			} else {
+				$("#order-send-logistics-company").parent().removeClass("has-error");
+			}
+			if(no==null||no=="") {
+				validate=false;
+				$("#order-send-logistics-no").parent().addClass("has-error");
+			} else {
+				$("#order-send-logistics-no").parent().removeClass("has-error");
+			}
 		} else {
-			$("#order-send-logistics").parent().removeClass("has-error");
+			company="用户自提";
+			no="";
+		}
+		if(validate) {
+			$(this).text("正在发货").attr("disabled", "disabled");
+			$.post("AlipayServlet", {
+				task: "send",
+				oid: sendingOid,
+				logistics_name: company,
+				invoice_no: no
+			}, function(data) {
+				if(data!=null) {
+					$("#"+sendingOid).remove();
+					$("#order-send-submit").text("确认发货").removeAttr("disabled");
+					$("#order-send-modal").modal("hide");
+					OrderManager.savetLogistics(sendingOid, company+no);
+				}
+			});
 		}
 	});
 
@@ -186,6 +216,14 @@ function searchOrders(ono, page) {
 							"order-send-zip": order.zip==null? "无": order.zip,
 							"order-send-email": order.email==null? "无": order.email
 						});
+
+						sendingOid=order.oid;
+						sendingExpress=order.express;
+						if(sendingExpress) {
+							$("#order-send-logistics").show();
+						} else {
+							$("#order-send-logistics").hide();
+						}
 					});
 
 					//获取订单商品

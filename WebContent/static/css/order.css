@@ -38,3 +38,9 @@
 #order-list  a {
 	margin-top: 10px;
 }
+
+.alert-wait {
+	color: #1A7B50;
+    background-color: #B7EAE1;
+    border-color: #93D0CD;
+}

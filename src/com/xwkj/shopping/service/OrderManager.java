@@ -75,4 +75,12 @@ public interface OrderManager {
 	 * @return
 	 */
 	List<OrderBean> searchOrders(boolean payed, boolean timeout, boolean send, boolean receive, String ono, int page, int pageSize);
+	
+	/**
+	 * 发货
+	 * @param oid
+	 * @param logistics
+	 * @return
+	 */
+	void savetLogistics(String oid, String logistics);
 }

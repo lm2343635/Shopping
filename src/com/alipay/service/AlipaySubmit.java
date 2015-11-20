@@ -1,9 +1,13 @@
 package com.alipay.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.httpclient.HttpException;
+import org.apache.commons.httpclient.NameValuePair;
 
 import com.xwkj.common.util.HttpRequestUtil;
 
@@ -127,6 +131,21 @@ public class AlipaySubmit {
     }
 
     /**
+     * MAP类型数组转换成NameValuePair类型
+     * @param properties  MAP类型数组
+     * @return NameValuePair类型数组
+     */
+    private static NameValuePair[] generatNameValuePair(Map<String, String> properties) {
+        NameValuePair[] nameValuePair = new NameValuePair[properties.size()];
+        int i = 0;
+        for (Map.Entry<String, String> entry : properties.entrySet()) {
+            nameValuePair[i++] = new NameValuePair(entry.getKey(), entry.getValue());
+        }
+
+        return nameValuePair;
+    }
+    
+    /**
      * 建立请求，以表单HTML形式构造（默认）
      * @param sParaTemp 请求参数数组
      * @param strMethod 提交方式。两个值可选：post、get
@@ -224,6 +243,34 @@ public class AlipaySubmit {
         sbHtml.append("<input type=\"submit\" value=\"" + "submit" + "\" style=\"display:none;\"></form>");
         sbHtml.append("<script>document.forms['alipaysubmit'].submit();</script>");
         return sbHtml.toString();
+    }
+    
+    public String buildSendGoodRequest(String trade_no, String logistics_name, String invoice_no, String transport_type) throws HttpException, IOException {
+		Map<String, String> sParaTemp = new HashMap<String, String>();
+		sParaTemp.put("service", "send_goods_confirm_by_platform");
+        sParaTemp.put("partner", partner);
+        sParaTemp.put("_input_charset", input_charset);
+		sParaTemp.put("trade_no", trade_no);
+		sParaTemp.put("logistics_name", logistics_name);
+		sParaTemp.put("invoice_no", invoice_no);
+		sParaTemp.put("transport_type", transport_type);
+		//待请求参数数组
+        Map<String, String> sPara = buildRequestPara(sParaTemp);
+
+        HttpProtocolHandler httpProtocolHandler = HttpProtocolHandler.getInstance();
+
+        HttpRequest request = new HttpRequest(HttpResultType.BYTES);
+        //设置编码集
+        request.setCharset(input_charset);
+
+        request.setParameters(generatNameValuePair(sPara));
+        request.setUrl(ALIPAY_GATEWAY_NEW+"_input_charset="+input_charset);
+
+        HttpResponse response = httpProtocolHandler.execute(request, "", "");
+        if (response == null) {
+            return null;
+        }
+        return response.getStringResult();
     }
     
 	/**

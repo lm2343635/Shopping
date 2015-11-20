@@ -9,7 +9,7 @@
         <link href="static/css/bootstrap.min.css" rel="stylesheet">
         <link href="static/css/bootstrap-switch.min.css" rel="stylesheet">
         <link href="static/css/font-awesome.min.css" rel="stylesheet">
-         <link href="static/css/buttons.min.css" rel="stylesheet">
+        <link href="static/css/buttons.min.css" rel="stylesheet">
         <link href="static/css/mengular.css" rel="stylesheet">
         <link href="static/css/jquery.fileupload-ui.css" rel="stylesheet">
         <link href="static/css/jquery.fileupload.css" rel="stylesheet">
@@ -256,10 +256,14 @@
                             </div>  
                         </div>
                     </div>
-                    <div class="modal-body">
+                    <div id="order-send-logistics" class="modal-body">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-truck fa-lg"></i></div>
-                            <input id="order-send-logistics" type="text" class="form-control" placeholder="快递信息（快递公司，单号等）">
+                            <input id="order-send-logistics-company" type="text" class="form-control" placeholder="快递公司名称">
+                        </div>  
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-paper-plane fa-lg"></i></div>
+                            <input id="order-send-logistics-no" type="text" class="form-control" placeholder="快递发货单号">
                         </div>  
                     </div>
                     <div class="modal-footer">
