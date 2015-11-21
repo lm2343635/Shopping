@@ -43,12 +43,14 @@ public class AlipayPayedServlet extends HttpServlet {
 		String notify_id=request.getParameter("notify_id");
 		String trade_no=request.getParameter("trade_no");//支付宝交易号
 		String trade_status=request.getParameter("trade_status");//交易状态
+		String refund_status=request.getParameter("refund_status");//退款状态
 		
 		System.out.println("Received an message for "+ono+" with trade status "+trade_status+" at "+new Date());
 		
 		//支付完成更新支付信息，验证信息是否是由支付宝所发出的请求
 		if(alipaySubmit.notifyVertify(notify_id)) {
 			Order order=orderDao.findByOno(ono);
+			//交易状态
 			switch (trade_status) {
 			//该判断表示买家已在支付宝交易管理中产生了交易记录，但没有付款
 			case "WAIT_BUYER_PAY":
@@ -56,6 +58,7 @@ public class AlipayPayedServlet extends HttpServlet {
 				if(order.getTrade()==null) {
 					order.setTrade(trade_no);
 					orderDao.update(order);
+					response.getWriter().println("success");
 				}
 				break;
 			//该判断表示买家已在支付宝交易管理中产生了交易记录且付款成功，但卖家没有发货
@@ -83,6 +86,7 @@ public class AlipayPayedServlet extends HttpServlet {
 				String url="http://"+sendeeManager.getBookingDomain()+"/UserServlet?task=getTelephone&uid="+order.getSendee().getUid();
 				String telephone=HttpRequestUtil.httpRequest(url);
 				sms.send(telephone, orderManager.getPaySuccessSMSTemplateID(), value);
+				response.getWriter().println("success");
 				break;
 			//该判断表示卖家已经发了货，但买家还没有做确认收货的操作
 			case "WAIT_BUYER_CONFIRM_GOODS":
@@ -91,6 +95,7 @@ public class AlipayPayedServlet extends HttpServlet {
 					order.setSendDate(new Date());
 					orderDao.update(order);
 					System.out.println(ono+" has been sent at "+order.getSendDate());			
+					response.getWriter().println("success");
 				}
 				break;
 			//该判断表示买家已经确认收货，这笔交易完成
@@ -100,11 +105,57 @@ public class AlipayPayedServlet extends HttpServlet {
 					order.setReceiveDate(new Date());
 					orderDao.update(order);
 					System.out.println(ono+" has been received at "+order.getReceiveDate());			
+					response.getWriter().println("success");
 				}	
+				break;
+			//交易中途关闭（已结束，未成功完成）
+			case "TRADE_CLOSED":
+				
 				break;
 			default:
 				break;
 			}
+			//退款状态
+			switch (refund_status) {
+			//退款协议等待卖家确认中
+			case "WAIT_SELLER_AGREE":
+				order.setPayed(false);
+				order.setTimeout(false);
+				order.setSend(true);
+				order.setReceive(true);
+				order.setReturnDate(new Date());
+				orderDao.update(order);
+				System.out.println(ono+" request refund at "+order.getReceiveDate());			
+				response.getWriter().println("success");
+				break;
+			//卖家不同意协议，等待买家修改
+			case "SELLER_REFUSE_BUYER":
+				
+				break;
+			//退款协议达成，等待买家退货
+			case "WAIT_BUYER_RETURN_GOODS":
+				
+				break;
+			//等待卖家收货
+			case "WAIT_SELLER_CONFIRM_GOODS":
+				
+				break;
+			//退款成功
+			case "REFUND_SUCCESS":
+				order.setTimeout(true);
+				orderDao.update(order);
+				System.out.println(ono+" has refunded at "+order.getReceiveDate());			
+				response.getWriter().println("success");
+				break;
+			//退款关闭
+			case "REFUND_CLOSED":
+				
+				break;
+			default:
+				break;
+			}
+		} else {
+			response.getWriter().println("fail");
 		}
 	}
 

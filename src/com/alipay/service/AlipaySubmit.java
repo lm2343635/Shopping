@@ -222,6 +222,7 @@ public class AlipaySubmit {
 		sParaTemp.put("receive_zip", receive_zip);//收货人邮编
 		sParaTemp.put("receive_phone", receive_phone);//收货人电话号码
 		sParaTemp.put("receive_mobile", receive_mobile);//收货人手机号码
+		sParaTemp.put("it_b_pay", it_b_pay+"m"); //支付超时
 		//待请求参数数组
         Map<String, String> sPara = buildRequestPara(sParaTemp);
         List<String> keys = new ArrayList<String>(sPara.keySet());

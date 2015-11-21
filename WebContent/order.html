@@ -89,7 +89,7 @@
 						<h3>订单号：${ono}$</h3>
 						<p>共${count}$件商品，合计${amount}$元，订购于${createDate}$，支付于${payDate}$，等待发货。</p>
 						<a href="pay.html?ono=${ono}$" class="btn btn-info">查看订单</a>
-						<button class="btn btn-primary">申请退货</button>
+						<a href="AlipayServlet?task=pay&ono=${ono}$" class="btn btn-primary">申请退款</a>
 					</div>
 					<div id="${oid}$" class="alert alert-info mengular-template order-sending-template">
 						<input type="hidden" class="order-ono" value="${ono}$">
