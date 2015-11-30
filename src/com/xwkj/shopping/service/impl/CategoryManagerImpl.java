@@ -32,6 +32,7 @@ public class CategoryManagerImpl extends ManagerTemplate implements CategoryMana
 		category.setType(type);
 		category.setCname(cname);
 		category.setCreateDate(new Date());
+		category.setEnable(true);
 		category.setGoods(0);
 		String cid=categoryDao.save(category);
 		if(cid!=null) {
@@ -58,11 +59,13 @@ public class CategoryManagerImpl extends ManagerTemplate implements CategoryMana
 		Icon icon=category.getIcon();
 		categoryDao.delete(category);
 		//删除图标
-		String rootPath=WebContextFactory.get().getServletContext().getRealPath("/");
-		String path=rootPath+PhotoServlet.PHOTO_FOLDER+"/"+type.getTid();
-		File file=new File(path+"/"+icon.getFilename());
-		file.delete();
-		iconDao.delete(icon);
+		if(category.getIcon()!=null) {
+			String rootPath=WebContextFactory.get().getServletContext().getRealPath("/");
+			String path=rootPath+PhotoServlet.PHOTO_FOLDER+"/"+type.getTid();
+			File file=new File(path+"/"+icon.getFilename());
+			file.delete();
+			iconDao.delete(icon);
+		}
 		//更新一级分类
 		type.setCategories(type.getCategories()-1);
 		typeDao.update(type);

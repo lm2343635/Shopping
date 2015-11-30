@@ -30,6 +30,7 @@ public class TypeManagerImpl extends ManagerTemplate implements TypeManager {
 		type.setTname(tname);
 		type.setCreateDate(new Date());
 		type.setCategories(0);
+		type.setEnable(true);
 		return typeDao.save(type);
 	}
 
@@ -49,9 +50,13 @@ public class TypeManagerImpl extends ManagerTemplate implements TypeManager {
 		typeDao.delete(type);
 		String rootPath=WebContextFactory.get().getServletContext().getRealPath("/");
 		String path=rootPath+PhotoServlet.PHOTO_FOLDER+"/"+tid;
-		FileTool.delAllFile(path);
-		FileTool.delFolder(path);
-		iconDao.delete(icon);
+		if(icon!=null||type.getCategories()>0) {
+			FileTool.delAllFile(path);
+			FileTool.delFolder(path);
+		}
+		if(icon!=null) {
+			iconDao.delete(icon);
+		}
 		return true;
 	}
 
