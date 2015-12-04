@@ -28,6 +28,9 @@
 		<create creator="spring" javascript="OrderManager"> 
 			<param name="beanName" value="orderManager"/>
 		</create>
+		<create creator="spring" javascript="CommentManager"> 
+			<param name="beanName" value="commentManager"/>
+		</create>
 		<create creator="spring" javascript="MailManager"> 
 			<param name="beanName" value="mailManager"/>
 		</create>
@@ -41,5 +44,6 @@
 		<convert converter="bean" match="com.xwkj.shopping.bean.UserBean"/> 
 		<convert converter="bean" match="com.xwkj.shopping.bean.BasketBean"/> 
 		<convert converter="bean" match="com.xwkj.shopping.bean.OrderBean"/> 
+		<convert converter="bean" match="com.xwkj.shopping.bean.CommentBean"/> 
 	</allow>
 </dwr>

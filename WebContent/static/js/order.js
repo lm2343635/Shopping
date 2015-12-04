@@ -1,3 +1,7 @@
+var stars=5;
+var writingCommentOid;
+var writingCommentGid;
+
 $(document).ready(function() {
 	$.messager.model = {
 		ok:{ 
@@ -62,7 +66,112 @@ $(document).ready(function() {
 						});
 					});
 				});
+
+				//评论订单
+				$("#"+orders[i].oid+" .order-comment").click(function() {
+					writingCommentOid=$(this).parent().attr("id");
+					BasketManager.getBasketGoodsByOid(writingCommentOid, function(baskets) {
+						$("#order-goods").mengularClear();
+						for(var i in baskets) {
+							var src="static/images/noImage.jpg";
+							if(baskets[i].good.cover!=null) {
+								src="upload/"+baskets[i].good.category.type.tid+"/"+baskets[i].good.cover.filename;
+							}
+							$("#order-goods").mengular(".order-goods-template", {
+								bid: baskets[i].bid,
+								gid: baskets[i].good.gid,
+								src: src,
+								gname: baskets[i].good.gname,
+								count: baskets[i].count
+							});
+
+							$("#"+baskets[i].good.gid).click(function() {
+								writingCommentGid=$(this).attr("id");
+								GoodManager.getGood(writingCommentGid, function(good) {
+									$("#good-comment-gname").text(good.gname);
+								});
+								
+								CommentManager.getCommentByOidAndGid(writingCommentOid, writingCommentGid, function(comment) {
+									if(comment!=null) {
+										stars=comment.stars;
+										for(var i=0; i<5; i++) {
+											if(i<=stars-1) 
+												$("#good-comment-stars i").eq(i).removeClass("fa-star-o").addClass("fa-star");
+											else 
+												$("#good-comment-stars i").eq(i).removeClass("fa-star").addClass("fa-star-o");
+										}
+										$("#good-comment-content").val(comment.content);
+									}
+								});
+
+								$("#order-goods").fadeOut();
+								$("#good-comment-stars, #good-comment-content, #good-comment-submit").fadeIn();
+							});
+						}
+
+						$("#order-comment-modal").modal("show");
+					});
+				});
 			}
 		});
-	})
+	});
+
+	//选择星级
+	$("#good-comment-stars i").each(function(index) {
+		$(this).mouseover(function() {
+			for(var i=0; i<5; i++) {
+				if(i<=index) 
+					$("#good-comment-stars i").eq(i).removeClass("fa-star-o").addClass("fa-star");
+				else 
+					$("#good-comment-stars i").eq(i).removeClass("fa-star").addClass("fa-star-o");
+			}
+		});
+		$(this).mouseout(function() {
+			for(var i=0; i<5; i++) {
+				if(i<=stars-1) 
+					$("#good-comment-stars i").eq(i).removeClass("fa-star-o").addClass("fa-star");
+				else 
+					$("#good-comment-stars i").eq(i).removeClass("fa-star").addClass("fa-star-o");
+			}
+		});
+		$(this).click(function() {
+			for(var i=0; i<5; i++) {
+				if(i<=index) 
+					$("#good-comment-stars i").eq(i).removeClass("fa-star-o").addClass("fa-star");
+				else 
+					$("#good-comment-stars i").eq(i).removeClass("fa-star").addClass("fa-star-o");
+			}
+			stars=index+1;
+		});
+	});
+
+	//提交评论
+	$("#good-comment-submit").click(function() {
+		var content=$("#good-comment-content").val();
+		if(content==null||content=="") {
+			$.messager.popup("请填写评论");
+			return;
+		} 
+		CommentManager.writeComment(writingCommentOid, writingCommentGid, content, stars, function(success) {
+			if(success) {
+				
+				$("#order-comment-modal").modal("hide");
+				$.messager.popup("评论成功，等待审核！");
+			}
+		});
+	});
+
+	$("#order-comment-modal").on("hidden.bs.modal", function() {
+		$("#order-goods").fadeIn();
+		$("#good-comment-stars, #good-comment-content, #good-comment-submit").fadeOut();
+		$("#good-comment-gname").text("");
+		stars=5;
+		for(var i=0; i<5; i++) {
+			if(i<=stars-1) 
+				$("#good-comment-stars i").eq(i).removeClass("fa-star-o").addClass("fa-star");
+			else 
+				$("#good-comment-stars i").eq(i).removeClass("fa-star").addClass("fa-star-o");
+		}
+		$("#good-comment-content").val("");
+	});
 });

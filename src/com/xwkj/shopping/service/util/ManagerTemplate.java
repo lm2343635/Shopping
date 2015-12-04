@@ -2,6 +2,7 @@ package com.xwkj.shopping.service.util;
 
 import com.xwkj.shopping.dao.BasketDao;
 import com.xwkj.shopping.dao.CategoryDao;
+import com.xwkj.shopping.dao.CommentDao;
 import com.xwkj.shopping.dao.GoodDao;
 import com.xwkj.shopping.dao.IconDao;
 import com.xwkj.shopping.dao.OrderDao;
@@ -18,6 +19,7 @@ public class ManagerTemplate {
 	protected PhotoDao photoDao;
 	protected SendeeDao sendeeDao;
 	protected TypeDao typeDao;
+	protected CommentDao commentDao;
 	
 	public BasketDao getBasketDao() {
 		return basketDao;
@@ -66,6 +68,12 @@ public class ManagerTemplate {
 	}
 	public void setTypeDao(TypeDao typeDao) {
 		this.typeDao = typeDao;
+	}
+	public CommentDao getCommentDao() {
+		return commentDao;
+	}
+	public void setCommentDao(CommentDao commentDao) {
+		this.commentDao = commentDao;
 	}
 
 }

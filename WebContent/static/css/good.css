@@ -40,3 +40,13 @@
 	height: 98%;
 	top: 5px;	
 }
+
+#good-comment .panel-heading h2 {
+	font-size: 25px;
+	text-align: center;
+}
+
+#good-comment-list .good-comment-list-template p,
+#good-comment-list .good-comment-list-template hr  {
+	margin: 3px;
+}

@@ -31,6 +31,7 @@ $(document).ready(function() {
 			"good-number": good.number
 		})
 
+		//加载商品图片
 		PhotoManager.getPhotosByGid(gid, function(photos) {
 			if(photos.length==0) {
 				$("#good-photo-list").mengular(".good-photo-list-template", {
@@ -60,9 +61,33 @@ $(document).ready(function() {
 			$("#good-photo-list .mengular-template").remove();
 		});
 
+		//加载商品数量
 		for(var i=1; i<=good.number; i++) {
 			$("<option>").val(i).text("购买"+i+"件").appendTo("#buy-good-count");
 		}
+
+		//加载商品评论
+		CommentManager.getCommentsByGid(gid, function(comments) {
+			$("#good-comment-list").mengularClear();
+			if(comments.length>0)
+				$("#no-good-comment").hide();
+			for(var i in comments) {
+				$("#good-comment-list").mengular(".good-comment-list-template", {
+					cid: comments[i].cid,
+					ono: comments[i].order.ono,
+					commentDate: comments[i].commentDate.format(DATE_HOUR_MINUTE_FORMAT_CN),
+					content: comments[i].content
+				});
+
+				 //加载评分星级
+				 $("#"+comments[i].cid+" .good-comment-stars i").each(function(index) {
+				 	if(index+1<=comments[i].stars)
+				 		$(this).addClass("fa-star");
+				 	else
+				 		$(this).addClass("fa-star-o");
+				 });
+			}
+		});
 	});
 
 	//变更购买数量

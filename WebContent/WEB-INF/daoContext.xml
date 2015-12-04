@@ -28,4 +28,7 @@
 	<bean id="typeDao" class="com.xwkj.shopping.dao.impl.TypeDaoHibernate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="commentDao" class="com.xwkj.shopping.dao.impl.CommentDaoHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 </beans>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.xwkj.shopping.domain">
+	<class name="Comment" table="comment">
+		<id name="cid" column="cid" type="string">
+			<generator class="uuid"/>
+		</id>
+		<property name="stars"  type="integer"/>
+		<property name="content" type="text"/>
+		<property name="commentDate" type="java.util.Date"/>	
+		<property name="enable" type="boolean" not-null="true"/>
+		<many-to-one name="order" column="oid" class="Order" not-null="true" lazy="false"/>
+		<many-to-one name="good" column="gid" class="Good" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>

@@ -44,3 +44,13 @@
     background-color: #B7EAE1;
     border-color: #93D0CD;
 }
+
+#order-goods img {
+	width: 100%;
+}
+
+#good-comment-stars,
+#good-comment-content,
+#good-comment-submit {
+	display: none;
+}

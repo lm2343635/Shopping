@@ -259,7 +259,13 @@ function searchOrders(ono, page) {
 	});
 }
 
-function setOrderGoods(oid,selector, template) {
+/**
+ * 加载订单商品
+ * @param oid 订单id
+ * @param selector div选择器
+ * @param template mengluar模板
+ */
+function setOrderGoods(oid, selector, template) {
 	BasketManager.getBasketGoodsByOid(oid, function(baskets) {
 		$(selector).mengularClear();
 		for(var i in baskets) {

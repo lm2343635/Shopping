@@ -83,4 +83,5 @@ public interface OrderManager {
 	 * @return
 	 */
 	void savetLogistics(String oid, String logistics);
+
 }

@@ -25,6 +25,8 @@
         <script src="dwr/interface/SendeeManager.js"></script>
         <script src="dwr/interface/BasketManager.js"></script>
         <script src="dwr/interface/OrderManager.js"></script>
+        <script src="dwr/interface/GoodManager.js"></script>
+        <script src="dwr/interface/CommentManager.js"></script>
         <script src="static/js/tools.js"></script>
 		<script src="static/js/order.js"></script>
 	</head>
@@ -115,6 +117,7 @@
 						<p>该订单已于${sendDate}$发货，于${receiveDate}$收货。</p>
 						<a href="pay.html?ono=${ono}$" class="btn btn-info">查看订单</a>
 						<button class="btn btn-primary">申请退货</button>
+						<button class="btn btn-warning order-comment">评论订单</button>
 					</div>
 				</div>
 				<div id="no-order" class="jumbotron">
@@ -134,5 +137,47 @@
 			</div>
 		</div>
 		<div id="foot"></div>
+		<!-- 评论订单 -->
+		<div id="order-comment-modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="glyphicon glyphicon-remove pull-right" data-dismiss="modal"></span>
+                        <h4 class="modal-title">请选择一件商品评论</h4>
+                    </div>
+                    <div class="modal-body">
+						<div id="order-goods" class="list-group">
+	                        <div id="${bid}$" class="list-group-item mengular-template order-goods-template">
+	                            <div class="row">
+	                                <div class="col-xs-12 col-md-1">
+	                                    <a href="good.html?gid=${gid}$" target="_blank">
+	                                        <img class="img-circle" src="${src}$" alt="${gname}$">
+	                                    </a>
+	                                </div>
+	                                <div class="col-xs-12 col-md-7">
+	                                    <a href="good.html?gid=${gid}$" target="_blank">${gname}$</a>
+	                                </div>
+	                                <div class="col-xs-6 col-md-2">${count}$件</div>
+	                                <div class="col-xs-6 col-md-2"><button id="${gid}$" class="btn btn-warning btn-xs">评论商品</button></div>
+	                            </div>  
+	                        </div>
+	                    </div>
+	                    <h2 id="good-comment-gname" class="text-success text-center"></h2>
+	                    <h1 id="good-comment-stars" class="text-danger text-center">
+	                        <i class="fa fa-star"></i>
+	                        <i class="fa fa-star"></i>
+	                        <i class="fa fa-star"></i>
+	                        <i class="fa fa-star"></i>
+	                        <i class="fa fa-star"></i>
+						</h1>
+	                    <textarea id="good-comment-content" class="form-control" placeholder="评论订单内容" rows="5"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+                        <button id="good-comment-submit" class="btn btn-success pull-right">提交评论</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 	</body>
 </html>
