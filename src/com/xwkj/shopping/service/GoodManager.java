@@ -22,7 +22,7 @@ public interface GoodManager {
 	 * @param descriptor
 	 * @return
 	 */
-	String addGood(String cid, String gname, double price, int number, String descriptor);
+	String addGood(String cid, String gname, double price, int number, String descriptor, String taobao);
 	
 	/**
 	 * 修改商品
@@ -32,7 +32,7 @@ public interface GoodManager {
 	 * @param number
 	 * @param descriptor
 	 */
-	void modifyGood(String gid, String gname, double price, int number, String descriptor);
+	void modifyGood(String gid, String gname, double price, int number, String descriptor, String taoboa);
 	
 	/**
 	 * 增加商品数量

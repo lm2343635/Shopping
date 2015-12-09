@@ -31,6 +31,8 @@ $(document).ready(function() {
 			"good-number": good.number
 		})
 
+		$("#buy-good-taobao").attr("href", good.taobao);
+
 		//加载商品图片
 		PhotoManager.getPhotosByGid(gid, function(photos) {
 			if(photos.length==0) {

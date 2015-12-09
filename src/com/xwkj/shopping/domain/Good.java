@@ -14,6 +14,7 @@ public class Good implements Serializable {
 	private Double price;
 	private Integer number;
 	private String descriptor;
+	private String taobao;
 	private Integer sold;
 	private Date createDate;
 	private Category category;
@@ -85,6 +86,12 @@ public class Good implements Serializable {
 	}
 	public void setEnable(Boolean enable) {
 		this.enable = enable;
+	}
+	public String getTaobao() {
+		return taobao;
+	}
+	public void setTaobao(String taobao) {
+		this.taobao = taobao;
 	}
 
 }

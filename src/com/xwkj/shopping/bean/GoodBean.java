@@ -11,6 +11,7 @@ public class GoodBean {
 	private double price;
 	private int number;
 	private String descriptor;
+	private String taobao;
 	private int sold;
 	private Date createDate;
 	private CategoryBean category;
@@ -76,6 +77,12 @@ public class GoodBean {
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
+	public String getTaobao() {
+		return taobao;
+	}
+	public void setTaobao(String taobao) {
+		this.taobao = taobao;
+	}
 	
 	public GoodBean(Good good) {
 		super();
@@ -85,6 +92,7 @@ public class GoodBean {
 		this.price = good.getPrice();
 		this.number = good.getNumber();
 		this.descriptor = good.getDescriptor();
+		this.taobao = good.getTaobao();
 		this.sold = good.getSold();
 		this.createDate = good.getCreateDate();
 		this.category = new CategoryBean(good.getCategory());

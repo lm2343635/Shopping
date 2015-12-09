@@ -33,6 +33,7 @@ $(document).ready(function() {
 		var price=$("#add-good-price").val();
 		var number=$("#add-good-number").val();
 		var descriptor=$("#add-good-descriptor").val();
+		var taobao=$("#add-good-taobao").val();
 		var validate=true;
 		if(gname==""||gname==null) {
 			validate=false;
@@ -58,8 +59,14 @@ $(document).ready(function() {
 		} else {
 			$("#add-good-descriptor").parent().removeClass("has-error");
 		}
+		if(taobao==""||taobao==null) {
+			validate=false;
+			$("#add-good-taobao").parent().addClass("has-error");
+		} else {
+			$("#add-good-taobao").parent().removeClass("has-error");
+		}
 		if(validate) {
-			GoodManager.addGood(cid, gname, price, number, descriptor, function(gid) {
+			GoodManager.addGood(cid, gname, price, number, descriptor, taobao, function(gid) {
 				if(gid!=null) {
 					$("#add-good-modal").modal("hide");
 					loadGoods();
@@ -79,6 +86,7 @@ $(document).ready(function() {
 		var price=$("#modify-good-price").val();
 		var number=$("#modify-good-number").val();
 		var descriptor=$("#modify-good-descriptor").val();
+		var taobao=$("#modify-good-taobao").val();
 		var validate=true;
 		if(gname==""||gname==null) {
 			validate=false;
@@ -104,8 +112,14 @@ $(document).ready(function() {
 		} else {
 			$("#modify-good-descriptor").parent().removeClass("has-error");
 		}
+		if(taobao==""||taobao==null) {
+			validate=false;
+			$("#modify-good-taobao").parent().addClass("has-error");
+		} else {
+			$("#modify-good-taobao").parent().removeClass("has-error");
+		}
 		if(validate) {
-			GoodManager.modifyGood(modifyingGid, gname, price, number, descriptor, function() {
+			GoodManager.modifyGood(modifyingGid, gname, price, number, descriptor, taobao, function() {
 				$("#modify-good-modal").modal("hide");
 				loadGoods();
 			});
@@ -157,6 +171,7 @@ function loadGoods() {
 						"modify-good-price": good.price,
 						"modify-good-number": good.number,
 						"modify-good-descriptor": good.descriptor,
+						"modify-good-taobao": good.taobao
 					});
 
 					//加载照片

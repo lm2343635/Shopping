@@ -27,7 +27,7 @@ public class GoodManagerImpl extends ManagerTemplate implements GoodManager {
 	}
 
 	@Override
-	public String addGood(String cid, String gname, double price, int number, String descriptor) {
+	public String addGood(String cid, String gname, double price, int number, String descriptor, String taobao) {
 		Good good=new Good();
 		Category category=categoryDao.get(cid);
 		good.setCategory(category);
@@ -38,6 +38,7 @@ public class GoodManagerImpl extends ManagerTemplate implements GoodManager {
 		good.setDescriptor(descriptor);
 		good.setCreateDate(new Date());
 		good.setSold(0);
+		good.setTaobao(taobao);
 		String gid=goodDao.save(good);
 		if(gid!=null) {
 			category.setGoods(category.getGoods()+1);
@@ -48,12 +49,13 @@ public class GoodManagerImpl extends ManagerTemplate implements GoodManager {
 	}
 
 	@Override
-	public void modifyGood(String gid, String gname, double price, int number, String descriptor) {
+	public void modifyGood(String gid, String gname, double price, int number, String descriptor, String taobao) {
 		Good good=goodDao.get(gid);
 		good.setGname(gname);;
 		good.setPrice(price);
 		good.setNumber(number);
 		good.setDescriptor(descriptor);
+		good.setTaobao(taobao);
 		goodDao.update(good);
 	}
 

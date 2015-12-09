@@ -10,8 +10,8 @@ $(document).ready(function() {
 			"search-good": gname
 		});
 	} else  {
-		//加载销量最好的12件商品
-		GoodManager.getHotestGoodsWithLimit(12, function(goods) {
+		//加载销量最好的18件商品
+		GoodManager.getHotestGoodsWithLimit(18, function(goods) {
 			loadGoods(goods);
 		});
 	}
