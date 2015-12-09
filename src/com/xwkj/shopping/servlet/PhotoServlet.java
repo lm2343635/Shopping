@@ -344,15 +344,19 @@ public class PhotoServlet extends HttpServlet
 			List<Category> categories=categoryDao.findByType(type, false);
 			for(File file: files.listFiles()) {
 				boolean exist=false;
-				if(type.getIcon().getFilename().equals(file.getName())) {
-					exist=true;
+				if(type.getIcon()!=null) {
+					if(type.getIcon().getFilename().equals(file.getName())) {
+						exist=true;
+					}
 				}
 				if(!exist) {
 					for(Category category: categories) {
-						if(category.getIcon().getFilename().equals(file.getName())) {
-							exist=true;
-							categories.remove(category);
-							break;
+						if(category.getIcon()!=null) {
+							if(category.getIcon().getFilename().equals(file.getName())) {
+								exist=true;
+								categories.remove(category);
+								break;
+							}
 						}
 					}
 				}
