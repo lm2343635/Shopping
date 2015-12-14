@@ -102,10 +102,11 @@
 								<h4 class="text-muted">商品单价：￥<span id="good-price"></span>元</h4>
 								<h4 class="text-muted">库存数量：<span id="good-number"></span>件</h4>
 		                        <div class="input-group">
-		                            <span class="input-group-addon form-icon"><i class="fa fa-list-ol fa-lg"></i></span>
-		                            <select id="buy-good-count" class="form-control input-lg">
-		                            	<option value="0" selected>请选择购买件数</option>
-		                            </select>
+		                            <span class="input-group-addon form-icon">购买</span>
+		                            <span id="buy-good-count-minus" class="input-group-addon form-icon"><i class="fa fa-minus fa-lg"></i></span>
+		                            <input id="buy-good-count" class="form-control input-lg" value="0">
+		                            <span id="buy-good-count-plus" class="input-group-addon form-icon"><i class="fa fa-plus fa-lg"></i></span>
+		                            <span class="input-group-addon form-icon">件</span>
 		                        </div>
 		                        <h4 class="text-muted">共<strong id="buy-good-number" class="text-success">0</strong>件，合计￥<strong id="buy-good-amount" class="text-success">0</strong>元。</h4>
 		                        <button id="buy-good-cart" class="btn btn-lg btn-danger btn-block" disabled>加入购物车</button>

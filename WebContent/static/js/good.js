@@ -63,11 +63,6 @@ $(document).ready(function() {
 			$("#good-photo-list .mengular-template").remove();
 		});
 
-		//加载商品数量
-		for(var i=1; i<=good.number; i++) {
-			$("<option>").val(i).text("购买"+i+"件").appendTo("#buy-good-count");
-		}
-
 		//加载商品评论
 		CommentManager.getCommentsByGid(gid, function(comments) {
 			$("#good-comment-list").mengularClear();
@@ -95,6 +90,16 @@ $(document).ready(function() {
 	//变更购买数量
 	$("#buy-good-count").change(function() {
 		var number=$("#buy-good-count").val();
+		if(!isInteger(number)||number<0) {
+			$.messager.popup("请填写一个正整数！");
+			$(this).val(0);
+			return;
+		}
+		if(number>_good.number) {
+			$.messager.popup("超过库存数量！");
+			$(this).val(0);
+			return;
+		}
 		if(number==0) {
 			$.messager.popup("至少选择一件商品！");
 			$("#buy-good-cart").attr("disabled", "disabled");
@@ -106,8 +111,24 @@ $(document).ready(function() {
 			});
 			$("#buy-good-cart").removeAttr("disabled", "disabled");
 		}
-			
-		
+	});
+
+	$("#buy-good-count-minus").click(function() {
+		var number=parseInt($("#buy-good-count").val());
+		if(number==0) {
+			return;
+		}
+		number-=1;
+		$("#buy-good-count").val(number).change();
+	});
+
+	$("#buy-good-count-plus").click(function() {
+		var number=parseInt($("#buy-good-count").val());
+		if(number==_good.number) {
+			return;
+		}
+		number+=1;
+		$("#buy-good-count").val(number).change();
 	});
 
 	//加入购物车
