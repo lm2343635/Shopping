@@ -46,7 +46,7 @@ $(document).ready(function() {
 					oid: orders[i].oid,
 					ono: orders[i].ono,
 					count: orders[i].count,
-					amount: orders[i].amount,
+					amount: (orders[i].amount).toFixed(2),
 					createDate: orders[i].createDate.format(DATE_HOUR_MINUTE_FORMAT_CN),
 					payDate: orders[i].payDate==null? null: orders[i].payDate.format(DATE_HOUR_MINUTE_FORMAT_CN),
 					sendDate: orders[i].sendDate==null? null: orders[i].sendDate.format(DATE_HOUR_MINUTE_FORMAT_CN),
