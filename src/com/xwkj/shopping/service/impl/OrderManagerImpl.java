@@ -1,5 +1,6 @@
 package com.xwkj.shopping.service.impl;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -145,7 +146,7 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 				+ "&#ono#="+ order.getOno()
 				+ "&#goods#="+ baskets.size()
 				+ "&#count#="+ order.getCount()
-				+ "&#amount#="+ order.getAmount()
+				+ "&#amount#="+ (new DecimalFormat("#.00").format(order.getAmount()))
 				+ "&#express#="+ (express? ExpressTure: ExpressFalse)
 				+ "&#sendee#="+ (express? name+"，"+telephone+"，"+address: " ")
 				+ "&#hour#="+ (PayTimeOut/60);
@@ -225,5 +226,5 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 		}
 		orderDao.update(order);
 	}
-
+	
 }

@@ -1,6 +1,7 @@
 package com.xwkj.shopping.servlet;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -80,7 +81,7 @@ public class AlipayPayedServlet extends HttpServlet {
 				SMSService sms=(SMSService)context.getBean("SMSService");
 				String value="#ono#="+ order.getOno()
 						+ "&#payDate#="+ DateTool.formatDate(new Date(), DateTool.DATE_HOUR_MINUTE_FORMAT_CN)
-						+ "&#amount#="+ order.getAmount();
+						+ "&#amount#="+ (new DecimalFormat("#.00").format(order.getAmount()));
 				SendeeManager sendeeManager=(SendeeManager)context.getBean("sendeeManager");
 				OrderManager orderManager=(OrderManager)context.getBean("orderManager");
 				String url="http://"+sendeeManager.getBookingDomain()+"/UserServlet?task=getTelephone&uid="+order.getSendee().getUid();

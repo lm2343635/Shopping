@@ -31,7 +31,7 @@ $(document).ready(function() {
 		fillText({
 			"pay-ono": order.ono,
 			"pay-count": order.count,
-			"pay-amount": order.amount,
+			"pay-amount": order.amount.toFixed(2),
 		});
 		$("#alipay-submit").attr("href","AlipayServlet?task=pay&ono="+ono);
 		BasketManager.getBasketGoodsByOid(order.oid, function(baskets) {
@@ -45,7 +45,7 @@ $(document).ready(function() {
 					src: src,
 					gid: baskets[i].good.gid,
 					gname: baskets[i].good.gname,
-					amount: baskets[i].count*baskets[i].good.price,
+					amount: (baskets[i].count*baskets[i].good.price).toFixed(2),
 					price: baskets[i].good.price,
 					count: baskets[i].count
 				});

@@ -40,7 +40,7 @@ $(document).ready(function() {
 					src: src,
 					gid: baskets[i].good.gid,
 					gname: baskets[i].good.gname,
-					amount: baskets[i].count*baskets[i].good.price,
+					amount: (baskets[i].count*baskets[i].good.price).toFixed(2),
 					price: baskets[i].good.price,
 					count: baskets[i].count
 				});
@@ -49,7 +49,7 @@ $(document).ready(function() {
 			fillText({
 				"account-goods": goods,
 				"account-count": accountCount,
-				"account-amount": accountAmount
+				"account-amount": accountAmount.toFixed(2)
 			});
 		});
 
@@ -109,7 +109,7 @@ $(document).ready(function() {
 			$.messager.popup("请正确填写收货人信息！");
 		} else {
 			var message="订单信息<br>"+
-				"共"+goods+"种商品， "+accountCount+"件， 合计￥"+accountAmount+"元<br><br>"+
+				"共"+goods+"种商品， "+accountCount+"件， 合计￥"+accountAmount.toFixed(2)+"元<br><br>"+
 				"配送信息<br>"+
 				"配送方式："+ (express? "快递包邮": "用户自取")+"<br>";
 			if(express) {

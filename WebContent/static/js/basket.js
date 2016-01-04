@@ -49,7 +49,7 @@ $(document).ready(function() {
 					number: baskets[i].good.number,
 					cname: baskets[i].good.category.cname,
 					tname: baskets[i].good.category.type.tname,
-					amount: baskets[i].count*baskets[i].good.price,
+					amount: (baskets[i].count*baskets[i].good.price).toFixed(2),
 					price: baskets[i].good.price
 				});
 
@@ -66,12 +66,12 @@ $(document).ready(function() {
 					var count=$(this).val();
 					var bid=$(this).parent().parent().parent().parent().parent().attr("id");
 					BasketManager.changeCount(bid, count, function(data) {
-						$("#"+bid+" .buy-good-amount").text(data.amount);
+						$("#"+bid+" .buy-good-amount").text(data.amount.toFixed(2));
 						accountCount+=data.dcount;
 						accountAmount+=data.damount;
 						fillText({
 							"account-count": accountCount,
-							"account-amount": accountAmount
+							"account-amount": accountAmount.toFixed(2)
 						});
 					});
 				});
@@ -89,7 +89,7 @@ $(document).ready(function() {
 							accountAmount-=amount;
 							fillText({
 								"account-count": accountCount,
-								"account-amount": accountAmount
+								"account-amount": accountAmount.toFixed(2)
 							});
 							if(accountCount==0) {
 								$("#account-div").hide();
@@ -102,7 +102,7 @@ $(document).ready(function() {
 			fillText({
 				"account-goods": baskets.length,
 				"account-count": accountCount,
-				"account-amount": accountAmount
+				"account-amount": accountAmount.toFixed(2)
 			});
 		});
 	});

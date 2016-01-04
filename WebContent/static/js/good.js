@@ -104,7 +104,7 @@ $(document).ready(function() {
 			$.messager.popup("至少选择一件商品！");
 			$("#buy-good-cart").attr("disabled", "disabled");
 		} else {
-			var amount=number*_good.price;
+			var amount=(number*_good.price).toFixed(2);
 			fillText({
 				"buy-good-number": number,
 				"buy-good-amount": amount
