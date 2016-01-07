@@ -157,7 +157,7 @@ function searchOrders(ono, page) {
 				oid: orders[i].oid,
 				ono: orders[i].ono,
 				date: date,
-				amount: orders[i].amount,
+				amount: orders[i].amount.toFixed(2),
 				name: orders[i].name==null? "无": orders[i].name,
 				express: orders[i].express? "快递包邮": "用户自提",
 				task: task

@@ -1,6 +1,6 @@
 package com.xwkj.shopping.service.impl;
 
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -109,7 +109,7 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 		order.setCreateDate(new Date());
 		order.setExpress(express);
 		order.setCount(count);
-		order.setAmount(amount);
+		order.setAmount((new BigDecimal(amount)).setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue());
 		order.setPayed(false);
 		order.setTimeout(false);
 		order.setSend(false);
@@ -146,7 +146,7 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 				+ "&#ono#="+ order.getOno()
 				+ "&#goods#="+ baskets.size()
 				+ "&#count#="+ order.getCount()
-				+ "&#amount#="+ (new DecimalFormat("#.00").format(order.getAmount()))
+				+ "&#amount#="+ order.getAmount()
 				+ "&#express#="+ (express? ExpressTure: ExpressFalse)
 				+ "&#sendee#="+ (express? name+"，"+telephone+"，"+address: " ")
 				+ "&#hour#="+ (PayTimeOut/60);
