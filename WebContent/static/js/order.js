@@ -37,6 +37,8 @@ $(document).ready(function() {
 					template=".order-wait-template";
 				} else if(orders[i].payed&&!orders[i].timeout&&orders[i].send&&!orders[i].receive) { //已发货
 					template=".order-sending-template";
+				} else if(orders[i].payed&&orders[i].timeout&&!orders[i].send&&!orders[i].receive) {//待退款
+					template=".order-return-template";
 				} else if(orders[i].payed&&!orders[i].timeout&&orders[i].send&&orders[i].receive) { //已完成
 					template=".order-finish-template";
 				} else if(!orders[i].payed&&orders[i].timeout&&!orders[i].send&&!orders[i].receive) {//未付款
@@ -51,6 +53,7 @@ $(document).ready(function() {
 					payDate: orders[i].payDate==null? null: orders[i].payDate.format(DATE_HOUR_MINUTE_FORMAT_CN),
 					sendDate: orders[i].sendDate==null? null: orders[i].sendDate.format(DATE_HOUR_MINUTE_FORMAT_CN),
 					receiveDate: orders[i].receiveDate==null? null: orders[i].receiveDate.format(DATE_HOUR_MINUTE_FORMAT_CN),
+					returnDate: orders[i].returnDate==null? null: orders[i].returnDate.format(DATE_HOUR_MINUTE_FORMAT_CN),
 					logistics: orders[i].logistics
 				});
 

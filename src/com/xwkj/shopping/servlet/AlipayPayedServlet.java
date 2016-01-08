@@ -120,10 +120,10 @@ public class AlipayPayedServlet extends HttpServlet {
 			switch (refund_status) {
 			//退款协议等待卖家确认中
 			case "WAIT_SELLER_AGREE":
-				order.setPayed(false);
-				order.setTimeout(false);
-				order.setSend(true);
-				order.setReceive(true);
+				order.setPayed(true);
+				order.setTimeout(true);
+				order.setSend(false);
+				order.setReceive(false);
 				order.setReturnDate(new Date());
 				orderDao.update(order);
 				System.out.println(ono+" request refund at "+order.getReceiveDate());			

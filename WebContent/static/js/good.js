@@ -137,7 +137,8 @@ $(document).ready(function() {
 		var id=	$(this).attr("id");
 		checkSession(function(user) {
 			if(user==null) {
-				$.messager.popup("请先登录！");
+//				$.messager.popup("请先登录！");
+				$("#user-login-modal").modal("show");
 				return;
 			}
 			if(number>0) {

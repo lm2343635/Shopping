@@ -233,7 +233,10 @@ function searchOrders(ono, page) {
 				} 
 				//退款操作
 				else if(type==3) {
-					$("#order-return-modal").modal("show");
+					OrderManager.getOrder(oid, function(order) {
+						$("#order-return-modal a").attr("href", "https://lab.alipay.com/consume/queryTradeDetail.htm?tradeNo="+order.trade);
+						$("#order-return-modal").modal("show");
+					});
 				}
 				//无操作
 				else {
