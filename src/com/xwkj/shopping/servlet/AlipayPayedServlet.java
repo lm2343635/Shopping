@@ -38,8 +38,11 @@ public class AlipayPayedServlet extends HttpServlet {
 		WebApplicationContext context=WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		ManagerTemplate managerTemplate=(ManagerTemplate)context.getBean("managerTemplate");
 		OrderDao orderDao=managerTemplate.getOrderDao();
+		SendeeManager sendeeManager=(SendeeManager)context.getBean("sendeeManager");
+		OrderManager orderManager=(OrderManager)context.getBean("orderManager");
+		SMSService sms=(SMSService)context.getBean("SMSService");
+		
 		AlipaySubmit alipaySubmit=(AlipaySubmit)context.getBean("AlipaySubmit");
-
 		String ono=request.getParameter("out_trade_no");
 		String notify_id=request.getParameter("notify_id");
 		String trade_no=request.getParameter("trade_no");//支付宝交易号
@@ -51,6 +54,8 @@ public class AlipayPayedServlet extends HttpServlet {
 		//支付完成更新支付信息，验证信息是否是由支付宝所发出的请求
 		if(alipaySubmit.notifyVertify(notify_id)) {
 			Order order=orderDao.findByOno(ono);
+			String url="http://"+sendeeManager.getBookingDomain()+"/UserServlet?task=getTelephone&uid="+order.getSendee().getUid();
+			String telephone=HttpRequestUtil.httpRequest(url);
 			//交易状态
 			switch (trade_status) {
 			//该判断表示买家已在支付宝交易管理中产生了交易记录，但没有付款
@@ -78,14 +83,10 @@ public class AlipayPayedServlet extends HttpServlet {
 					managerTemplate.getGoodDao().update(good);
 				}
 				//发送短息通知用户支付成功
-				SMSService sms=(SMSService)context.getBean("SMSService");
 				String value="#ono#="+ order.getOno()
 						+ "&#payDate#="+ DateTool.formatDate(new Date(), DateTool.DATE_HOUR_MINUTE_FORMAT_CN)
 						+ "&#amount#="+ (new DecimalFormat("#.00").format(order.getAmount()));
-				SendeeManager sendeeManager=(SendeeManager)context.getBean("sendeeManager");
-				OrderManager orderManager=(OrderManager)context.getBean("orderManager");
-				String url="http://"+sendeeManager.getBookingDomain()+"/UserServlet?task=getTelephone&uid="+order.getSendee().getUid();
-				String telephone=HttpRequestUtil.httpRequest(url);
+
 				sms.send(telephone, orderManager.getPaySuccessSMSTemplateID(), value);
 				response.getWriter().println("success");
 				break;
@@ -120,32 +121,41 @@ public class AlipayPayedServlet extends HttpServlet {
 			switch (refund_status) {
 			//退款协议等待卖家确认中
 			case "WAIT_SELLER_AGREE":
-				order.setPayed(true);
 				order.setTimeout(true);
-				order.setSend(false);
-				order.setReceive(false);
 				order.setReturnDate(new Date());
 				orderDao.update(order);
-				System.out.println(ono+" request refund at "+order.getReceiveDate());			
+				System.out.println();			
 				response.getWriter().println("success");
 				break;
 			//卖家不同意协议，等待买家修改
 			case "SELLER_REFUSE_BUYER":
-				
+				order.setTimeout(false);
+				orderDao.update(order);
+				//发送短息通知用户退款失败
+				sms.send(telephone, orderManager.getRefundFailedSMSTemplateID(), "#ono#="+ order.getOno());
+				System.out.println(ono+"'s refund was rejected at "+(new Date()));
+				response.getWriter().println("success");
 				break;
 			//退款协议达成，等待买家退货
 			case "WAIT_BUYER_RETURN_GOODS":
-				
+				//此处通知买家发货给卖家
+				//您的订单#ono#退款已被受理，请将商品邮寄至指定地址（点击我的订单->退款查询登录支付宝页面查看指定退货地址），收到退货商品后，将会再次与您联系。详情咨询九资游客服：0713-5077888。
 				break;
 			//等待卖家收货
 			case "WAIT_SELLER_CONFIRM_GOODS":
-				
+				//通知买家发货成功
 				break;
 			//退款成功
 			case "REFUND_SUCCESS":
-				order.setTimeout(true);
+				order.setPayed(false);
+				order.setSend(false);
 				orderDao.update(order);
 				System.out.println(ono+" has refunded at "+order.getReceiveDate());			
+				//发送短息通知用户退款成功
+				String value="#ono#="+ order.getOno()
+					+"&#date#="+ DateTool.formatDate(new Date(), DateTool.DATE_HOUR_MINUTE_FORMAT_CN);
+				sms.send(telephone, orderManager.getRefundSuccessSMSTemplateID(), value);
+				System.out.println(ono+"'s refund was rejected at "+(new Date()));
 				response.getWriter().println("success");
 				break;
 			//退款关闭

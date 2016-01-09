@@ -37,7 +37,7 @@ $(document).ready(function() {
 					template=".order-wait-template";
 				} else if(orders[i].payed&&!orders[i].timeout&&orders[i].send&&!orders[i].receive) { //已发货
 					template=".order-sending-template";
-				} else if(orders[i].payed&&orders[i].timeout&&!orders[i].send&&!orders[i].receive) {//待退款
+				} else if(orders[i].payed&&orders[i].timeout&&!orders[i].receive) {//待退款
 					template=".order-return-template";
 				} else if(orders[i].payed&&!orders[i].timeout&&orders[i].send&&orders[i].receive) { //已完成
 					template=".order-finish-template";

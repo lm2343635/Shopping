@@ -107,7 +107,7 @@ function searchOrders(ono, page) {
 		timeout=false;
 	} else if(type==3) {
 		payed=timeout=true;
-		send=receive=false;
+		receive=false;
 	} else if(type==4) {
 		payed=send=receive=timeout=false;
 	} else if(type==5) {

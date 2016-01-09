@@ -9,8 +9,9 @@ import com.xwkj.shopping.bean.UserBean;
 public interface OrderManager {
 	
 	int getPayTimeOut();
-	
 	int getPaySuccessSMSTemplateID();
+	int getRefundFailedSMSTemplateID();
+	int getRefundSuccessSMSTemplateID();
 	
 	/**
 	 * 新增订单

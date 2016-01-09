@@ -31,11 +31,15 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 	private String ExpressFalse;
 	//支付超时时长
 	private int PayTimeOut;
-	//订房成功发送短信模板id
+	//创建订单成功发送短信模板id
 	private int OrderSuccessSMSTemplateID;
 	//付款成功发送短信模板id
 	private int PaySuccessSMSTemplateID;
-
+	//退款失败发送短信模板id
+	private int RefundFailedSMSTemplateID;
+	//退款成功发送短信模板id
+	private int RefundSuccessSMSTemplateID;
+	
 	public String getExpressTure() {
 		return ExpressTure;
 	}
@@ -74,6 +78,22 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 
 	public void setPaySuccessSMSTemplateID(int paySuccessSMSTemplateID) {
 		PaySuccessSMSTemplateID = paySuccessSMSTemplateID;
+	}
+
+	public int getRefundFailedSMSTemplateID() {
+		return RefundFailedSMSTemplateID;
+	}
+
+	public int getRefundSuccessSMSTemplateID() {
+		return RefundSuccessSMSTemplateID;
+	}
+
+	public void setRefundFailedSMSTemplateID(int refundFailedSMSTemplateID) {
+		RefundFailedSMSTemplateID = refundFailedSMSTemplateID;
+	}
+
+	public void setRefundSuccessSMSTemplateID(int refundSuccessSMSTemplateID) {
+		RefundSuccessSMSTemplateID = refundSuccessSMSTemplateID;
 	}
 
 	@Override

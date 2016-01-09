@@ -60,16 +60,27 @@ public class OrderDaoHibernate extends PageHibernateDaoSupport implements OrderD
 
 	@Override
 	public int getOrdersCount(boolean payed, boolean timeout, boolean send, boolean receive, String ono) {
-		String hql="select count(*) from Order where payed=? and timeout=? and send=? and receive=? and ono like ?";
+		String hql="select count(*) from Order where payed=? and timeout=? ";
+		//非退款状态
+		if(!(payed&&timeout&&!receive))
+			hql+=" and send=? ";
+		hql+=" and receive=? and ono like ?";
+		final String _hql=hql;
 		return getHibernateTemplate().execute(new HibernateCallback<Long>() {
 			@Override
 			public Long doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query=session.createQuery(hql);
+				Query query=session.createQuery(_hql);
 				query.setParameter(0, payed);
 				query.setParameter(1, timeout);
-				query.setParameter(2, send);
-				query.setParameter(3, receive);
-				query.setParameter(4, "%"+ono+"%");
+				//退款状态
+				if(payed&&timeout&&!receive) {
+					query.setParameter(2, receive);
+					query.setParameter(3, "%"+ono+"%");
+				} else {
+					query.setParameter(2, send);
+					query.setParameter(3, receive);
+					query.setParameter(4, "%"+ono+"%");
+				}
 				return (long)query.uniqueResult();
 			}
 		}).intValue();
@@ -78,21 +89,28 @@ public class OrderDaoHibernate extends PageHibernateDaoSupport implements OrderD
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Order> findOrders(boolean payed, boolean timeout, boolean send, boolean receive, String ono, int offset, int pageSize) {
-		String hql="from Order where payed=? and timeout=? and send=? and receive=? and ono like ?";
+		String hql="from Order where payed=? and timeout=? ";
+		Object [] objs=new Object[] {payed, timeout, receive, "%"+ono+"%"};
+		//非退款状态
+		if(!(payed&&timeout&&!receive)) {
+			hql+=" and send=?";
+			objs=new Object[] {payed, timeout, send, receive, "%"+ono+"%"};
+		}
+		hql+=" and receive=? and ono like ?";
 		if(payed&&!timeout&&!send&&!receive) { //待发货
 			hql+=" order by payDate desc";
 		} else if(payed&&!timeout&&send&&!receive) { //已发货
 			hql+=" order by sendDate desc";
 		} else if(payed&&!timeout&&send&&receive) { //已完成
 			hql+=" order by receiveDate desc";
-		} else if(!payed&&!timeout&&send&&receive) { //待退款
+		} else if(payed&&timeout&&!receive) { //待退款
 			hql+=" order by returnDate desc";
 		} else if(!payed&&!timeout&&!send&&!receive) { //待付款
 			hql+=" order by createDate desc";
 		} else if(!payed&&timeout&&!send&&!receive) { //未付款
 			hql+=" order by createDate desc";
 		}
-		return findByPage(hql, new Object[]{payed, timeout, send, receive, "%"+ono+"%"}, offset, pageSize);
+		return findByPage(hql, objs, offset, pageSize);
 	}
 
 }
