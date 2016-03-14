@@ -300,14 +300,12 @@ public class PhotoServlet extends HttpServlet
 	 * @param response
 	 * @throws UnsupportedEncodingException
 	 */
-	private void download(String filePath,String fileName,HttpServletResponse response) throws UnsupportedEncodingException 
-	{
+	private void download(String filePath,String fileName,HttpServletResponse response) throws UnsupportedEncodingException {
 		FileInputStream in=null;
 		ServletOutputStream out=null;
 		response.setContentType("application/x-msdownload; charset=UTF-8");
 		response.setHeader("Content-disposition","attachment; filename="+new String(fileName.getBytes("UTF-8"),"iso8859-1"));
-		try
-		{
+		try {
 			in=new FileInputStream(filePath+"\\"+fileName);
 			out=response.getOutputStream();
 			out.flush();
@@ -317,9 +315,7 @@ public class PhotoServlet extends HttpServlet
 			out.flush();
 			in.close();
 			out.close();
-		} 
-		catch (Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -340,6 +336,8 @@ public class PhotoServlet extends HttpServlet
 		for(Type type: manager.getTypeDao().findAll(false)) {
 			String folder=rootPath+"/"+PHOTO_FOLDER+"/"+type.getTid();
 			File files=new File(folder);
+			if(!files.exists())
+				continue;
 			List<Photo> photos=photoDao.findByType(type);
 			List<Category> categories=categoryDao.findByType(type, false);
 			for(File file: files.listFiles()) {
