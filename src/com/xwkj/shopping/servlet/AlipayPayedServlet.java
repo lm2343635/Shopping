@@ -82,12 +82,12 @@ public class AlipayPayedServlet extends HttpServlet {
 					good.setSold(good.getSold()+basket.getCount());
 					managerTemplate.getGoodDao().update(good);
 				}
-				//发送短息通知用户支付成功
+				//发送短息通知用户和管理员支付成功
 				String value="#ono#="+ order.getOno()
 						+ "&#payDate#="+ DateTool.formatDate(new Date(), DateTool.DATE_HOUR_MINUTE_FORMAT_CN)
 						+ "&#amount#="+ (new DecimalFormat("#.00").format(order.getAmount()));
-
 				sms.send(telephone, orderManager.getPaySuccessSMSTemplateID(), value);
+				sms.send(orderManager.getAdminTelephone(), orderManager.getPaySuccessSMSTemplateID(), value);
 				response.getWriter().println("success");
 				break;
 			//该判断表示卖家已经发了货，但买家还没有做确认收货的操作

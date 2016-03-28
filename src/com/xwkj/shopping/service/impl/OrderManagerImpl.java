@@ -32,68 +32,78 @@ public class OrderManagerImpl extends ManagerTemplate implements OrderManager {
 	//支付超时时长
 	private int PayTimeOut;
 	//创建订单成功发送短信模板id
-	private int OrderSuccessSMSTemplateID;
+	private String OrderSuccessSMSTemplateID;
 	//付款成功发送短信模板id
-	private int PaySuccessSMSTemplateID;
+	private String PaySuccessSMSTemplateID;
 	//退款失败发送短信模板id
-	private int RefundFailedSMSTemplateID;
+	private String RefundFailedSMSTemplateID;
 	//退款成功发送短信模板id
-	private int RefundSuccessSMSTemplateID;
+	private String RefundSuccessSMSTemplateID;
+	//管理员手机号
+	private String adminTelephone;
 	
 	public String getExpressTure() {
 		return ExpressTure;
-	}
-
-	public String getExpressFalse() {
-		return ExpressFalse;
-	}
-
-	public int getPayTimeOut() {
-		return PayTimeOut;
-	}
-
-	public int getOrderSuccessSMSTemplateID() {
-		return OrderSuccessSMSTemplateID;
 	}
 
 	public void setExpressTure(String expressTure) {
 		ExpressTure = expressTure;
 	}
 
+	public String getExpressFalse() {
+		return ExpressFalse;
+	}
+
 	public void setExpressFalse(String expressFalse) {
 		ExpressFalse = expressFalse;
+	}
+
+	public int getPayTimeOut() {
+		return PayTimeOut;
 	}
 
 	public void setPayTimeOut(int payTimeOut) {
 		PayTimeOut = payTimeOut;
 	}
 
-	public void setOrderSuccessSMSTemplateID(int orderSuccessSMSTemplateID) {
+	public String getOrderSuccessSMSTemplateID() {
+		return OrderSuccessSMSTemplateID;
+	}
+
+	public void setOrderSuccessSMSTemplateID(String orderSuccessSMSTemplateID) {
 		OrderSuccessSMSTemplateID = orderSuccessSMSTemplateID;
 	}
 
-	public int getPaySuccessSMSTemplateID() {
+	public String getPaySuccessSMSTemplateID() {
 		return PaySuccessSMSTemplateID;
 	}
 
-	public void setPaySuccessSMSTemplateID(int paySuccessSMSTemplateID) {
+	public void setPaySuccessSMSTemplateID(String paySuccessSMSTemplateID) {
 		PaySuccessSMSTemplateID = paySuccessSMSTemplateID;
 	}
 
-	public int getRefundFailedSMSTemplateID() {
+	public String getRefundFailedSMSTemplateID() {
 		return RefundFailedSMSTemplateID;
 	}
 
-	public int getRefundSuccessSMSTemplateID() {
-		return RefundSuccessSMSTemplateID;
-	}
-
-	public void setRefundFailedSMSTemplateID(int refundFailedSMSTemplateID) {
+	public void setRefundFailedSMSTemplateID(String refundFailedSMSTemplateID) {
 		RefundFailedSMSTemplateID = refundFailedSMSTemplateID;
 	}
 
-	public void setRefundSuccessSMSTemplateID(int refundSuccessSMSTemplateID) {
+	public String getRefundSuccessSMSTemplateID() {
+		return RefundSuccessSMSTemplateID;
+	}
+
+	public void setRefundSuccessSMSTemplateID(String refundSuccessSMSTemplateID) {
 		RefundSuccessSMSTemplateID = refundSuccessSMSTemplateID;
+	}
+
+	public String getAdminTelephone() {
+		return adminTelephone;
+	}
+
+	public void setAdminTelephone(String adminTelephone) {
+		this.adminTelephone = adminTelephone;
 	}
 
 	@Override
